@@ -1,5 +1,4 @@
-<%-- 
-    Document   : index
+ Document   : index
     Created on : 01-abr-2015, 23:24:14
     Author     : USUARIO
 --%>
@@ -7,13 +6,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
      
         <script src="js/jquery.js"></script>
         <script src="js/jquery.validate.js"></script>
-      
-        <link rel="stylesheet" type="text/css" href="css/estiloi.css">
         
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SmileSystem</title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -29,7 +26,7 @@
         <script src="js/init.js"></script>
         <noscript>
         <link rel="stylesheet" href="css/skel.css" />
-        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/manu.css" />
         <link rel="stylesheet" href="css/style-xlarge.css" />
         </noscript>
         <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
@@ -65,14 +62,14 @@
                     messages: {
                         pass: {
                             required: "El campo es Requerido",
-                            number: "El campo debe ser NumÃ©rico ",
-                            minlength: "Son {0} digitos MÃ­nimo  ",
-                            maxlength: "Son {0} digitos MÃ¡ximo"
+                            number: "El campo debe ser Numerico ",
+                            minlength: "Son {0} digitos Minimo  ",
+                            maxlength: "Son {0} digitos Maximo"
                         },
                         user: {
                             required: "El campo es Requerido",
-                            minlength: "Son {0} digitos MÃ­nimo  ",
-                            maxlength: "Son {0} digitos MÃ¡ximo"
+                            minlength: "Son {0} digitos Minimo  ",
+                            maxlength: "Son {0} digitos Maximo"
 
                         }
                     }
@@ -145,29 +142,28 @@
                                     <div class="row">                               
                                         <div class="col-md-6">
                                             <div class="mover"  style="  margin-left: -214px;">
-                                            <form name="frmUsuario" action="../UsuarioServlet" id="form1" class=" form-horizontal" method="POST" style="position:relative; left: 200px;" role="form" action="../../UsuarioServlet">
+                                            <form   name="frmUsuario"  action="../Mail"  id="form1" class=" form-horizontal" method="POST" style="   position:relative; left: 200px;" role="form" >
                                                 <br>
                                                 <fieldset style="padding-left: 63px; font-size: 38px;"  padd>Iniciar Sesion</fieldset>
                                                 <br>
                                                 <br>
-                                                <div  class=" form-group input-group input-group-lg">
-                                                    <span   for ="user" class="input-group-addon">Usuario</span>
-                                                    <input type="text" name="user" class="  form-control" required  id="use" value="" tabindex="2" name="Cedula"   >
-                                                </div> 
-                                                <div  class=" form-group input-group input-group-lg">
-                                                    <span   for="pass" class="input-group-addon">Contraseña</span>
-                                                    <input type="password" value="" name="pass" required class="lettersonly form-control" id="pass" >
+                                               
+                                                <div  class=" ">
+                                                    <span   for="cedula" class="input-group-addon">Contraseña</span>
+                                                    <input type="password" value="" name="cedula" required class="lettersonly " id="cedula" >
                                                 </div>  
+  
 
-                                                <div>
-                                                    <label  class="ayuda"><a onClick="OcultarForm('Formlogin', 'Recuperar');" href="indexx.jsp">Recordar Contraseña ?</a></label>
-                                                </div>
+                                               
+                         
+
+
 
                                                 <div class="style"><%if (request.getParameter("msg") != null) {
                                                         out.print(request.getParameter("msg"));
                                                     }%>  </div>
                                                     <div class="mover">
-                                                <input style=" margin-left: 75px;  height: 57px; width: 200px; background-color: #46b8da; color:#000000;" type="submit" name="btnIngresar" value="Ingresar" class="btn btn-primary"> 
+                                                <input style=" margin-left:400px;  height: 57px; width: 200px; background-color: #46b8da; color:#000000;" type="submit"  name="recu"    value="Enviar" class="btn btn-primary"> 
                                                 </div>
                                                 </form>     
                                                     </div>

@@ -24,6 +24,10 @@
         <servlet-name>FCitas</servlet-name>
         <servlet-class>Facade.FCitas</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Mail</servlet-name>
+        <servlet-class>Controlador.Mail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Conectar</servlet-name>
         <url-pattern>/Conectar</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>FCitas</servlet-name>
         <url-pattern>/FCitas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Mail</servlet-name>
+        <url-pattern>/Mail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

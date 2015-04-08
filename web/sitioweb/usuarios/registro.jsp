@@ -143,7 +143,7 @@
                 <a href="#"><strong>Registrar Paciente</strong></a>
             </div>
             <div class ="menu-session">     
-                <button type="button" onClick="javascript:window.location = '../indexout.jsp'">Cerrar Sesión </button>
+                <button type="button" onClick="javascript:window.location = '../indexout.jsp'"  class="btn btn-info" >Cerrar Sesión </button>
             </div>
             <div class ="menu-session">
                 <span style="color: white;"> <%  out.print(uregistrado.getRol());%>:</span>
@@ -151,7 +151,7 @@
             </div>
         </div>
         <div class="contenido">
-            <div class="menu2"> 
+            <div class="menu22"> 
                 <div class="menucoreer"> <img class="vector" src="../imagenes/manu.png " width="70"	height="70"></div>
                     <% out.println(menu); %> 
             </div>
@@ -333,7 +333,7 @@
                     <div class="style"><%if (request.getParameter("msg") != null) {
                                 out.print(request.getParameter("msg"));
                             } %>  </div>
-                    <div class="moverlo">  <input type="submit"   class="boton"  id="guardar" value="Guardar" name="guardarUsuario" /></div>
+                    <div class="moverlo">  <input type="submit"   class=" beto"  id="guardar" value="Guardar" name="guardarUsuario" /></div>
 
 
 

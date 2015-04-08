@@ -87,7 +87,7 @@
                 <a href="#"><strong> Historial Paciente</strong></a>
             </div>  
             <div class ="menu-session"> 		   
-                <button type="button" onClick="javascript:window.location = '../indexout.jsp'">Cerrar Sesión </button>
+                <button type="button" onClick="javascript:window.location = '../indexout.jsp'"  class="btn btn-info" >Cerrar Sesión </button>
             </div>
             <div class ="menu-session">
                  <span style="color:white; font-size: 16px;  font-weight: bold">  <%  out.print(uregistrado.getRol());%>:  </span>

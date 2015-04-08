@@ -25,8 +25,17 @@
                 jQuery.validator.addMethod("lettersonly", function (value, element) {
                     return this.optional(element) || /^[a-z]+$/i.test(value);
                 }, "Digite solo caracteres");
-     
 
+                // sirve para bloquear los campos input
+                $('.bloqueado').attr('disabled', 'disabled');
+                $('.nobloqueado').attr('disabled', 'disabled');
+
+                //sirve para desbloquear los campos input y ocultar el boton actualizar
+                $('#actualizar').click(function () {
+                    $('.bloqueado').removeAttr('disabled');
+                    $('#actualizar').hide();
+                    $('#guardar').show();
+                });
 
                 // sirver para validar los campos del formulario
                 $('#form1').validate({
@@ -92,15 +101,18 @@
         %>
     </head>
     <body>
-     <%  
-         if (request.getParameter("idusuario") != null) {
+        <%
+            HttpSession miSesion = request.getSession(false);
+           FUsuarios fu= new FUsuarios();
+            if (miSesion.getAttribute("usr") != null) {
+                UsuariosDTO uregistrado = (UsuariosDTO) miSesion.getAttribute("usr");
+                String menu = (String) miSesion.getAttribute("mp");
+                
+                  if(request.getParameter("id") != null ){
+                  uregistrado = fu.Byid(Integer.parseInt(request.getParameter("id")));
+              }
 
-                long  id = (Long.parseLong(  request.getParameter("idusuario")));
-                FUsuarios fu= new FUsuarios();
-                UsuariosDTO    uregistrado = new   UsuariosDTO();
 
-                uregistrado = fu.listarUsu(id);
-                if (uregistrado != null) {
         %>
 
 
@@ -113,22 +125,22 @@
                 <a href="#"><strong>Perfil Secretaria</strong></a>
             </div>
             <div class ="menu-session">     
-                <button type="button" onClick="javascript:window.location = '../indexout.jsp'"  class="btn btn-info" >Cerrar Sesión </button>
+                <button type="button" onClick="javascript:window.location = '../indexout.jsp'">Cerrar Sesión </button>
             </div>
             <div class ="menu-session">
-                 <span style="color:white; font-size: 16px;  font-weight: bold">  <%  out.print(uregistrado.getRol());%>:  </span>
-                <span style="color:white; font-size: 16px;  font-weight: bold"> <%  out.print(uregistrado.getNombres());%> <%  out.print(uregistrado.getApellidos());%></span>                                   
+                <span style="color: white;">  <%  out.print(uregistrado.getRol());%>: </span>
+                <span style="color: white;"> <%  out.print(uregistrado.getNombres());%> <%  out.print(uregistrado.getApellidos());%>  </span>                  
             </div>
         </div>
         <div class="contenido">
             <div class="menu2"> 
                 <div class="menucoreer"> <img class="vector" src="../imagenes/manu.png " width="70"	height="70"></div>
-                   
+                    <% out.println(menu); %> 
             </div>
             <div class="mesa">
                 <h1>Datos de Registro</h1>
 
-                <form class="form-horizontal" name="form1" id="form1" action="../../UsuarioServlet">
+                <form class="form-horizontal" name="form1" id="form1" action="">
 
                     <table>
                         <tr>
@@ -360,8 +372,8 @@
                     </table> 
                         <div class="style"><%if (request.getParameter("msg") != null) {
                             } %>  </div>
-      	                
-                    <button type="submit" class="boton"    name="btnModificar"   id="guardar">Guardar</button>
+                    <button type="button" class="boton" id="actualizar">Actualizar</button>	                
+                    <button type="submit" class="boton" name="btnActualizarusu" style="display:none" id="guardar">Guardar</button>
 
 
 
@@ -369,17 +381,11 @@
             </div>		                     
         </div>
 
-          <%
-                                } else if (request.getParameter("msg") != null) {
-                                %>
-                                <div class="confirmarOK"><%=request.getParameter("msg")%></div>        
-                                <%
-                                        } else {
-                                            out.print("no llego nada");
+        <%     } else {
+                response.sendRedirect("../index.jsp");
+            }
 
-                                        }
-                                    }
-                                %>
+        %>
 
     </body>
 </html>
