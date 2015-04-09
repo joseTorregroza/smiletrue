@@ -326,7 +326,7 @@
 
 
                     </table>
-                                <div > <a href="../../GestionCitas?can2=<%=citas.getIdPaciente()%>&&fechaci2=<%=citas.getFecha()%> "><img style=" float: right; margin-right: -60;margin-top: -65;" src="../imagenes/cancelar.png" width="50" height="50" alt="Cancelar Cita" title="Cancelar Cital"/> </a></div>         
+                                <div > <a href="../../GestionCitas?can=<%=citas.getIdPaciente()%>&&fechaci=<%=citas.getFecha()%> "><img style=" float: right; margin-right: -60;margin-top: -65;" src="../imagenes/cancelar.png" width="50" height="50" alt="Cancelar Cita" title="Cancelar Cital"/> </a></div>         
 
                    
 
@@ -379,11 +379,11 @@
                                         </div>
                                         
                                        </td>
-                                       <input type="submit" name="horas" class="botones" value=">>">
-                                </form>
+                                
                                 </tr>
                                 
-                                
+                                <input type="submit" name="horas" class="botones" value=">>">
+                                </form>
                                 <tr>
                                     <td><label for="turno" class=" InputRequired col-lg-2 control-label">Hora:</label></td> 
                                     <td><div class="form-group">
@@ -410,7 +410,7 @@
                 <div class="row">
                     <div class="col-md-4"></div>
                     <div class="col-md-6">
-                  
+                             
                         <div class="col-md-4"></div>
                     </div>
                 </div>
@@ -434,9 +434,12 @@
 
     </div>     
 
-
-    <%   }%>
-                
+ <%   }%>   
+    
+                    <div class="lado4">
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-6">
                     <%                        if (request.getParameter("info") != null) {
                     %>
                     <div class="alert alert-info text-center">
@@ -463,7 +466,7 @@
 
             </div>
                 
-                
+        
      <%  }  else {
             response.sendRedirect("../index.jsp");
         }

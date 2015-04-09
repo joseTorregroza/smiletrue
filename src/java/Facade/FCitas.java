@@ -40,7 +40,7 @@ public class FCitas extends HttpServlet {
         PrintWriter out = response.getWriter(); 
         FCitas citas = new FCitas(); 
         
-        List<JornadaDTO> salida=citas.lisDis(1081407271, "2014-12-04"); 
+        int salida=citas.ValCi(1081407241); 
         
         out.print(salida);
     }
