@@ -85,7 +85,7 @@ public class GestionCitas extends HttpServlet {
                      sesion.setAttribute("Citas", cita);
                     datos =(UsuariosDTO) fu.ObUsu(1081407271);
                   sesion.setAttribute("Odonto", datos);
-                  response.sendRedirect("sitioweb/usuarios/citas.jsp?si=1"+cita);
+                  response.sendRedirect("sitioweb/usuarios/citas.jsp?si=1");
                    
             } else {
                   response.sendRedirect("sitioweb/usuarios/citas.jsp");
@@ -107,12 +107,23 @@ public class GestionCitas extends HttpServlet {
           if (msg.equals("ok")) {
                 response.sendRedirect("sitioweb/usuarios/citas.jsp?info=1");
             } else {
-                response.sendRedirect("sitioweb/usuarios/citas.jsp?alert=1"+msg);
+                response.sendRedirect("sitioweb/usuarios/citas.jsp?alert=2");
             }
            }
 
     }
+      else  if (request.getParameter("can2") != null || request.getParameter("fechaci2") != null) {
+            long ced = Long.parseLong(request.getParameter("can2"));
+            String fecha = request.getParameter("fechaci2");
+            String msg = fc.CanCi(ced, fecha);
+            if (msg.equals("ok")) {
+                response.sendRedirect("sitioweb/usuarios/citas.jsp?info=1");
+            } else {
+                response.sendRedirect("sitioweb/usuarios/citas.jsp?si=1");
+            }
+      }
     }
+    
     
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -276,8 +276,8 @@
                 
                 
             %>
-            <div class="lado4">
-                <div class="row">
+            <div class="lado4"  style="margin-top: 20px" >
+                <div >
                     <div class="col-md-4"></div>
                     <div class="col-md-6"></div>
 
@@ -295,15 +295,15 @@
                 </div>
 
             </div>
-             <div class="Divprint" style= "width: 98% " 
+             <div class="Divprint" style="width:700px; margin-top:-80px;"  
                      >
-                    <table id ="tablah" style =" padding-bottom:5px; text-align: center;" >
+                    <table id ="tablah"  class="table table-bordered table-striped table-hover" >
                         <thead>
                             <tr id="titulo" >
 
 
                                 <td style=" width:150px; height: 20px" > Identificacion</td>
-                                <td style=" width: 150px; height: 20px" > Nombres</td>
+                                <td style=" width: 150px; height: 20px" > Doctor</td>
                                 
                                 <td style=" width: 150px; height: 20px">Fecha</td>
                                 <td style=" width: 150px; height: 20px" >Horario</td>
@@ -326,7 +326,7 @@
 
 
                     </table>
-                                <div> <td ><a href="../../GestionCitas?can=<%=citas.getIdPaciente()%>&&fechaci=<%=citas.getFecha()%> "> <img class="vector" src="../imagenes/cancelar.png" width="50" height="50" alt="Cancelar Cita" title="Cancelar Cital"/> </a>  </td>  </div>         
+                                <div > <a href="../../GestionCitas?can2=<%=citas.getIdPaciente()%>&&fechaci2=<%=citas.getFecha()%> "><img style=" float: right; margin-right: -60;margin-top: -65;" src="../imagenes/cancelar.png" width="50" height="50" alt="Cancelar Cita" title="Cancelar Cital"/> </a></div>         
 
                    
 
@@ -350,6 +350,7 @@
                                 </div>
 
                                 </tr> 
+                                <form class="form-horizontal" name="form2" id="form1" action="../../GestionCitas">
                                 <tr>
                                     <td><label for="turno" class=" InputRequired col-lg-2 control-label">Odontologo:</label></td> 
                                     <td><div class="form-group">
@@ -378,8 +379,11 @@
                                         </div>
                                         
                                        </td>
+                                       <input type="submit" name="horas" class="botones" value=">>">
+                                </form>
                                 </tr>
-                                <tr>
+                                
+                                
                                 <tr>
                                     <td><label for="turno" class=" InputRequired col-lg-2 control-label">Hora:</label></td> 
                                     <td><div class="form-group">
@@ -402,6 +406,16 @@
                     </div>                            
                     <div class="lado4">
                         <div id="respuesta" class="mensajegError"> </div>
+                                   <div class="lado4">
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-6">
+                  
+                        <div class="col-md-4"></div>
+                    </div>
+                </div>
+
+            </div>
                              
                         <img src="../imagenes/imagenes.png" width="450" height="450" class="dibu">                
                     </div>
@@ -422,10 +436,7 @@
 
 
     <%   }%>
-                    <div class="lado4">
-                <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-6">
+                
                     <%                        if (request.getParameter("info") != null) {
                     %>
                     <div class="alert alert-info text-center">

@@ -143,6 +143,27 @@ public class JornadaDAO {
         }
         return mensaje;
     }
+     public List<JornadaDTO> listaDispo(Connection cnn, long id, String fe) {
+        this.cnn = cnn;
+        ArrayList<JornadaDTO> jornada = new ArrayList<>();
+        try {
+            String sqlAll = "select horario , idJornada from jornadas where idJornada not in (select idJornada from citas where fecha = ? and idOdontologo = ?);";  
+            pstm = cnn.prepareStatement(sqlAll);
+            pstm.setLong(1, id);
+            pstm.setString(2, fe);
+            rs = pstm.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    jornada.add( new JornadaDTO(rs.getInt("idJornada"), rs.getString("horario")));
+                }
+            }
+        } catch (SQLException ex) {
+            mensaje = "Error, datelle " + ex.getMessage();
+        }
+        
+        return jornada;
+    }
 
 }
 

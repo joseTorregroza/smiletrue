@@ -591,20 +591,20 @@ div .formulario label.error{
 .corr{
     margin-left: 51px;
 }
-.form-gris{
-    background: rgb(59,103,158); /* Old browsers */
-    background: -moz-linear-gradient(top, rgba(59,103,158,1) 26%, rgba(43,136,217,1) 50%, rgba(32,124,202,1) 60%, rgba(125,185,232,1) 85%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(26%,rgba(59,103,158,1)), color-stop(50%,rgba(43,136,217,1)), color-stop(60%,rgba(32,124,202,1)), color-stop(85%,rgba(125,185,232,1))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, rgba(59,103,158,1) 26%,rgba(43,136,217,1) 50%,rgba(32,124,202,1) 60%,rgba(125,185,232,1) 85%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, rgba(59,103,158,1) 26%,rgba(43,136,217,1) 50%,rgba(32,124,202,1) 60%,rgba(125,185,232,1) 85%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, rgba(59,103,158,1) 26%,rgba(43,136,217,1) 50%,rgba(32,124,202,1) 60%,rgba(125,185,232,1) 85%); /* IE10+ */
-    background: linear-gradient(to bottom, rgba(59,103,158,1) 26%,rgba(43,136,217,1) 50%,rgba(32,124,202,1) 60%,rgba(125,185,232,1) 85%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b679e', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
+/*.form-gris{
+    background: rgb(59,103,158);  Old browsers 
+    background: -moz-linear-gradient(top, rgba(59,103,158,1) 26%, rgba(43,136,217,1) 50%, rgba(32,124,202,1) 60%, rgba(125,185,232,1) 85%);  FF3.6+ 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(26%,rgba(59,103,158,1)), color-stop(50%,rgba(43,136,217,1)), color-stop(60%,rgba(32,124,202,1)), color-stop(85%,rgba(125,185,232,1)));  Chrome,Safari4+ 
+    background: -webkit-linear-gradient(top, rgba(59,103,158,1) 26%,rgba(43,136,217,1) 50%,rgba(32,124,202,1) 60%,rgba(125,185,232,1) 85%);  Chrome10+,Safari5.1+ 
+    background: -o-linear-gradient(top, rgba(59,103,158,1) 26%,rgba(43,136,217,1) 50%,rgba(32,124,202,1) 60%,rgba(125,185,232,1) 85%);  Opera 11.10+ 
+    background: -ms-linear-gradient(top, rgba(59,103,158,1) 26%,rgba(43,136,217,1) 50%,rgba(32,124,202,1) 60%,rgba(125,185,232,1) 85%);  IE10+ 
+    background: linear-gradient(to bottom, rgba(59,103,158,1) 26%,rgba(43,136,217,1) 50%,rgba(32,124,202,1) 60%,rgba(125,185,232,1) 85%);  W3C 
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b679e', endColorstr='#7db9e8',GradientType=0 );  IE6-9 
     margin-top: 37px;
     padding-right: 36px;
     padding-top: 10px;
     box-shadow: -1px 0px 5px #aaa;
-}
+}*/
 .lado3 {
     display: inline-block;
     width: 422px;
@@ -620,7 +620,7 @@ div .formulario label.error{
     width: 422px;
     height: auto;
     float: left;
-    padding-top: 47px;
+   
 }
 .formulario form {
     width: 279px;
@@ -744,3 +744,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b0d4e3', end
     padding-left: 7px;
     border-radius: 2px;
 }*/
+table thead td {
+   text-align: center;
+}

@@ -144,7 +144,7 @@
                 <br>
 
 
-                <table id ="tablah" class="table table-bordered table-striped table-hover"> 
+                <table id ="tablah" class="table table-bordered table-striped table-hover" style="margin-left: 42px;"> 
                     <thead>
                     <th style=" width:150px; height: 20px">Documento</th>
                     <th style=" width:150px; height: 20px">Nombre</th>

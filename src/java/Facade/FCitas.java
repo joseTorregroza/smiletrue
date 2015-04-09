@@ -40,7 +40,7 @@ public class FCitas extends HttpServlet {
         PrintWriter out = response.getWriter(); 
         FCitas citas = new FCitas(); 
         
-        CitaDTO salida=citas.OCitaId(1081407241); 
+        List<JornadaDTO> salida=citas.lisDis(1081407271, "2014-12-04"); 
         
         out.print(salida);
     }
@@ -95,6 +95,9 @@ public class FCitas extends HttpServlet {
       //////////////////////////////////////////////CITAS////////////////////////////////////
       public List<JornadaDTO> lisJor(){
          return jornada.listarTodos(cnx);
+     }
+         public List<JornadaDTO> lisDis(long id, String fecha){
+         return jornada.listaDispo(cnx, id, fecha);
      }
      public JornadaDTO OJorn(int ce){
          return jornada.obtenerUno(ce, cnx);

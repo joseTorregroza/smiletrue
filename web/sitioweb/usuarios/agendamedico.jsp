@@ -116,7 +116,7 @@
 
                 <div class="Divprint" style= "width: 98% " 
                      >
-                    <table id ="tablah" style =" padding-bottom:5px; text-align: center;" >
+                    <table id ="tablah"  class="table table-bordered table-striped table-hover" >
                         <thead>
                             <tr id="titulo" >
 
