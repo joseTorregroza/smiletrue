@@ -120,7 +120,7 @@
                 <a href="#"><strong>Perfil Secretaria</strong></a>
             </div>
             <div class ="menu-session">     
-                <button type="button" onClick="javascript:window.location = '../indexout.jsp'">Cerrar Sesión </button>
+                <button type="button"  class="btn btn-info" onClick="javascript:window.location = '../indexout.jsp'">Cerrar Sesión </button>
             </div>
             <div class ="menu-session">
                  <span style="color:white; font-size: 16px;  font-weight: bold">  <%  out.print(uregistrado.getRol());%>:  </span>
@@ -369,7 +369,7 @@
                             } %>  </div>
                   
                            
-                    <input type="submit" class="boton" value="  Enviar"  href="recibirperfil.jsp?idusuario=<%=uregistrado.getDocumento()  %> " name=""  id="guardar"/>
+                    <input type="submit" class="beton" value="  Enviar"  href="recibirperfil.jsp?idusuario=<%=uregistrado.getDocumento()  %> " name=""  id="guardar"/>
 
 
 

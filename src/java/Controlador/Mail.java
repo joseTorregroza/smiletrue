@@ -36,7 +36,7 @@ public class Mail extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    FUsuarios fu = new FUsuarios();
+     FUsuarios fu = new FUsuarios();
         UsuariosDTO us = new UsuariosDTO();
         newClass nc = new newClass();
         String rol;
@@ -51,7 +51,7 @@ public class Mail extends HttpServlet {
                     String con = String.valueOf(doc);
                     String ced = nc.encode(con);
 
-                    String url = "http://localhost:8080/smilesystem/sitioweb/nueva.jsp?id=" + (ced);
+                    String url = "http://localhost:8080/smiletrue/sitioweb/nueva.jsp?id=" + (ced);
                     Correo.sendMail("Recuperar Contraseña", url, us.getEmail());
                     response.sendRedirect("sitioweb/index.jsp?msg= correo enviado ");
 

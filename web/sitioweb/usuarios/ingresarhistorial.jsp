@@ -77,7 +77,7 @@
                 <a href="#"><strong>Ingresar Historial</strong></a>
             </div>
             <div class ="menu-session">          
-                <button type="button" onClick="javascript:window.location = '../indexout.jsp'">Cerrar Sesión </button>
+                <button type="button" onClick="javascript:window.location = '../indexout.jsp'"  class="btn btn-info" >Cerrar Sesión </button>
             </div>
             <div class ="menu-session">
                  <span style="color:white; font-size: 16px;  font-weight: bold">  <%  out.print(uregistrado.getRol());%>:  </span>
@@ -96,7 +96,7 @@
 
             <div class="mesa">
                 <div class="lado1-agenda">
-           
+                  
                         <form action="../../GestionHistorial" id="form1" class="form-format1" method="POST"> 
                             <h1 class="h1-session" style="padding-bottom: 10px;padding-left: 54px;">Consultar Pacientes</h1>    
 

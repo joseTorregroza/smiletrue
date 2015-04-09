@@ -1,6 +1,6 @@
 <%-- 
-    Document   : prueba f
-    Created on : 08-abr-2015, 12:27:07
+    Document   : registroadmi
+    Created on : 03-abr-2015, 17:58:42
     Author     : USUARIO
 --%>
 

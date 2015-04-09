@@ -105,12 +105,12 @@ ul li {
 
 }
 ul li a{
-    color: mediumblue;
-    text-decoration: none;
-    margin-left: -67px;
-    margin-top: 20px;
-    display: block;
-    font-weight: bold;
+    color: white;
+  text-decoration: none;
+   margin-left: -110px; 
+  margin-top: 20px; 
+  display: block; 
+   font-weight: bold; 
 }
 ul li a:hover{
     color:  #FFF ;
@@ -160,6 +160,18 @@ ul#submenu li a:hover{
 li:hover .submenu{
     display: block;
 }
+
+.menu22 {
+  margin-top: -2px;
+  width: 212px;
+  height: auto;
+  border-radius: 0px 2px 2px 0px;
+  padding: 20px 0px 40px;
+  min-height: 641px;
+  font-size: 200%;
+  float: left;
+  margin-right: 4px;
+  background: #5F9EA0;}
 #ul2{
     width: 110px;
     text-align: left;
@@ -178,12 +190,12 @@ li:hover .submenu{
     height: auto;
     border-radius: 0px 2px 2px 0px;
     padding: 20px 0px 40px;
-    min-height: 595px;
+      min-height: 639px;
     font-size: 200%;
     float: left;
     margin-right: 4px;
-    background:  #7FFFD4;
-    background: #7FFFD4;
+     background: #5F9EA0;
+    
    
 }
 
