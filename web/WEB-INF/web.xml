@@ -16,6 +16,14 @@
         <servlet-name>GestionHistorial</servlet-name>
         <servlet-class>Controlador.GestionHistorial</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FUsuarios</servlet-name>
+        <servlet-class>Facade.FUsuarios</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FCitas</servlet-name>
+        <servlet-class>Facade.FCitas</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Conectar</servlet-name>
         <url-pattern>/Conectar</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>GestionHistorial</servlet-name>
         <url-pattern>/GestionHistorial</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FUsuarios</servlet-name>
+        <url-pattern>/FUsuarios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FCitas</servlet-name>
+        <url-pattern>/FCitas</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

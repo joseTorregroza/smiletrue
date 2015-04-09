@@ -46,7 +46,7 @@ public class GestionCitas extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
 
-        UsuariosDTO datos = new UsuariosDTO();
+        UsuariosDTO datos = null;
         FUsuarios fu = new FUsuarios();
         FCitas fc = new FCitas();
         Historial h = null;
@@ -78,16 +78,15 @@ public class GestionCitas extends HttpServlet {
        
               
                    int exis= fc.ValCi(us.getDocumento());
-                 if (exis>=1) {
-//               
-//                  CitaDTO cita= new CitaDTO ();
-//                     cita= fc.OCitaId(us.getDocumento());
-//                     sesion.setAttribute("Citas", cita);
-////                     datos= (UsuariosDTO) fu.listOdby(cita.getIdOdontologo());
-////                     sesion.setAttribute("Odonto", datos);
-                  response.sendRedirect("sitioweb/usuarios/citas.jsp?si=1"+exis);
-//                     
-//                    
+                 if (exis>1) {
+               
+                  CitaDTO cita= new CitaDTO ();
+                     cita= fc.OCitaId(us.getDocumento());
+                     sesion.setAttribute("Citas", cita);
+                    datos =(UsuariosDTO) fu.ObUsu(1081407271);
+                  sesion.setAttribute("Odonto", datos);
+                  response.sendRedirect("sitioweb/usuarios/citas.jsp?si=1"+cita);
+                   
             } else {
                   response.sendRedirect("sitioweb/usuarios/citas.jsp");
            }

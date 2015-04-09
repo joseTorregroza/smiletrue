@@ -35,9 +35,9 @@ public class FUsuarios extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter(); 
         FUsuarios u= new  FUsuarios();
-      HashMap<UsuariosDTO, String> salida=  u.Validarusu("ltorres", "1081407251");
+//      HashMap<UsuariosDTO, String> salida=  u.Validarusu("ltorres", "1081407251");
         
-//        ArrayList<AgendaMedicoDTO> salida=citas.lisAgen(1024498580); 
+   UsuariosDTO salida= u.ObUsu(1081407241); 
         
        out.print(salida);
     }
@@ -89,9 +89,6 @@ public class FUsuarios extends HttpServlet {
 
       public List<UsuariosDTO> listOd(){
         return usuario.listarOdontologos(cnx);
-    }
-       public List<UsuariosDTO> listOdby(long id){
-        return usuario.ObtOdontologos(cnx, id);
     }
 
     public List<UsuariosDTO> listTodos(long e,String non,String ape){

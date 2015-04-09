@@ -269,8 +269,8 @@
             
 
             <%                        if (request.getParameter("si") != null) {
-                 ArrayList<CitaDTO> citas = new ArrayList();
-                citas = (ArrayList<CitaDTO>) sesion.getAttribute("Citas");
+                 CitaDTO citas = new CitaDTO();
+                citas = (CitaDTO)sesion.getAttribute("Citas");
                 UsuariosDTO doc = (UsuariosDTO) sesion.getAttribute("Odonto");
                 
                 
@@ -295,10 +295,7 @@
                 </div>
 
             </div>
-            <div class="mesa"  style="height: 414px">	
-
-
-                <div class="Divprint" style= "width: 98% " 
+             <div class="Divprint" style= "width: 98% " 
                      >
                     <table id ="tablah" style =" padding-bottom:5px; text-align: center;" >
                         <thead>
@@ -313,10 +310,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                       
+                            <%            for (AgendaMedicoDTO producto : lista) {
+                            %>
+                            <tr>
+                                <td><%=producto.getIdPaciente()%></td>
+                                <td><%=producto.getNombre() + producto.getApellido()%></td>
+                                
+                                <td><%=producto.getFecha()%></td>
+                                <td><%=producto.getHorario()%></td>
+                                <td ><a href="../../GestionCitas?paci=<%=producto.getIdPaciente()%>&&fecha=<%=producto.getFecha()%> "> <img class="vector" src="../imagenes/iniciar.png" width="50" height="50" alt="Comenzar Cita" title="Comenzar Cita"/> </a> </td>
+                                <td ><a href="../../GestionCitas?can=<%=producto.getIdPaciente()%>&&fechaci=<%=producto.getFecha()%> "> <img class="vector" src="../imagenes/cancelar.png" width="50" height="50" alt="Cancelar Cita" title="Cancelar Cital"/> </a>  </td>  
+
+
+
+
+
+                            </tr>
+                            <%            }
+
+                            %>
 
 
                     </table>
+
+                   
+
+
+                </div>
                     
                     
                     
