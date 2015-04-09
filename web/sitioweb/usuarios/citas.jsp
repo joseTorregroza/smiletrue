@@ -310,28 +310,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <%            for (AgendaMedicoDTO producto : lista) {
-                            %>
+                            
                             <tr>
-                                <td><%=producto.getIdPaciente()%></td>
-                                <td><%=producto.getNombre() + producto.getApellido()%></td>
+                                <td><%=citas.getIdOdontologo() %></td>
+                                <td><%=doc.getNombres() +"  "+doc.getApellidos() %></td>
                                 
-                                <td><%=producto.getFecha()%></td>
-                                <td><%=producto.getHorario()%></td>
-                                <td ><a href="../../GestionCitas?paci=<%=producto.getIdPaciente()%>&&fecha=<%=producto.getFecha()%> "> <img class="vector" src="../imagenes/iniciar.png" width="50" height="50" alt="Comenzar Cita" title="Comenzar Cita"/> </a> </td>
-                                <td ><a href="../../GestionCitas?can=<%=producto.getIdPaciente()%>&&fechaci=<%=producto.getFecha()%> "> <img class="vector" src="../imagenes/cancelar.png" width="50" height="50" alt="Cancelar Cita" title="Cancelar Cital"/> </a>  </td>  
-
-
-
+                                <td><%=citas.getFecha() %></td>
+                                <td><%= citas.getJornada() %></td>
+                                
+                                
 
 
                             </tr>
-                            <%            }
-
-                            %>
+                          
 
 
                     </table>
+                                <div> <td ><a href="../../GestionCitas?can=<%=citas.getIdPaciente()%>&&fechaci=<%=citas.getFecha()%> "> <img class="vector" src="../imagenes/cancelar.png" width="50" height="50" alt="Cancelar Cita" title="Cancelar Cital"/> </a>  </td>  </div>         
 
                    
 
