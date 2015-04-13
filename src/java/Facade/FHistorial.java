@@ -33,8 +33,9 @@ public class FHistorial extends HttpServlet {
             FHistorial citas = new FHistorial(); 
             
         
-        ArrayList<Historial> salida=(ArrayList<Historial>) citas.lisHisp(0, "", ""); 
-          ArrayList<CartaDentalDTO> sali=citas.lisCarta(1019041211); 
+        ArrayList<CartaDentalDTO> salida=citas.lisCarta(1081407241, 21); 
+        ArrayList<CartaDentalDTO> sali=citas.lisTodoCar(); 
+        
           
         out.print(salida);
     }
@@ -73,8 +74,11 @@ public class FHistorial extends HttpServlet {
 //         return estado.obtenerUno(id); 
 //     }
      ////////////////////////////////////////HISTORIAL//////////////////////////////////////////////
-     public ArrayList<CartaDentalDTO> lisCarta(long idProcPac){
-         return carta.listarTodos(idProcPac, cnx);
+     public ArrayList<CartaDentalDTO> lisCarta(long idProcPac, int id){
+         return carta.lisporDiente(idProcPac, id, cnx);
+     }
+      public ArrayList<CartaDentalDTO> lisTodoCar(){
+         return carta.listodos(cnx);
      }
      public CartaDentalDTO OCarta(int ce){
          return carta.obtenerUno(ce, cnx);

@@ -59,18 +59,20 @@ public class CartaDentalDAO {
 }
 
            
- public ArrayList<CartaDentalDTO> listarTodos(long  idProcPac ,  Connection cnn ) {
+ public ArrayList<CartaDentalDTO> lisporDiente(long  idProcPac, int id ,  Connection cnn ) {
      this.cnn = cnn;
         ArrayList< CartaDentalDTO> cartaDental = new ArrayList();
         try {
-            String sqlAll = "select cartadental.idCartaDental , cartadental.Descripcion, procedimientos.fechaProcCita, procedimientoscatalogos.procedimiento " +
+            String sqlAll = "select cartadental.idCartaDental , cartadental.Descripcion, procedimientos.fechaProcCita, procedimientoscatalogos.procedimiento, cartadental.Estado " +
 "from citas\n" +
 "join procedimientos on citas.idPaciente=procedimientos.idProcPac\n" +
 "join procedimientoscatalogos on procedimientos.idCatalogo= procedimientoscatalogos.idCatalogo\n" +
 "join cartadental on procedimientos.idCartadental = cartadental.idCartaDental\n" +
-"where citas.idPaciente= ?;";
+"where citas.idPaciente= ?  and cartadental.idCartaDental= ?  order by procedimientos.fechaProcCita desc ;";
             pstmt = cnn.prepareCall(sqlAll);
             pstmt.setLong(1, idProcPac);
+            pstmt.setInt(2, id);
+            
             rs = pstmt.executeQuery();
 
             if (rs != null) {
@@ -80,6 +82,7 @@ public class CartaDentalDAO {
                     cdto.setDescripcion(rs.getString("Descripcion"));
                     cdto.setFechaProccita(rs.getString("fechaProcCita"));
                     cdto.setProcedimientos(rs.getString("procedimiento"));
+                    cdto.setEstado(rs.getInt("Estado"));
                     cartaDental.add(cdto);
                 }
             }
@@ -161,6 +164,30 @@ public class CartaDentalDAO {
             mensaje = sqle.getMessage();
         }
         return mensaje;
+    }
+    public ArrayList<CartaDentalDTO> listodos(Connection cnn ) {
+     this.cnn = cnn;
+        ArrayList< CartaDentalDTO> cartaDental = new ArrayList();
+        try {
+            String sqlAll = "select cartadental.idCartaDental , cartadental.Descripcion from cartadental where 1=1\n" +
+"order by idCartaDental asc";
+            pstmt = cnn.prepareCall(sqlAll);
+           
+            rs = pstmt.executeQuery();
+
+            if (rs != null) {
+                while (rs.next()) {
+                  CartaDentalDTO cdto = new  CartaDentalDTO();
+                    cdto.setIdCartaDental(rs.getInt("idCartaDental"));
+                    cdto.setDescripcion(rs.getString("Descripcion"));
+        
+                    cartaDental.add(cdto);
+                }
+            }
+        } catch (SQLException ex) {
+            mensaje = "Error, datelle " + ex.getMessage();
+        }
+        return cartaDental;
     }
 
 }

@@ -13,6 +13,7 @@ function validarFecha() {
     if (fechaSolicitud < fechaActual){
         document.getElementById("respuesta").innerHTML=" <div><p><strong>Fecha No Valida</Strong> No es posible asignar citas con fechas anteriores <i class='glyphicon glyphicon-ok'></i></p><div>";
         document.getElementById("fechacita").focus();
+        alert(this.innerHTML);
     }else if(fechaSolicitud >=fechaMaxima){
        document.getElementById("respuesta").innerHTML="<div> <p><strong>Fecha No Valida</Strong> No es posible asignar con tanta anticipacion <i class='glyphicon glyphicon-ok'></i></p></div>";
        document.getElementById("fechacita").focus();
