@@ -12,8 +12,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        
+                <div class=""><img src="imagenes/descarga.jpg" height="400" width="400" style="  margin-top: 97px;      margin-left: 143px;">    </div>         
+
+        <h1>no coje mensaje</h1>
     </body>
 </html>
-
 
