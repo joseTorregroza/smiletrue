@@ -10,7 +10,7 @@
 
         <title>Smile System</title>
         <meta charset="utf-8" />
-        
+        <%@page errorPage="../error404.jsp" %> 
         <link rel="shortcut icon" href="../imagenes/favicon.ico" />
         <link href="../css/footer.css" rel="stylesheet" type="text/css">
         <link href="../css/css.css" rel="stylesheet" type="text/css">

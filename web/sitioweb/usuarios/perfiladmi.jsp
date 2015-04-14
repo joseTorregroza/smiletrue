@@ -4,7 +4,7 @@
         <%@page import="Dtos.UsuariosDTO"%>
         
         <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+        <%@page errorPage="../error404.jsp" %> 
         <title>Smile System</title>
         <meta charset="utf-8" />
         <link rel="shortcut icon" href="../imagenes/favicon.ico" />
@@ -109,7 +109,7 @@
                 String menu = (String) miSesion.getAttribute("mp");
                 
                   if(request.getParameter("id") != null ){
-                  uregistrado = fu.Byid(Integer.parseInt(request.getParameter("id")));
+                  uregistrado = fu.ObUsu(Integer.parseInt(request.getParameter("id")));
               }
 
 
@@ -153,24 +153,19 @@
                                     </div>
                                 </div>
                             </td>
-                            <td><label for="TipoAlergia" class="col-lg-2 control-label">T.Alergia:</label></td> 
+                            <td><label for="rol" class="col-lg-2 control-label">Rol Usuario:</label></td> 
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <select  for="TipoAlergia" name="TipoAlergia" id="TipoAlergia" required class="nobloqueado  form-control">
+                                        <select  for="rol" name="rol" id="rol" required class="nobloqueado  form-control">
 
-                                            <option value="1" <% if ("1".equals(uregistrado.getGrupoSangui())) {
+                                            <option value="2" <% if ("2".equals(uregistrado.getRoles())) {
                                                     out.println("selected");
                                                 } %>>Ninguna</option>
-                                                    <option value="2" <% if ("2".equals(uregistrado.getGrupoSangui())) {
+                                                    <option value="3" <% if ("3".equals(uregistrado.getRoles())) {
                                                     out.println("selected");
                                                 } %>>Polvo</option>
-                                                    <option value="3" <% if ("3".equals(uregistrado.getGrupoSangui())) {
-                                                    out.println("selected");
-                                                } %>>Acetaminofem </option>
-                                                    <option value="4" <% if ("4".equals(uregistrado.getGrupoSangui())) {
-                                                    out.println("selected");
-                                                } %>>Penisilina</option>
+                                                   
                                         </select>
                                     </div>
                                 </div></td>
@@ -181,44 +176,14 @@
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <input type="text" class="form-control  nobloqueado lettersonly" required id="ApellidoCompleto" value="<%  out.print(uregistrado.getApellidos());%>" name="ApellidoCompleto" placeholder="lopez Vargas">
+                                        <input type="text" class="form-control  nobloqueado lettersonly" required id="ApellidoCompleto" value="<%  out.print(uregistrado.getApellidos());%>" name="ApellidoCompleto" placeholder="">
 
 
                                     </div>
                                 </div></td>
-                            <td><label for="Gruposanguineo" class="col-lg-2 control-label">Rh:</label></td> 
-                            <td><div class="form-group">
-
-                                    <div class="col-lg-10">
-                                        <select  for="Gruposanguineo" name="Gruposanguineo" id="Gruposanguineo" required class="nobloqueado  form-control">
-
-                                                    <option value="1" <% if ("1".equals(uregistrado.getGrupoSangui())) {
-                                                    out.println("selected");
-                                                } %>>A+</option>
-                                                    <option value="2"<% if ("2".equals(uregistrado.getGrupoSangui())) {
-                                                    out.println("selected");
-                                                } %>>A-</option>
-                                                    <option value="3"<% if ("3".equals(uregistrado.getGrupoSangui())) {
-                                                    out.println("selected");
-                                                } %>>O+ </option>
-                                                    <option value="4"<% if ("4".equals(uregistrado.getGrupoSangui())) {
-                                                    out.println("selected");
-                                                } %>>O-</option>
-                                                    <option value="5"<% if ("5".equals(uregistrado.getGrupoSangui())) {
-                                                    out.println("selected");
-                                                } %>>B+</option>
-                                                    <option value="6"<% if ("6".equals(uregistrado.getGrupoSangui())) {
-                                                    out.println("selected");
-                                                } %>>B-</option>
-                                                    <option value="7" <% if ("7".equals(uregistrado.getGrupoSangui())) {
-                                                    out.println("selected");
-                                                } %>> AB+</option>
-                                                    <option value="8"<% if ("8".equals(uregistrado.getGrupoSangui())) {
-                                                    out.println("selected");
-                                                } %>>AB-</option>	
-                                        </select>
-                                    </div>
-                                </div></td>
+                            <td><label for="tarjetaProfe" class="col-lg-2 control-label">Rh:</label></td> 
+                            <td><input type="text" class="form-control  nobloqueado " required id="tarjetaProfe" value="<%  out.print(uregistrado.getTarjetaprofesional());%>" name="tarjetaProfe" placeholder="">
+</td>
                         </tr>
                         <tr>
                             <td><label for="tipodoc" class="col-lg-2 control-label">T.Documento:</label></td> 
@@ -266,7 +231,7 @@
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <input type="date" class="nobloqueado  form-control" required id="ejemplo_email_3" value="<%if(uregistrado !=null){out.print(uregistrado.getDireccion());}%>" name="">
+                                        <input type="date" class="nobloqueado  form-control" required id="ejemplo_email_3" value="<%if(uregistrado !=null){out.print(uregistrado.getFechadenacimiento());}%>" name="">
                                     </div>
                                 </div></td>
                             <td><label for="Direccion" class=" InputRequired col-lg-2 control-label" >Direccion</label></td> 

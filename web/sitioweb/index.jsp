@@ -6,8 +6,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-     
+    <head>    
+    <%@page errorPage="error404.jsp" %> 
         <script src="js/jquery.js"></script>
         <script src="js/jquery.validate.js"></script>
       
@@ -189,6 +189,7 @@
                 </ul>
             </div>
         </section>
+      
         <!-- Footer -->
     </body>
 </html>

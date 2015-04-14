@@ -109,7 +109,7 @@ public class UsuarioServlet extends HttpServlet {
 
                 String mensa = fu.CrearAd(usnuevo);
 
-                response.sendRedirect("sitioweb/usuarios/perfiladmi.jsp?msg= Usuario Registrado" + mensa);
+                response.sendRedirect("sitioweb/usuarios/registroadmi.jsp?msg= Usuario Registrado" + mensa);
             } catch (IOException ex) {
                 response.sendRedirect("sitioweb/sitioes/paciente/error");
             }

@@ -9,7 +9,7 @@
 <html>
     <head>
         <%@page import="Dtos.UsuariosDTO"%>
-        
+        <%@page errorPage="../error404.jsp" %> 
         <%@page contentType="text/html" pageEncoding="UTF-8"%>
         <title>Smile System</title>
         <meta charset="utf-8" />

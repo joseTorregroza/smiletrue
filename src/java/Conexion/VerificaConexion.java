@@ -12,10 +12,8 @@ public class VerificaConexion {
    public static void main(String[] args) {
             Connection con= null;
             PreparedStatement stmt ;
-	    ResultSet rs ;       
-        
-            
-         
+            ResultSet rs ;       
+    
         try {
             con= Conexion.getInstance();  
                // La Query

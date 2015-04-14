@@ -14,6 +14,7 @@
        
 <%@page import="java.util.Date"%>
         <%@page contentType="text/html" pageEncoding="UTF-8"%>
+        <%@page errorPage="../error404.jsp" %> 
         <title>Smile System</title>
         <meta charset="utf-8" />
         <link rel="shortcut icon" href="../imagenes/favicon.ico" />	

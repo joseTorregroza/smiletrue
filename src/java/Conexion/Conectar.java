@@ -45,10 +45,7 @@ public class Conectar extends HttpServlet {
                        AgendaMedico pdao = new AgendaMedico();
                AgendaMedicoDTO pdto = new  AgendaMedicoDTO();
           
-     try {
-            /*
-             * TODO output your page here. You may use following sample code.
-             */
+     try {         
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet Conectar</title>");

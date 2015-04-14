@@ -6,6 +6,7 @@
         <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
         <title>Smile System</title>
+        <%@page errorPage="../error404.jsp" %> 
         <meta charset="utf-8" />
         <link rel="shortcut icon" href="../imagenes/favicon.ico" />
         <link href="../css/footer.css" rel="stylesheet" type="text/css">
