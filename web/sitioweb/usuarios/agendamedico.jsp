@@ -81,7 +81,7 @@
         </div>
         <div class="menu">
             <div class="tags">
-                <a href="iniciarsesion.jsp"><strong  font-size: 16px;  font-weight: bold>Iniciar Sesión</strong></a>
+                <a href="iniciarsesion.jsp"><strong style="font-size: 16px;  font-weight: bold">Iniciar Sesión</strong></a>
                 <a href="#"><strong>Citas Paciente</strong></a>
             </div>
             <div class ="menu-session">     

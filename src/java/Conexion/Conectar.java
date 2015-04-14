@@ -81,10 +81,6 @@ public class Conectar extends HttpServlet {
             cnn = ds.getConnection();
             if (cnn != null) {
 
-            EstadoDAO es = new EstadoDAO ();
-            EstadoDTO est  = new EstadoDTO ();
-          
-            salida = es.eliminarEstado(1, cnn);
                 return cnn;
 
             } else {
