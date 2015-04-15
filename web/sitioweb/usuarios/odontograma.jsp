@@ -24,44 +24,41 @@
         <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
         <script type="text/javascript">
 
-            $(document).ready(function () {
+                    $(document).ready(function () {
 
-                // sirve para bloquear los campos input
-                $('.bloqueado').attr('disabled', 'disabled');
-
-                //sirve para desbloquear los campos input y ocultar el boton actualizar
-                $('#actualizar').click(function () {
-                    $('.bloqueado').removeAttr('disabled');
+            // sirve para bloquear los campos input
+            $('.bloqueado').attr('disabled', 'disabled');
+                    //sirve para desbloquear los campos input y ocultar el boton actualizar
+                    $('#actualizar').click(function () {
+            $('.bloqueado').removeAttr('disabled');
                     $('#actualizar').hide();
                     $('#guardar').show();
-                });
-
-                // sirver para validar los campos del formulario
-                $('#form1').validate({
-                    rules: {
-                        Documento: {
-                            required: true,
-                            number: true,
-                            minlength: 8,
-                            maxlength: 10
-                        }
-                    },
+            });
+                    // sirver para validar los campos del formulario
+                    $('#form1').validate({
+            rules: {
+            Documento: {
+            required: true,
+                    number: true,
+                    minlength: 8,
+                    maxlength: 10
+            }
+            },
                     messages: {
-                        Documento: {
-                            required: "Este campo es Requerido",
+                    Documento: {
+                    required: "Este campo es Requerido",
                             number: "El campo debe ser Numérico ",
                             minlength: "Son {0} digitos Mínimo  ",
                             maxlength: "Son {0} digitos Máximo"
-                        }
+                    }
                     },
-                });
             });
-        </script>
-        <%
-            response.setHeader("Cache-Control", "no-cache");
-            response.setHeader("Cache-Control", "no-store");
-            response.setDateHeader("Expires", 0);
-        %>
+            });</script>
+            <%
+                response.setHeader("Cache-Control", "no-cache");
+                response.setHeader("Cache-Control", "no-store");
+                response.setDateHeader("Expires", 0);
+            %>
     </head>
     <body>
         <%
@@ -76,7 +73,7 @@
                 lista = (ArrayList<CartaDentalDTO>) sesion.getAttribute("dientes");
                 ArrayList<CartaDentalDTO> dientes = new ArrayList();
                 dientes = (ArrayList<CartaDentalDTO>) sesion.getAttribute("histodent");
-              
+
         %>
 
         <div class="logo">        
@@ -105,16 +102,46 @@
             <div class="mesa"  style="height: 414px">	
                 <div class="dent"  style="border-color: green ;  border-style: solid;">
                     <h1 class="h1-session" style="padding-top: 15px;">Odontograma</h1>
+                    <div class="pri"  style="border-color: #0033FF;  border-style: solid;">
+                        <div class="carta1"  style="border-color: #4acaa8 ;  border-style: solid;"> 
+                            <%for (int i = 0; i < 8; i++) {%>
+                            <button type="submit" class="btn btn-default btn-mini" style="  margin-right: 3px;" onclick=location.href="../../GestionCitas?iddiente=<%=lista.get(i).getIdCartaDental()%>"><%=lista.get(i).getIdCartaDental()%></button>
 
-                    <%for (CartaDentalDTO carta : lista) {%>
-                    <button type="sutmit" class="btn btn-default btn-mini" onclick=location.href="../../GestionCitas?iddiente=<%=carta.getIdCartaDental()%>"><%=carta.getIdCartaDental()%></button>
+                            <%} %> 
+                        </div>
 
-                    <%} %>
 
+                    </div>
+                    <div class="sec"  style="border-color: #4acaa8 ;  border-style: solid;">
+                        <div class="carta2"  style="border-color: #4acaa8 ;  border-style: solid;">
+                            <%for (int i = 8; i < 16; i++) {%>
+                            <button type="submit" class="btn btn-default btn-mini" style="  margin-right: 3px;" onclick=location.href="../../GestionCitas?iddiente=<%=lista.get(i).getIdCartaDental()%>"><%=lista.get(i).getIdCartaDental()%></button>
+
+                            <%} %>
+                        </div>
+                    </div>
+                    <div class="tre"   style="border-color: #8702A8 ;  border-style: solid;">
+                        <div class="carta1"  style="border-color: #4acaa8 ;  border-style: solid;">
+                            <%for (int i = 16; i < 24; i++) {%>
+                            <button type="submit" class="btn btn-default btn-mini" style="  margin-right: 3px;" onclick=location.href="../../GestionCitas?iddiente=<%=lista.get(i).getIdCartaDental()%>"><%=lista.get(i).getIdCartaDental()%></button>
+
+                            <%} %>
+                        </div>
+                    </div>
+                    <div class="four"  style="border-color: #C00;  border-style: solid;">
+                        <div class="carta2"  style="border-color: #4acaa8 ;  border-style: solid;">
+                            <%for (int i = 24; i < 32; i++) {%>
+                            <button type="submit" class="btn btn-default btn-mini" style="  margin-right: 3px;" onclick=location.href="../../GestionCitas?iddiente=<%=lista.get(i).getIdCartaDental()%>"><%=lista.get(i).getIdCartaDental()%></button>
+                            <%} %>
+                        </div>
+                    </div>
                 </div>	
 
+
+                <% if (sesion.getAttribute("histodent") != null) {%>
                 <div class="his" style="border-color: blue;   border-style: solid;">
-                    <% if (sesion.getAttribute("histodent") != null) {%>
+                    <div class="es" style="border-color: blue;   border-style: solid;"></div>
+                    
 
                     <table id ="tablah"  style="padding: 5px;" class="table table-bordered table-striped table-hover" >
                         <thead>
@@ -135,23 +162,21 @@
                                 <td><%=his.getProcedimientos()%></td>
 
                             </tr>
-                            
+
                             <% } %>
                     </table>
                     <div id="pageNavPosition" ></div>
                     <script type="text/javascript">
-                        var pager = new Pager('tablah', 4);
-                        pager.init();
-                        pager.showPageNav('pager', 'pageNavPosition');
-                        pager.showPage(1);
+                                var pager = new Pager('tablah', 4);
+                                pager.init();
+                                pager.showPageNav('pager', 'pageNavPosition');
+                                pager.showPage(1);
                     </script>
 
                     <% } %>
                 </div>
-
-
+               <% if (sesion.getAttribute("histodent") != null) {%>
                 <div class="act" style="border-color: yellow ;  border-style: solid;">
-                    <% if (sesion.getAttribute("histodent") != null) {%>
                     <h1 class="h1-session" style="padding-top: 20px;">Agregar Informacion</h1>
                     <form class="inline"  action="../../GestionCitas" style="margin-top: 0px;">
                         <table>
@@ -197,15 +222,12 @@
                         </table> 
                         <input type="submit" name="citar" class="btn btn-primary input-small col-lg-3 " value="Asignar" style="margin-left: 278px;">
                     </form> 
+                    </div>
                     <% }%>
-                </div>
+                
 
             </div>
-
-
-
-
-
+     
             <%
                 } else {
                     response.sendRedirect("../index.jsp");

@@ -741,7 +741,7 @@ table thead td {
    text-align: center;
 }
 .dent{
-    height: 90%;
+    height: 95%;
     border-style: solid;  
     background-image: url("../imagenes/odontograma.gif");
     background-repeat: no-repeat;
@@ -766,5 +766,42 @@ table thead td {
     border-style: solid; 
     
 }
-
+.pri{
+    height: 43%;
+    border-style: solid;   
+     width: 50%;
+     float: left;
+}
+.sec{
+    height: 43%;
+    border-style: solid; 
+    width: 50%;
+    float:right;
+}
+.tre{
+    height: 43%;
+    border-style: solid; 
+     width: 50%;
+     float: left;
+}
+.four{
+    height: 43%;
+    border-style: solid; 
+     width: 50%;
+     float:right;
+}
+.carta1{
+  border-style: solid;
+  width: 268px;
+  position: relative;
+  margin-left: 212px;
+  margin-top: 125px;
+}
+.carta2{
+  border-style: solid;
+  width: 268px;
+  position: relative;
+  margin-left: 12px;
+  margin-top: 125px;
+}
 
