@@ -15,6 +15,7 @@ public class CartaDentalDTO {
         private String fechaProccita="";
         private String procedimientos="";
         private int estado=0;
+        private String observacion="";
         
     public CartaDentalDTO() {
         
@@ -100,9 +101,24 @@ public class CartaDentalDTO {
         this.estado = estado;
     }
 
+
+    /**
+     * @return the observacion
+     */
+    public String getObservacion() {
+        return observacion;
+    }
+
+    /**
+     * @param observacion the observacion to set
+     */
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
+
     @Override
     public String toString() {
-        return "CartaDentalDTO{" + "idCartaDental=" + idCartaDental + ", Descripcion=" + Descripcion + ", fechaProccita=" + fechaProccita + ", procedimientos=" + procedimientos + ", estado=" + estado + '}';
+        return "CartaDentalDTO{" + "idCartaDental=" + idCartaDental + ", Descripcion=" + Descripcion + ", fechaProccita=" + fechaProccita + ", procedimientos=" + procedimientos + ", estado=" + estado + ", observacion=" + observacion + '}';
     }
     
 

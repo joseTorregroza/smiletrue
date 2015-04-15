@@ -64,7 +64,7 @@ public class ProcedimientoDAO {
     public String crea(ProcedimientoDTO pdto,  Connection cnn) {
         this.cnn = cnn;
         try {
-            String sqlInsert = "INSERT INTO `smilesystemv2`.`procedimientos`(fechaProcCita, idProcPac, idCartadental, idCatalogo, observacion ) VALUES(?, ?,?,?,?)";
+            String sqlInsert = "insert into procedimientos (fechaProcCita,idProcPac,idCartadental,idCatalogo,observacion) value(?,?,?,?,?);";
             
             pstm = cnn.prepareStatement(sqlInsert);
             pstm.setString(1, pdto.getFechaProcCita());

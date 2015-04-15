@@ -33,7 +33,7 @@ public class FHistorial extends HttpServlet {
             FHistorial citas = new FHistorial(); 
             
         
-        ArrayList<CartaDentalDTO> salida=citas.lisCarta(1081407241, 21); 
+        List<ProcedimientosCatalogosDTO> salida=citas.lisCat(); 
         ArrayList<CartaDentalDTO> sali=citas.lisTodoCar(); 
         
           
@@ -108,7 +108,7 @@ public class FHistorial extends HttpServlet {
          return catalogo.eliminarprocedimientosCatalogos(e, cnx); 
      }
      public List<ProcedimientosCatalogosDTO> lisCat(){
-         return catalogo.listarTodos(cnx);  
+         return catalogo.lisCata(cnx);  
      }
      public String creProCa(ProcedimientosCatalogosDTO e){
          return catalogo.crearProcedimientosCatalogos(e, cnx);

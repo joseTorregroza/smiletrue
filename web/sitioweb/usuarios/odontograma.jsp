@@ -1,4 +1,5 @@
 
+<%@page import="Dtos.ProcedimientosCatalogosDTO"%>
 <%@page import="Dtos.CartaDentalDTO"%>
 <%@page import="Facade.FCitas"%>
 <%@page import="Dtos.AgendaMedicoDTO"%>
@@ -73,6 +74,8 @@
                 lista = (ArrayList<CartaDentalDTO>) sesion.getAttribute("dientes");
                 ArrayList<CartaDentalDTO> dientes = new ArrayList();
                 dientes = (ArrayList<CartaDentalDTO>) sesion.getAttribute("histodent");
+                 ArrayList<ProcedimientosCatalogosDTO> proca = new ArrayList();
+                 proca= (ArrayList<ProcedimientosCatalogosDTO>)sesion.getAttribute("catalo");
 
         %>
 
@@ -158,8 +161,9 @@
                             <%for (CartaDentalDTO his : dientes) {%>
                             <tr>
                                 <td><%=his.getFechaProccita()%></td>
-                                <td><%=his.getDescripcion()%></td>
+                                <td><%=his.getObservacion()%></td>
                                 <td><%=his.getProcedimientos()%></td>
+                                
 
                             </tr>
 
@@ -175,7 +179,7 @@
 
                     <% } %>
                 </div>
-               <% if (sesion.getAttribute("histodent") != null) {%>
+                    <% if (sesion.getAttribute("histodent") != null ) {%>
                 <div class="act" style="border-color: yellow ;  border-style: solid;">
                     <h1 class="h1-session" style="padding-top: 20px;">Agregar Informacion</h1>
                     <form class="inline"  action="../../GestionCitas" style="margin-top: 0px;">
@@ -185,20 +189,23 @@
                                 <td><div class="form-group">    
                                         <div >
                                             <select  class="form-control input-sm" name="estado" id="estado" required class="form-control input-sm"  style="width: 75px; padding-right: 0px; padding-left: 0px;">
-                                                <option value="1">Presente</option> 
+                                                <option value="0">Presente</option> 
                                                 <option value="2"> Ausente</option>                                                
                                             </select>
                                         </div>
                                     </div></td> 
                             </tr>
                             <tr>
-                                <td><label for="Procedimientos" class=" InputRequired col-lg-1  control-label">Procedimientos:</label></td> 
+                                <td><label for="procedimientos" class=" InputRequired col-lg-1  control-label">Procedimientos:</label></td> 
                                 <td><div class="form-group">  
                                         <div col-lg-9>
-                                            <select  class="form-control input-sm InputRequired"  name="Procedimientos" id="Procedimientos" required >
+                                            <select  class="form-control input-sm InputRequired"  name="procedimientos" id="procedimientos" required >
                                                 <option value="">Seleccione Especialidad</option>
-                                                <option value="1">Odontología</option>
-                                                <option value="2">Periodoncia </option>
+                                                <%for (ProcedimientosCatalogosDTO proce:proca) {%>
+                                                <option value="<%=proce.getIdCatalogo()  %>"><%=proce.getProcedimiento() %></option>
+                                                        
+                                                   <% }  %>
+                                              
 
                                             </select>
                                         </div>
@@ -206,11 +213,11 @@
                                 </td> 
                             </tr>
                             <tr>
-                                <td><label for="observaciones" class=" InputRequired col-lg-1  control-label">Observaciones:</label></td> 
+                                <td><label for="observacion" class=" InputRequired col-lg-1  control-label">Observaciones:</label></td> 
                                 <td><div class="form-group">  
                                         <div col-lg-9
                                              >
-                                            <textarea style="margin-left: -20;" rows="3"   name="Procedimientos" id="observaciones" required >
+                                            <textarea style="margin-left: -20;" rows="3"   name="observacion" id="observacion" required >
                                                  
                                                   
                                             </textarea>
@@ -220,7 +227,7 @@
                             </tr>
 
                         </table> 
-                        <input type="submit" name="citar" class="btn btn-primary input-small col-lg-3 " value="Asignar" style="margin-left: 278px;">
+                        <input type="submit" name="infodiente" class="btn btn-primary input-small col-lg-3 " value="Guardar" style="margin-left: 278px;">
                     </form> 
                     </div>
                     <% }%>

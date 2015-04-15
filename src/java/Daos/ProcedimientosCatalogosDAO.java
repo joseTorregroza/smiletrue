@@ -58,35 +58,32 @@ public class ProcedimientosCatalogosDAO {
         return mensaje;
     }
 }
-
-           
- public List<ProcedimientosCatalogosDTO> listarTodos(Connection cnn) {
+public ArrayList<ProcedimientosCatalogosDTO> lisCata(Connection cnn) {
      this.cnn = cnn;
-        ArrayList<ProcedimientosCatalogosDTO> proCatalogos = new ArrayList();
+        ArrayList< ProcedimientosCatalogosDTO> catalogo = new ArrayList();
         try {
-            String sqlAll = "SELECT `procedimientosCatalogos`.`idCatalogo`, "
-                    + "`procedimientosCatalogo`.`duracion`,"
-                    + "`procedimientosCatalogo`.`procedimiento`"
-                    
-                    + "FROM `smilesystemv2`.`procedimientosCatalogos`;"
-                    + "where 1=1";
+            String sqlAll = " SELECT idCatalogo, procedimiento, duracion from procedimientoscatalogos ";
             pstmt = cnn.prepareCall(sqlAll);
+           
             rs = pstmt.executeQuery();
 
             if (rs != null) {
                 while (rs.next()) {
-                  ProcedimientosCatalogosDTO pdto = new ProcedimientosCatalogosDTO();
-                    pdto.setIdCatalogo(rs.getInt("idCatalogo"));
-                    pdto.setDuracion(rs.getInt("duracion"));
-                    pdto.setProcedimiento(rs.getString("procedimiento"));
-                    proCatalogos.add(pdto);
+                  ProcedimientosCatalogosDTO cdto = new  ProcedimientosCatalogosDTO();
+                    cdto.setIdCatalogo(rs.getInt("idCatalogo"));
+                    cdto.setProcedimiento(rs.getString("procedimiento"));
+                    cdto.setDuracion(rs.getInt("duracion"));
+                   
+                    catalogo.add(cdto);
                 }
             }
         } catch (SQLException ex) {
             mensaje = "Error, datelle " + ex.getMessage();
         }
-        return proCatalogos;
+        return catalogo;
     }
+           
+
  public ProcedimientosCatalogosDTO obtenerUno(int idCatalogo,Connection cnn) {
      this.cnn = cnn;
        ProcedimientosCatalogosDTO pdto = null;

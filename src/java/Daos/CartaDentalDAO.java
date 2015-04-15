@@ -63,12 +63,11 @@ public class CartaDentalDAO {
      this.cnn = cnn;
         ArrayList< CartaDentalDTO> cartaDental = new ArrayList();
         try {
-            String sqlAll = "select cartadental.idCartaDental , cartadental.Descripcion, procedimientos.fechaProcCita, procedimientoscatalogos.procedimiento, cartadental.Estado " +
-"from citas\n" +
-"join procedimientos on citas.idPaciente=procedimientos.idProcPac\n" +
-"join procedimientoscatalogos on procedimientos.idCatalogo= procedimientoscatalogos.idCatalogo\n" +
+            String sqlAll = "select cartadental.idCartaDental , cartadental.Descripcion, procedimientos.fechaProcCita,  procedimientos.observacion, procedimientoscatalogos.procedimiento, cartadental.Estado \n" +
+"from procedimientos\n" +
+"join procedimientoscatalogos on procedimientos.idCatalogo= procedimientoscatalogos.idCatalogo \n" +
 "join cartadental on procedimientos.idCartadental = cartadental.idCartaDental\n" +
-"where citas.idPaciente= ?  and cartadental.idCartaDental= ?  order by procedimientos.fechaProcCita desc ;";
+"where procedimientos.idProcPac= ?  and cartadental.idCartaDental= ?   order by procedimientos.fechaProcCita desc ;";
             pstmt = cnn.prepareCall(sqlAll);
             pstmt.setLong(1, idProcPac);
             pstmt.setInt(2, id);
@@ -83,6 +82,7 @@ public class CartaDentalDAO {
                     cdto.setFechaProccita(rs.getString("fechaProcCita"));
                     cdto.setProcedimientos(rs.getString("procedimiento"));
                     cdto.setEstado(rs.getInt("Estado"));
+                    cdto.setObservacion(rs.getString("observacion"));
                     cartaDental.add(cdto);
                 }
             }

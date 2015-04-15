@@ -6,10 +6,12 @@
 package Controlador;
 
 ;
+
 import Dtos.CartaDentalDTO;
 import Dtos.CitaDTO;
 import Dtos.Historial;
 import Dtos.JornadaDTO;
+import Dtos.ProcedimientosCatalogosDTO;
 import Dtos.UsuariosDTO;
 import Facade.FCitas;
 import Facade.FHistorial;
@@ -131,14 +133,27 @@ public class GestionCitas extends HttpServlet {
         } else if (request.getParameter("iddiente") != null) {
             int idd = Integer.parseInt(request.getParameter("iddiente"));
             long ced = (long) sesion.getAttribute("docupa");
+            
             ArrayList<CartaDentalDTO> dent = new ArrayList();
-            dent = (ArrayList<CartaDentalDTO>) fh.lisCarta(ced, idd);
+              dent = (ArrayList<CartaDentalDTO>) fh.lisCarta(ced, idd);
+               ArrayList<ProcedimientosCatalogosDTO> proca = new ArrayList();
+            proca=(ArrayList<ProcedimientosCatalogosDTO>) fh.lisCat();
+          
+          sesion.setAttribute("catalo", proca);
            
             sesion.setAttribute("histodent", dent);
             
             response.sendRedirect("sitioweb/usuarios/odontograma.jsp");
 
+        }else if (request.getParameter("infodiente") != null) {
+          int proce= Integer.parseInt(request.getParameter("procedimientos"));
+          int estado=  Integer.parseInt(request.getParameter("estado"));
+          String obser= request.getParameter("observacion");
+            
+            
+           
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
