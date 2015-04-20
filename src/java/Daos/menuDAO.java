@@ -31,20 +31,25 @@ public HashMap<UsuariosDTO, String> validarUsuario(String usuario, String pss,Co
         
         ResultSet rs = null;
         try {
-            stmt = cnn.prepareStatement("SELECT u.documento, u.nombres,u.tipoDoc,u.apellidos,u.direccion,u.fechadenacimiento,"
-                    + "u.usuario, u.clave,u.genero,u.correo,t.idTelefono, u.lugarDeNacimiento, u.ciudad,p.descripcion as rol,p.idperfil as idrol, p.idperfil, a.descripcion, a.url, a.idaccion\n"
-                    + "                     FROM usuarios u \n"
-                     +"                     INNER JOIN  telefonos t on  u.documento =t.Documento \n"
-                    + "                     INNER JOIN usuariosperfiles up on u.documento = up.usuarioid \n"
-                    + "                     INNER JOIN perfiles p ON up.perfilid = p.idperfil\n"
-                    + "                     INNER JOIN perfilaccion pa ON p.`idperfil`= pa.`perfilid`\n"
-                    + "                     INNER JOIN acciones a ON pa.`accionid`=a.`idaccion`\n"
-                    + "                     WHERE u.usuario = ?\n"
-                    + "                     AND clave =?\n"
-                    + "                     AND a.parent=0");
+            stmt = cnn.prepareStatement("SELECT u.documento, u.nombres,u.tipoDoc,u.apellidos,u.direccion,u.fechadenacimiento,\n"
+                    + "                    u.usuario, u.clave,u.genero,u.correo,t.idTelefono  as telefono, u.lugarDeNacimiento, \n"
+                    + "                   u.ciudad,p.descripcion as rol,p.idperfil as idrol, p.idperfil, a.descripcion, \n"
+                    + "                  a.url, a.idaccion, up.perfilid, odon.tarjetaProfesional as tarjeta, pac.idRh as rh, paler.idAlergia as alergia\n"
+                    + "				FROM usuarios u				\n"
+                    + "			    LEFT JOIN  pacientes pac on u.documento= pac.idPaciente\n"
+                    + "		        LEFT JOIN  pacientealergias paler on pac.idPaciente= paler.idPaciente\n"
+                    + "                LEFT JOIN  odontologos odon on u.documento= idOdontologo\n"
+                    + "                LEFT JOIN telefonos t on  u.documento = t.documentoid				\n"
+                    + "				LEFT JOIN usuariosperfiles up on u.documento = up.usuarioid \n"
+                    + "				LEFT JOIN perfiles p ON up.perfilid = p.idperfil\n"
+                    + "				LEFT JOIN perfilaccion pa ON p.`idperfil`= pa.`perfilid`\n"
+                    + "				LEFT JOIN  acciones a ON pa.`accionid`=a.`idaccion`\n"
+                    + "				WHERE u.usuario =?\n"
+                    + "				AND clave =?\n"
+                    + "				AND a.parent=0");
 
-                    stmt.setString(1, usuario);
-                    stmt.setString(2, pss);
+            stmt.setString(1, usuario);
+            stmt.setString(2, pss);
                     
 
 
@@ -66,7 +71,11 @@ public HashMap<UsuariosDTO, String> validarUsuario(String usuario, String pss,Co
                     user.setEmail(rs.getString("correo"));
                     user.setLugardeNacimiento(rs.getString("lugarDeNacimiento"));
                     user.setCiudad(rs.getString("ciudad"));
-                    user.setTelefono(rs.getString("idTelefono"));
+                    user.setTelefono(rs.getString("telefono"));
+                    user.setTarjetaprofesional(rs.getLong("tarjeta"));
+                    user.setGrupoSangui(rs.getInt("rh"));
+                    user.setTipoAlergia(rs.getInt("alergia"));
+                    
                     
                     
                     menu += "<li>";

@@ -8,20 +8,17 @@
 <html>
     <head>    
     <%@page errorPage="error404.jsp" %> 
-        <script src="js/jquery.js"></script>
-        <script src="js/jquery.validate.js"></script>
-      
         <link rel="stylesheet" type="text/css" href="css/estiloi.css">
-        
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SmileSystem</title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="description" content="" />
         <link rel="shortcut icon"  href="images/favicon.ico" />
+        <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
         <meta name="keywords" content="" />
         <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.js"></script>
+         <script language="javascript" src="js/jquery.validate.js"></script>
         <script src="js/jquery.scrollzer.min.js"></script>
         <script src="js/jquery.scrolly.min.js"></script>
         <script src="js/skel.min.js"></script>
@@ -33,70 +30,42 @@
         <link rel="stylesheet" href="css/style-xlarge.css" />
         </noscript>
         <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-         <script type="text/javascript">
-
-            function OcultarForm(parm1, parm2) {
-                $('#' + parm2).show();
-                $('#' + parm1).hide();
-            }
-            $(document).ready(function () {
-                //codigo para validar que los campos solo sean letras
+      <script type="text/javascript">
+         $(document).ready(function () {
                 jQuery.validator.addMethod("lettersonly", function (value, element) {
-                    return this.optional(element) || /^[a-zA-ZÃ¡Ã©Ã­Ã³ÃºÃ Ã¨Ã¬Ã²Ã¹Ã€ÃˆÃŒÃ’Ã™ÃÃ‰ÃÃ“ÃšÃ±Ã‘Ã¼Ãœ_\s]+$/i.test(value);
-                }, "Solo puedes ingresar letras");
+                    return this.optional(element) || /^[a-zA-ZÃ¡Ã©Ã­Ã³ÃºÃ Ã¨Ã¬Ã²Ã¹ÃÃÃÃÃÃÃÃÃÃÃ±ÃÃ¼Ã_\s]+$/i.test(value);
+                }, '<div class="alert alert-info  movera"  role="alert">solo puede ingresar letras</div>');
 
                 // sirver para validar los campos del formulario
-                $('#form1').validate({
-                    rules: {
-                        pass: {
-                            required: true,
-                            number: true,
-                            minlength: 5,
-                            maxlength: 15
+                $("#form1").validate({
+                        rules: {
+                              pass: {
+                                  required: true,                                  
+                                  minlength: 5,
+                                  maxlength: 13
+                              },
+                              user: {
+                                  required: true,
+                                  minlength: 5,
+                                  maxlength: 30
+                              }
                         },
-                        user: {
-                            required: true,
-                            minlength: 5,
-                            maxlength: 15
-
-                        }
-
-                    },
-                    messages: {
-                        pass: {
-                            required: "El campo es Requerido",
-                            number: "El campo debe ser NumÃ©rico ",
-                            minlength: "Son {0} digitos MÃ­nimo  ",
-                            maxlength: "Son {0} digitos MÃ¡ximo"
+                        messages: {
+                            pass: {
+                                required: '<div class="alert alert-info movera" role="alert">Este campo es Requerido</div>',
+                                minlength:  '<div class="alert alert-info movera" role="alert">Son {0} digitos Mínimo </div>',
+                                maxlength:  '<div class="alert alert-info movera" role="alert">Son {0} digitos Máximo </div>'
+                            },
+                            user: {
+                                required:  '<div class="alert alert-info movera" role="alert">Este campo es Requerido</div>',
+                                number: '<div class="alert alert-info movera" role="alert">El  campo debe ser Numérico  </div>',
+                                minlength: '<div class="alert alert-info movera" role="alert">Son {0} digitos Mínimo </div>',
+                                
+                                 
+                            }
                         },
-                        user: {
-                            required: "El campo es Requerido",
-                            minlength: "Son {0} digitos MÃ­nimo  ",
-                            maxlength: "Son {0} digitos MÃ¡ximo"
-
-                        }
-                    }
                 });
-
-
-                $('#form2').validate({
-                    rules: {
-                        correo: {
-                            required: true,
-                            email: true
-                        }
-
-                    },
-                    messages: {
-                        correo: {
-                            required: "El campo es requerido",
-                            email: "El Correo es invalido"
-                        }
-                    },
-                  
-                });
-
-            });
+         });
         </script>
 
     </head>
@@ -112,11 +81,12 @@
                 <nav id="nav">
                     <ul>
 
-                        <li><a href="index.jsp" class=" active icon  fa-home"> Inicio</a></li>
-                         <li><a href="inicio.jsp" class="active icon fa-users"> Afiliados</a></li>
-                        <li><a href="index.jsp" class="icon fa-user"> Contactenos</a></li>
-                        <li><a href="index.jsp" class="icon fa-newspaper-o"> Servicios</a></li>
-                        <li><a href="index.jsp" class="icon fa-question-circle "> Inquietudes</a></li>
+                         <li><a href="inicio.jsp" class="icon  fa-home"> Inicio</a></li>
+                         <li><a href="#" class="active icon fa-users"> Afiliados</a></li>
+                                           
+                        <li><a href="inicio.jsp" class="icon fa-user"> Contactenos</a></li>
+                        <li><a href="inicio.jsp" class="icon fa-newspaper-o"> Servicios</a></li>
+                        <li><a href="inicio.jsp" class="icon fa-question-circle "> Inquietudes</a></li>
                     </ul>
                 </nav>
                 <br>
@@ -145,29 +115,37 @@
                                     <div class="row">                               
                                         <div class="col-md-6">
                                             <div class="mover"  style="  margin-left: -214px;">
-                                            <form name="frmUsuario" action="../UsuarioServlet" id="form1" class=" form-horizontal" method="POST" style="position:relative; left: 200px;" role="form" action="../../UsuarioServlet">
+                                            <form name="form1" action="../UsuarioServlet"  id="form1"   class=" form-horizontal" method="POST" style="position:relative; left: 150px;    margin-top: -19px;"  >
                                                 <br>
-                                                <fieldset style="padding-left: 63px; font-size: 38px;"  padd>Iniciar Sesion</fieldset>
+                                                <fieldset style="padding-left: 114px; font-size: 38px;  font-family: 'Oswald', sans-serif;   color: white;"  padd>Iniciar Sesion</fieldset>
                                                 <br>
                                                 <br>
                                                 <div  class=" form-group input-group input-group-lg">
-                                                    <span   for ="user" class="input-group-addon">Usuario</span>
-                                                    <input type="text" name="user" class="  form-control" required  id="use" value="" tabindex="2" name="Cedula"   >
+                                                    <span   for ="user" class="input-group-addon"  style="  color: white;  font-size: 19px;  font-family: 'Oswald', sans-serif;  margin-left: 58px;">Usuario</span>
+                                                    <input type="text" name="user" id="user" class="required form-control lettersonly" tabindex="2"   >
                                                 </div> 
                                                 <div  class=" form-group input-group input-group-lg">
-                                                    <span   for="pass" class="input-group-addon">Contraseña</span>
-                                                    <input type="password" value="" name="pass" required class="lettersonly form-control" id="pass" >
+                                                    <span   for="pass" class="input-group-addon"  style="  color: white;  font-size: 19px;   font-family: 'Oswald', sans-serif;   margin-left: 58px;">Contraseña</span>
+                                                    <input type="password" value="" name="pass" required class=" form-control" id="pass" >
                                                 </div>  
 
                                                 <div>
-                                                    <label  class="ayuda"><a onClick="OcultarForm('Formlogin', 'Recuperar');" href="indexx.jsp">Recordar Contraseña ?</a></label>
+                                                    <label  class="ayuda"><a onClick="OcultarForm('Formlogin', 'Recuperar');" href="indexx.jsp" style="margin-left: 158px;  font-family: 'Oswald', sans-serif;   font-size: 15px;">Recordar Contraseña ?</a></label>
                                                 </div>
 
-                                                <div class="style"><%if (request.getParameter("msg") != null) {
-                                                        out.print(request.getParameter("msg"));
-                                                    }%>  </div>
+                                                <div class="style"><%if (request.getParameter("msg") != null) {%>
+
+                                                    <div class="alert alert-error " role="alert" style="  width: 250px;  height: 40px;   margin-left: 57px;">
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span >&times;</span>
+                                                        </button>
+                                                        <p><strong> <%out.print(request.getParameter("msg")); %></Strong> <i class='glyphicon glyphicon-ok'></i></p>
+                                                    </div>
+
+
+                                                    <%    }%>  </div>
                                                     <div class="mover">
-                                                <input style=" margin-left: 75px;  height: 57px; width: 200px; background-color: #46b8da; color:#000000;" type="submit" name="btnIngresar" value="Ingresar" class="btn btn-primary"> 
+                                                <input style=" margin-left: 120px;  height: 57px; width: 200px; background-color: #46b8da; color:#000000;"  type="submit" name="btnIngresar" value="Ingresar" class="bt btn-info"> 
                                                 </div>
                                                 </form>     
                                                     </div>

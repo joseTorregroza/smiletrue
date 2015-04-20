@@ -102,12 +102,7 @@
             if (miSesion.getAttribute("usr") != null) {
                 UsuariosDTO uregistrado = (UsuariosDTO) miSesion.getAttribute("usr");
                 String menu = (String) miSesion.getAttribute("mp");
-                
-                  if(request.getParameter("id") != null ){
-                  uregistrado = fu.ObUsu(Integer.parseInt(request.getParameter("id")));
-              }
-
-
+     
         %>
 
 
@@ -154,16 +149,16 @@
                                     <div class="col-lg-10">
                                         <select  for="TipoAlergia" name="TipoAlergia" id="TipoAlergia" required class="nobloqueado  form-control">
 
-                                            <option value="1" <% if ("1".equals(uregistrado.getGrupoSangui())) {
+                                            <option value="1" <% if ("1".equals(uregistrado.getTipoAlergia())) {
                                                     out.println("selected");
                                                 } %>>Ninguna</option>
-                                                    <option value="2" <% if ("2".equals(uregistrado.getGrupoSangui())) {
+                                                    <option value="2" <% if ("2".equals(uregistrado.getTipoAlergia())) {
                                                     out.println("selected");
                                                 } %>>Polvo</option>
-                                                    <option value="3" <% if ("3".equals(uregistrado.getGrupoSangui())) {
+                                                    <option value="3" <% if ("3".equals(uregistrado.getTipoAlergia())) {
                                                     out.println("selected");
                                                 } %>>Acetaminofem </option>
-                                                    <option value="4" <% if ("4".equals(uregistrado.getGrupoSangui())) {
+                                                    <option value="4" <% if ("4".equals(uregistrado.getTipoAlergia())) {
                                                     out.println("selected");
                                                 } %>>Penisilina</option>
                                         </select>
@@ -367,11 +362,8 @@
                     </table> 
                         <div class="style"><%if (request.getParameter("msg") != null) {
                             } %>  </div>
-                  
-                           
-                    <input type="submit" class="beton" value="  Enviar"  href="recibirperfil.jsp?idusuario=<%=uregistrado.getDocumento()  %> " name=""  id="guardar"/>
-
-
+              <input  type="button"  class="btn btn-info  beton" onClick="location.href =  'recibirperfil.jsp?idusuario=<%=uregistrado.getDocumento()%> '" id="guardar"   value="  Enviar"  >
+           
 
                 </form>
             </div>		                     

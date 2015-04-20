@@ -133,6 +133,12 @@
 		font-size: 0.9em;
 		margin: 0 0 2.25em 0;
 	}
+        .movera{
+         margin-left: 56px;
+         width: 296px;
+            
+            
+           }
 
 		pre code {
 			-webkit-overflow-scrolling: touch;

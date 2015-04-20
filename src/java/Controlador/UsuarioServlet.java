@@ -58,7 +58,7 @@ public class UsuarioServlet extends HttpServlet {
                 response.sendRedirect("sitioweb/usuarios/iniciarsesion.jsp");
 
             } else {
-                response.sendRedirect("sitioweb/index.jsp?msg=no existe");
+                response.sendRedirect("sitioweb/index.jsp?msg=Noexiste usuario");
             }
         } else if (request.getParameter("guardarUsuario") != null) {
 
@@ -114,38 +114,53 @@ public class UsuarioServlet extends HttpServlet {
                 response.sendRedirect("sitioweb/sitioes/paciente/error");
             }
 
-        } else if (request.getParameter("btnModificar") != null) {
+      } else if (request.getParameter("btnModificar") != null) {
 
-            try {
-                UsuariosDTO usnuevo = new UsuariosDTO();
-                usnuevo.setNombres(request.getParameter("NombreCompleto").trim());
-                usnuevo.setApellidos(request.getParameter("ApellidoCompleto").trim());
-                usnuevo.setTipoDoc(request.getParameter("tipodoc").trim());
-                usnuevo.setDocumento(Long.parseLong(request.getParameter("Cedula").trim()));
-                usnuevo.setRoles(Integer.parseInt(request.getParameter("rol").trim()));
-                usnuevo.setTarjetaprofesional(Long.parseLong(request.getParameter("tarjetaProfe").trim()));
-                usnuevo.setFechadenacimiento(request.getParameter("FechaNacimiento").trim());
-                usnuevo.setLugardeNacimiento(request.getParameter("LugardeNacimiento").trim());
-                usnuevo.setEmail(request.getParameter("email").trim());
-                usnuevo.setTelefono(request.getParameter("Telefono").trim());
-                usnuevo.setDireccion(request.getParameter("Direccion").trim());
-                usnuevo.setCiudad(request.getParameter("Ciudad").trim());
-                usnuevo.setGenero(request.getParameter("Sexo").trim());
-                usnuevo.setClave(request.getParameter("clave").trim());
-                String salida = fu.modificarAdmi(usnuevo);
-                response.sendRedirect("sitioweb/usuarios/perfiladmi.jsp?sal" + salida);
-            } catch (SQLException ex) {
-                Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        
+          try {
+              UsuariosDTO usnuevo = new UsuariosDTO();
+              usnuevo.setNombres(request.getParameter("NombreCompleto").trim());
+              usnuevo.setApellidos(request.getParameter("ApellidoCompleto").trim());
+              usnuevo.setTipoDoc(request.getParameter("tipodoc").trim());
+              usnuevo.setDocumento(Long.parseLong(request.getParameter("Cedula").trim()));
+              usnuevo.setFechadenacimiento(request.getParameter("FechaNacimiento").trim());
+              usnuevo.setLugardeNacimiento(request.getParameter("LugardeNacimiento").trim());
+              usnuevo.setTipoAlergia(Integer.parseInt(request.getParameter("TipoAlergia").trim()));
+              usnuevo.setGrupoSangui(Integer.parseInt(request.getParameter("Gruposanguineo").trim()));
+              usnuevo.setCiudad(request.getParameter("Ciudad").trim());
+              usnuevo.setEmail(request.getParameter("email").trim());
+              usnuevo.setTelefono(request.getParameter("Telefono").trim());
+              usnuevo.setDireccion(request.getParameter("Direccion").trim());
+              usnuevo.setGenero(request.getParameter("Sexo").trim());
+              usnuevo.setClave(request.getParameter("clave").trim());
+              String salida = fu.ModUs(usnuevo);
+              response.sendRedirect("sitioweb/usuarios/perfil.jsp?msg" + salida);
+          } catch (SQLException ex) {
+              Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+          }
+         
         } else if (request.getParameter("btnActualizarusu") != null) {
-
-            boolean salida = fu.ModUs(Long.parseLong(request.getParameter("Cedula")), request.getParameter("NombreCompleto"));
-            if (salida == true) {
-
-                response.sendRedirect("sitioweb/usuarios/perfil.jsp?sal=actualizado!!!!");
-            } else {
-                response.sendRedirect("sitioweb/usuarios/perfil.jsp?sal= fallo al actualizar");
-            }
+             try {
+              UsuariosDTO usnuevo = new UsuariosDTO();
+              usnuevo.setNombres(request.getParameter("NombreCompleto").trim());
+              usnuevo.setApellidos(request.getParameter("ApellidoCompleto").trim());
+              usnuevo.setTipoDoc(request.getParameter("tipodoc").trim());
+              usnuevo.setDocumento(Long.parseLong(request.getParameter("Cedula").trim()));
+              usnuevo.setFechadenacimiento(request.getParameter("FechaNacimiento").trim());
+              usnuevo.setLugardeNacimiento(request.getParameter("LugardeNacimiento").trim());
+              usnuevo.setRoles(Integer.parseInt(request.getParameter("TipoAlergia").trim()));
+              usnuevo.setTarjetaprofesional(Long.parseLong(request.getParameter("Gruposanguineo").trim()));
+              usnuevo.setCiudad(request.getParameter("Ciudad").trim());
+              usnuevo.setEmail(request.getParameter("email").trim());
+              usnuevo.setTelefono(request.getParameter("Telefono").trim());
+              usnuevo.setDireccion(request.getParameter("Direccion").trim());
+              usnuevo.setGenero(request.getParameter("Sexo").trim());
+              usnuevo.setClave(request.getParameter("clave").trim());
+              String salida = fu.modificarAdmi(usnuevo);
+              response.sendRedirect("sitioweb/usuarios/perfil.jsp?msg" + salida);
+          } catch (SQLException ex) {
+              Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+          }
 
         } else {
             response.sendRedirect("sitioweb/index.jsp?msg=no puede ingresar");

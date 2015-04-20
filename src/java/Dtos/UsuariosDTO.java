@@ -16,7 +16,7 @@ public class UsuariosDTO {
     private String tipoDoc = "";
     private long documento = 0;
     private int grupoSangui = 0;
-    private int tipoAlergia = 0;
+    private int tipoAlergia ;
     private String fechadenacimiento = "";
     private String lugardeNacimiento = "";
     private String email = "";
@@ -27,8 +27,10 @@ public class UsuariosDTO {
     private String usuario = "";
     private String clave ;
     private String  rol="";
-    private int roles=0;
-    private long tarjetaprofesional=0;
+    private int roles;
+    private long tarjetaprofesional;
+    private int estado=0;
+    private int activarestado=0;
 
   
 
@@ -252,6 +254,22 @@ public class UsuariosDTO {
 
     public void setRoles(int roles) {
         this.roles = roles;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    public int getActivarestado() {
+        return activarestado;
+    }
+
+    public void setActivarestado(int activarestado) {
+        this.activarestado = activarestado;
     }
 
  

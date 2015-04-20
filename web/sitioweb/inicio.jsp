@@ -180,7 +180,7 @@
                         <form method="post" action="#">
                             <div class="row uniform">
                                 <div class="6u 12u(xsmall)"><input type="text" name="name" id="name" placeholder="Name" /></div>
-                                <div class="6u 12u(xsmall)"><input type="email" name="email" id="email" placeholder="Email" /></div>
+                                <div class="6u 12u(xsmall)"><input type="email" name="email" id="email" placeholder="Email"  style="  width: 176px;"/></div>
                             </div>
                             <div class="row uniform">
                                 <div class="12u"><input type="text" name="subject" id="subject" placeholder="Subject" /></div>

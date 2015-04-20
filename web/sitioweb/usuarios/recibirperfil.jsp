@@ -93,13 +93,12 @@
         %>
     </head>
     <body>
-     <%  
-         if (request.getParameter("idusuario") != null) {
-
-                long  id = (Long.parseLong(  request.getParameter("idusuario")));
+      <%
+            if (request.getParameter("idusuario") != null) {
+                
+                long id = (Long.parseLong(request.getParameter("idusuario")));
                 FUsuarios fu= new FUsuarios();
-                UsuariosDTO    uregistrado = new   UsuariosDTO();
-
+                 UsuariosDTO uregistrado = new UsuariosDTO(); 
                 uregistrado = fu.listarUsu(id);
                 if (uregistrado != null) {
         %>
@@ -138,7 +137,7 @@
                                 <div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <input type="text" value="<%  out.print(uregistrado.getNombres());%>" name="NombreCompleto" required class=" nobloqueado lettersonly form-control" id="NombreCompleto" placeholder="">
+                                        <input type="text" value="<%  out.print(uregistrado.getNombres());%>"  disabled name="NombreCompleto" required class="  lettersonly form-control  disabled" id="NombreCompleto" placeholder="">
                                     </div>
                                 </div>
                             </td>
@@ -146,7 +145,7 @@
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <select  for="TipoAlergia" name="TipoAlergia" id="TipoAlergia" required class="nobloqueado  form-control">
+                                        <select  for="TipoAlergia" name="TipoAlergia"  disabled  id="TipoAlergia" required class=" form-control  ">
 
                                             <option value="1" <% if ("1".equals(uregistrado.getGrupoSangui())) {
                                                     out.println("selected");
@@ -170,7 +169,7 @@
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <input type="text" class="form-control  nobloqueado lettersonly" required id="ApellidoCompleto" value="<%  out.print(uregistrado.getApellidos());%>" name="ApellidoCompleto" placeholder="lopez Vargas">
+                                        <input type="text" class="form-control   lettersonly"  disabled  required id="ApellidoCompleto" value="<%  out.print(uregistrado.getApellidos());%>" name="ApellidoCompleto" placeholder="lopez Vargas">
 
 
                                     </div>
@@ -179,7 +178,7 @@
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <select  for="Gruposanguineo" name="Gruposanguineo" id="Gruposanguineo" required class="nobloqueado  form-control">
+                                        <select  for="Gruposanguineo" name="Gruposanguineo" disabled id="Gruposanguineo" required class="nobloqueado  form-control">
 
                                                     <option value="1" <% if ("1".equals(uregistrado.getGrupoSangui())) {
                                                     out.println("selected");
@@ -214,7 +213,7 @@
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <select  for="tipodoc" name="tipodoc" id="tipodoc" required value="" class="nobloqueado  form-control">
+                                        <select  for="tipodoc" name="tipodoc" id="tipodoc" required value="" disabled class="  form-control">
                                             <option selected> Seleccione Tipo</option>
                                             <option value="CC"<% if ("CC".equals(uregistrado.getTipoDoc())) {
                                                     out.println("selected");
@@ -230,7 +229,7 @@
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <input type="text" class="  bloqueado email form-control" id="ejemplo_email_3" name="email" required value="<%  out.print(uregistrado.getEmail());%>"  placeholder="">
+                                        <input type="text" class="   email form-control" id="ejemplo_email_3" name="email" required value="<%  out.print(uregistrado.getEmail());%>"  placeholder="">
                                     </div>
                                 </div></td>
                         </tr>
@@ -239,14 +238,14 @@
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <input type="text" class="nobloqueado  form-control" required id="ejemplo_email_3" value="<%  out.print(uregistrado.getDocumento());%>" name="Cedula" placeholder=""  >
+                                        <input type="text" class="  form-control" disabled  required id="ejemplo_email_3" value="<%  out.print(uregistrado.getDocumento());%>" name="Cedula" placeholder=""  >
                                     </div>
                                 </div></td>
                             <td><label for="Telefono" class="InputRequired col-lg-2 control-label">Teléfono</label></td> 
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <input type="text" class=" form-control bloqueado" required name="Telefono" value="<%  out.print(uregistrado.getTelefono());%>"  id="" placeholder="">
+                                        <input type="text" class=" form-control "    required name="Telefono" value="<%  out.print(uregistrado.getTelefono());%>"  id="" placeholder="">
                                     </div>
                                 </div></td>
                         </tr>
@@ -255,14 +254,14 @@
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <input type="date" class="nobloqueado  form-control" required id="ejemplo_email_3" value="<%if(uregistrado !=null){out.print(uregistrado.getDireccion());}%>" name="">
+                                        <input type="date" class="  form-control" disabled  required id="ejemplo_email_3" value="<%if(uregistrado !=null){out.print(uregistrado.getFechadenacimiento());}%>" name="">
                                     </div>
                                 </div></td>
                             <td><label for="Direccion" class=" InputRequired col-lg-2 control-label" >Direccion</label></td> 
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <input type="text" class=" bloqueado" id="" name="Direccion" required value="<%  out.print(uregistrado.getDireccion());%>" placeholder="" >
+                                        <input type="text" class=" " id="" name="Direccion" required value="<%  out.print(uregistrado.getDireccion());%>" placeholder="" >
                                     </div>
                                 </div></td>
                         </tr>
@@ -271,7 +270,7 @@
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <select  for="LugardeNacimiento" name="LugardeNacimiento" id="tipodoc" required class="nobloqueado   form-control">
+                                        <select  for="LugardeNacimiento"  disabled name="LugardeNacimiento" id="tipodoc" required class="   form-control">
                                                 <option value="Bogota"<% if ("Bogota".equals(uregistrado.getLugardeNacimiento())) {
                                                     out.println("selected");
                                                 } %>>Bogotá</option>
@@ -309,7 +308,7 @@
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <select  for="Sexo" name="Sexo" id="Sexo" required class=" nobloqueado ">
+                                        <select  for="Sexo" name="Sexo" id="Sexo" required disabled class="  ">
                                             <option> Seleccione Tipo</option>
                                             <option value="F"<% if ("F".equals(uregistrado.getGenero())) {
                                                     out.println("selected");
@@ -332,7 +331,7 @@
 
                                     <div class="col-lg-10">
                                         <option></option>
-                                        <select  for="Ciudad" name="Ciudad" id="Ciudad" required class="nobloqueado   form-control">
+                                        <select  for="Ciudad" name="Ciudad" id="Ciudad" required  disabled  class="   form-control">
 
                                             <option> Seleccione </option>
                                                     <option value="Bogota"<% if ("Bogota".equals(uregistrado.getCiudad())) {

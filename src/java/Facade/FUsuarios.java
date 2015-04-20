@@ -75,8 +75,8 @@ public class FUsuarios extends HttpServlet {
         return usuario.listarUno(id, cnx);
     }
 
-    public boolean ModUs(long id, String e) {
-        return usuario.modfificarUsuario(id, e, cnx);
+    public String  ModUs(UsuariosDTO  usdto)   throws SQLException {
+        return usuario.modfificarUsuario(usdto, cnx);
     }
 
     public String Eli(long id) {
@@ -94,6 +94,15 @@ public class FUsuarios extends HttpServlet {
     public List<UsuariosDTO> listTodos(long e,String non,String ape){
         return usuario.listarPacinetes(non, ape, e, cnx);
     }
+    
+     public String ObtenercorreoUsuarioId(long usuarioid) {
+        return usuario.obtenerCorreoPorId(usuarioid, cnx);
+    }
+     
+      public List obtenerPersonasParaCorreos() {
+      return usuario.obtenerPersonas(cnx);
+      }
+      
           
      ////////////////////////////////////////ESTADOS//////////////////////////////////////////////
 //     public List<CitaDTO> lisCi(){

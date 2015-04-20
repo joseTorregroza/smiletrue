@@ -58,70 +58,34 @@ public class UsuarioDAO {
 
     public String crearUsuario(UsuariosDTO odto, Connection cnn) {
         this.cnn = cnn;
+        CallableStatement cstm;
         // recibe usuario, retorna entero 1: exitoso, 2: fallo;
-
         try {
 
-            String sqlInsert = "INSERT INTO usuarios VALUES(?,?,?,?,?,?,?,md5(?),?,?,?,?)";
-            String concat = "Update usuarios set usuario=concat( left(" + odto.getNombres() + ",2) , " + odto.getApellidos() + ") where  documento=" + odto.getDocumento() + " ";
-            String sqlinsert2 = "INSERT INTO telefonos VALUES (?,?)";
-            String sqlinsert3 = "INSERT INTO pacientes  VALUES (?,?,?)";
-            String sqlinsert4 = "INSERT INTO pacienteAlergias  VALUES (?,?)";
-            String sqlinsert5 = "INSERT INTO usuariosperfiles VALUES(?,?,?)";
-            int estado = 1;
-            String usuariosss = "jvargas";
-            long numero = (long) (Math.random() * 100000000 + 1);
-            pstmt = cnn.prepareStatement(sqlInsert);
-            pstmt.setLong(1, odto.getDocumento());
-            pstmt.setString(2, odto.getTipoDoc());
-            pstmt.setString(3, odto.getNombres());
-            pstmt.setString(4, odto.getApellidos());
-            pstmt.setString(5, odto.getDireccion());
-            pstmt.setString(6, odto.getFechadenacimiento());
-            pstmt.setString(7, usuariosss);
-            pstmt.setLong(8, numero);
-            pstmt.setString(9, odto.getGenero());
-            pstmt.setString(10, odto.getEmail());
-            pstmt.setString(11, odto.getLugardeNacimiento());
-            pstmt.setString(12, odto.getCiudad());
-            rtdo = pstmt.executeUpdate();
+            cstm = cnn.prepareCall("{call ProceRegistrarUsuarios(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
 
-            if (rtdo != 0) {
-                pstmt = cnn.prepareStatement(sqlinsert2);
-                pstmt.setString(1, odto.getTelefono());
-                pstmt.setLong(2, odto.getDocumento());
-                rtdo = pstmt.executeUpdate();
-                if (rtdo != 0) {
-
-                    pstmt = cnn.prepareStatement(sqlinsert3);
-                    pstmt.setLong(1, odto.getDocumento());
-                    pstmt.setInt(2, odto.getGrupoSangui());
-                    pstmt.setString(3, null);
-                    rtdo = pstmt.executeUpdate();
-
-                    if (rtdo != 0) {
-                        pstmt = cnn.prepareStatement(sqlinsert4);
-                        pstmt.setLong(1, odto.getDocumento());
-                        pstmt.setInt(2, odto.getTipoAlergia());
-                        rtdo = pstmt.executeUpdate();
-                        if (rtdo != 0) {
-                            int rol = 1;
-                            pstmt = cnn.prepareStatement(sqlinsert5);
-                            pstmt.setLong(1, odto.getDocumento());
-                            pstmt.setInt(2, rol);
-                            pstmt.setInt(3, estado);
-                            rtdo = pstmt.executeUpdate();
-                        }
-                    }
-
-                }
-//                
-//                if(rtdo != 0){
-//                   mensaje = "";
-//                    
-//                }
+            cstm.setLong(1, odto.getDocumento());
+            cstm.setString(2, odto.getTipoDoc());
+            cstm.setString(3, odto.getNombres());
+            cstm.setString(4, odto.getApellidos());
+            cstm.setString(5, odto.getDireccion());
+            cstm.setString(6, odto.getFechadenacimiento());
+            cstm.setString(7, odto.getGenero());
+            cstm.setString(8, odto.getEmail());
+            cstm.setString(9, odto.getLugardeNacimiento());
+            cstm.setString(10, odto.getCiudad());
+            cstm.setString(11, odto.getTelefono());
+            cstm.setInt(12, odto.getGrupoSangui());
+            cstm.setInt(13, odto.getTipoAlergia());
+            cstm.registerOutParameter(14, Types.INTEGER);
+            cstm.execute();
+            int salida = cstm.getInt(14);
+            if (salida == 1) {
+                mensaje = "ok";
+            } else if (salida == 2) {
+                mensaje = "no";
             } else {
-                mensaje = "No se pudo realizar la insert";
+                mensaje = "Ningun cambio";
             }
 
         } catch (SQLException sqle) {
@@ -135,63 +99,35 @@ public class UsuarioDAO {
 
     public String crearAdmi(UsuariosDTO odto, Connection cnn) {
         this.cnn = cnn;
+        CallableStatement cstm;
         // recibe usuario, retorna entero 1: exitoso, 2: fallo;
-
         try {
-
-            String sqlInsert = "INSERT INTO usuarios VALUES(?,?,?,?,?,?,?,md5(?),?,?,?,?)";
-            String concat = "Update usuarios set usuario=concat( left(" + odto.getNombres() + ",2) , " + odto.getApellidos() + ") where  documento=" + odto.getDocumento() + " ";
-            String sqlinsert2 = "INSERT INTO telefonos VALUES (?,?)";
-            String sqlinsert3 = "INSERT INTO odontologos  VALUES (?,?,?)";
-            String sqlinsert4 = "INSERT INTO usuariosperfiles VALUES(?,?,?)";
+            int rol = 1;
             int estado = 1;
-            String usuariosss = "jvargas";
-            long numero = (long) (Math.random() * 100000000 + 1);
-            pstmt = cnn.prepareStatement(sqlInsert);
-            pstmt.setLong(1, odto.getDocumento());
-            pstmt.setString(2, odto.getTipoDoc());
-            pstmt.setString(3, odto.getNombres());
-            pstmt.setString(4, odto.getApellidos());
-            pstmt.setString(5, odto.getDireccion());
-            pstmt.setString(6, odto.getFechadenacimiento());
-            pstmt.setString(7, usuariosss);
-            pstmt.setLong(8, numero);
-            pstmt.setString(9, odto.getGenero());
-            pstmt.setString(10, odto.getEmail());
-            pstmt.setString(11, odto.getLugardeNacimiento());
-            pstmt.setString(12, odto.getCiudad());
-            rtdo = pstmt.executeUpdate();
+            cstm = cnn.prepareCall("{call ProceRegistraradministrador(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
 
-            if (rtdo != 0) {
-                pstmt = cnn.prepareStatement(sqlinsert2);
-                pstmt.setString(1, odto.getTelefono());
-                pstmt.setLong(2, odto.getDocumento());
-                rtdo = pstmt.executeUpdate();
-                if (rtdo != 0) {
-                    int jornada = 1;
-                    pstmt = cnn.prepareStatement(sqlinsert3);
-                    pstmt.setLong(1, odto.getDocumento());
-                    pstmt.setLong(2, odto.getTarjetaprofesional());
-                    pstmt.setInt(3, jornada);
-                    rtdo = pstmt.executeUpdate();
-
-                    if (rtdo != 0) {
-                        pstmt = cnn.prepareStatement(sqlinsert4);
-                        pstmt.setLong(1, odto.getDocumento());
-                        pstmt.setInt(2, odto.getRoles());
-                        pstmt.setInt(3, estado);
-                        rtdo = pstmt.executeUpdate();
-
-                    }
-
-                }
-//                
-//                if(rtdo != 0){
-//                   mensaje = "";
-//                    
-//                }
+            cstm.setLong(1, odto.getDocumento());
+            cstm.setString(2, odto.getTipoDoc());
+            cstm.setString(3, odto.getNombres());
+            cstm.setString(4, odto.getApellidos());
+            cstm.setString(5, odto.getDireccion());
+            cstm.setString(6, odto.getFechadenacimiento());
+            cstm.setString(7, odto.getGenero());
+            cstm.setString(8, odto.getEmail());
+            cstm.setString(9, odto.getLugardeNacimiento());
+            cstm.setString(10, odto.getCiudad());
+            cstm.setString(11, odto.getTelefono());
+            cstm.setInt(12, odto.getRoles());
+            cstm.setLong(13, odto.getTarjetaprofesional());
+            cstm.registerOutParameter(14, Types.INTEGER);
+            cstm.execute();
+            int salida = cstm.getInt(14);
+            if (salida == 1) {
+                mensaje = "ok";
+            } else if (salida == 2) {
+                mensaje = "no";
             } else {
-                mensaje = "No se pudo realizar la insert";
+                mensaje = "Ningun cambio";
             }
 
         } catch (SQLException sqle) {
@@ -263,7 +199,7 @@ public class UsuarioDAO {
                     + "                    FROM\n"
                     + "                        usuarios us\n"
                     + "                            inner join\n"
-                    + "                        telefonos te ON us.documento = te.Documento\n"
+                    + "                        telefonos te ON us.documento = te.documentoid\n"
                     + "                            inner join\n"
                     + "                        pacientes paci ON us.documento = paci.idPaciente\n"
                     + "                            inner join \n"
@@ -294,7 +230,7 @@ public class UsuarioDAO {
                     odto.setClave(rs.getString("clave"));
                     odto.setTelefono(rs.getString("Telefono"));
                     odto.setGrupoSangui(rs.getInt("rol"));
-                     odto.setTipoAlergia(rs.getInt("alergia"));                  
+                    odto.setTipoAlergia(rs.getInt("alergia"));
                     odto.setRoles(rs.getInt("rol"));
                     odto.setRol(rs.getString("rolnom"));
                 }
@@ -333,7 +269,7 @@ public class UsuarioDAO {
         try {
             pstmt = cnn.prepareStatement("Update usuarios us"
                     + "        inner join"
-                    + "    telefonos te ON us.documento = te.Documento"
+                    + "    telefonos te ON us.documento = te.documentoid"
                     + "        inner join"
                     + "    odontologos odon ON us.documento = odon.idOdontologo"
                     + "        inner join"
@@ -383,26 +319,60 @@ public class UsuarioDAO {
         return fuera;
     }
 
-    public boolean modfificarUsuario(long id, String nombre, Connection cnn) {
+    public String modfificarUsuario(UsuariosDTO usdto, Connection cnn) {
         this.cnn = cnn;
-        boolean salida = false;
+        String fuera = "";
+        int res = 0;
         try {
-            pstmt = cnn.prepareStatement("UPDATE  usuarios us inner join telefonos  te on us.documento=te.Documento \n"
-                    + " SET  us.nombres=?, us.apellidos=?, us.tipoDoc = ?,us.fechadenacimiento=?, us.lugarDeNacimiento=?, us.correo=?, us.direccion=?,us.ciudad=?, us.genero= ?,us.usuario=?, us.clave=?, te.idTelefono=?  WHERE us.documento =?; ");
-            pstmt.setLong(1, id);
-            pstmt.setString(2, nombre);
-            int valor = 0;
-            valor = pstmt.executeUpdate();
-            if (valor != 0) {
-                salida = true;
-            } else {
-                salida = false;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            pstmt = cnn.prepareStatement("Update usuarios us"
+                    + "                            inner join"
+                    + "                       telefonos te ON us.documento = te.documentoid"
+                    + "                            inner join"
+                    + "                        pacientes pa ON us.documento = pa.idPaciente"
+                    + "                            inner join"
+                    + "                       pacientealergias paler ON pa.idPaciente = paler.idPaciente "
+                    + "                    SET "
+                    + "                        us.nombres = ?, "
+                    + "                         us.apellidos =?,"
+                    + "                        us.tipoDoc = ?, "
+                    + "	            us.fechadenacimiento = ?,"
+                    + "                        us.lugarDeNacimiento =?,"
+                    + "	          us.correo =?,"
+                    + "                        us.direccion =?, "
+                    + "                            us.ciudad =?,"
+                    + "                        us.genero =?,"
+                    + "                        us.usuario = ?,"
+                    + "                        us.clave = ?,"
+                    + "                        te.idTelefono =?,"
+                    + "                        pa.idRh=?,"
+                    + "                        paler.idAlergia=?"                   
+                    + "                    WHERE"
+                    + "                       us.documento = ?;");
+            pstmt.setString(1, usdto.getNombres());
+            pstmt.setString(2, usdto.getApellidos());
+            pstmt.setString(3, usdto.getTipoDoc());
+            pstmt.setString(4, usdto.getFechadenacimiento());
+            pstmt.setString(5, usdto.getLugardeNacimiento());
+            pstmt.setInt(6, usdto.getTipoAlergia());
+            pstmt.setInt(7, usdto.getGrupoSangui());
+            pstmt.setString(8, usdto.getCiudad());
+            pstmt.setString(9, usdto.getEmail());
+            pstmt.setString(10, usdto.getTelefono());
+            pstmt.setString(11, usdto.getDireccion());
+            pstmt.setString(12, usdto.getGenero());
+            pstmt.setString(13, usdto.getClave());
+            pstmt.setLong(14, usdto.getDocumento());
 
-        return salida;
+            res = pstmt.executeUpdate();
+            if (res != 0) {
+                fuera = "Perfil actualizado";
+            } else {
+                fuera = "Error al actualizar   el perfil";
+            }
+        } catch (SQLException sqle) {
+            System.out.println("Error en la base de datos" + sqle.getSQLState() + "y" + sqle.getMessage());
+        }
+        return fuera;
     }
 
     public long checkUser(long cedula, Connection cnn) {
@@ -446,7 +416,7 @@ public class UsuarioDAO {
 
         return salida;
     }
-    
+
     public List<UsuariosDTO> listarPacinetes(String nombre, String apellidos, long idpa, Connection cnn) {
         ArrayList<UsuariosDTO> usuarios = new ArrayList();
         try {
@@ -488,15 +458,15 @@ public class UsuarioDAO {
         }
         return usuarios;
     }
-    
-     public List<UsuariosDTO> listarOdontologos(Connection cnn) {
+
+    public List<UsuariosDTO> listarOdontologos(Connection cnn) {
         ArrayList<UsuariosDTO> usuarios = new ArrayList();
         try {
             String sql = ("SELECT   usuarios.documento, tipoDoc,usuarios.nombres, usuarios.apellidos, direccion, fechadenacimiento,usuario, clave,genero, correo,lugarDeNacimiento, ciudad , usuariosperfiles.perfilid "
                     + "FROM usuarios "
                     + "join usuariosperfiles on usuariosperfiles.usuarioid=usuarios.documento where usuariosperfiles.perfilid=2 order by apellidos desc; ");
             pstmt = cnn.prepareStatement(sql);
-            
+
             rs = pstmt.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
@@ -519,7 +489,8 @@ public class UsuarioDAO {
         }
         return usuarios;
     }
-        public List<UsuariosDTO> ObtOdontologos(Connection cnn, long id) {
+
+    public List<UsuariosDTO> ObtOdontologos(Connection cnn, long id) {
         ArrayList<UsuariosDTO> usuarios = new ArrayList();
         try {
             String sql = ("SELECT   usuarios.documento, tipoDoc,usuarios.nombres, usuarios.apellidos, direccion, fechadenacimiento,usuario, clave,genero, correo,lugarDeNacimiento, ciudad , usuariosperfiles.perfilid "
@@ -550,5 +521,55 @@ public class UsuarioDAO {
         return usuarios;
     }
 
+    public String obtenerCorreoPorId(long usuaerioid, Connection cnn) {
+        this.cnn = cnn;
+        String sqlTemp = "SELECT `correo` FROM `personas` WHERE  `documento` = ?";
+        try {
+            pstmt = cnn.prepareStatement(sqlTemp);
+            pstmt.setLong(1, usuaerioid);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                mensaje = rs.getString("Correo");
+            }
+
+        } catch (SQLException ex) {
+            mensaje = "Error, detalle: " + ex.getMessage();
+        }
+        return mensaje;
+    }
+
+    public List obtenerPersonas(Connection cnn) {
+        ArrayList<UsuariosDTO> usuario = null;
+        String sqlTemp = "SELECT documento , nombres, apellidos , tipoDoc, fechadenacimiento, lugarDeNacimiento, correo,direccion,  ciudad , genero,usuario, clave, estado, ActivarCorreo  FROM usuarios";
+        try {
+            pstmt = cnn.prepareStatement(sqlTemp);
+            rs = pstmt.executeQuery();
+
+            usuario = new ArrayList();
+            while (rs.next()) {
+                UsuariosDTO odto = new UsuariosDTO();
+                odto.setDocumento(rs.getLong("documento"));
+                odto.setNombres(rs.getString("nombres"));
+                odto.setApellidos(rs.getString("apellidos"));
+                odto.setTipoDoc(rs.getString("tipoDoc"));
+                odto.setFechadenacimiento(rs.getString("fechadenacimiento"));
+                odto.setLugardeNacimiento(rs.getString("lugarDeNacimiento"));
+                odto.setEmail(rs.getString("correo"));
+                odto.setDireccion(rs.getString("direccion"));
+                odto.setCiudad(rs.getString("ciudad"));
+                odto.setGenero(rs.getString("genero"));
+                odto.setUsuario(rs.getString("usuario"));
+                odto.setClave("clave");
+                odto.setEstado(rs.getInt("estado"));
+                odto.setActivarestado(rs.getInt("ActivarCorreo"));
+                usuario.add(odto);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Error, detalle: " + ex.getMessage());
+        }
+        return usuario;
+    }
 
 }

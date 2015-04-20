@@ -32,6 +32,10 @@
         <servlet-name>FHistorial</servlet-name>
         <servlet-class>Facade.FHistorial</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GestionCorreos</servlet-name>
+        <servlet-class>Controlador.GestionCorreos</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Conectar</servlet-name>
         <url-pattern>/Conectar</url-pattern>
@@ -64,16 +68,17 @@
         <servlet-name>FHistorial</servlet-name>
         <url-pattern>/FHistorial</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GestionCorreos</servlet-name>
+        <url-pattern>/GestionCorreos</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    
-  <error-page> 
-      <exception-type>exception</exception-type> 
-            <location>/error500.jsp</location> 
- </error-page> 
- 
- 
+    <error-page>
+        <exception-type>exception</exception-type>
+        <location>/error500.jsp</location>
+    </error-page>
 </web-app>

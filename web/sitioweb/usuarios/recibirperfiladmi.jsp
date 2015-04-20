@@ -101,16 +101,14 @@
         %>
     </head>
     <body>
-        <%
-            HttpSession miSesion = request.getSession(false);
-           FUsuarios fu= new FUsuarios();
-            if (miSesion.getAttribute("usr") != null) {
-                UsuariosDTO uregistrado = (UsuariosDTO) miSesion.getAttribute("usr");
-                String menu = (String) miSesion.getAttribute("mp");
+          <%
+            if (request.getParameter("idusuario") != null) {
                 
-                
-
-
+                long id = (Long.parseLong(request.getParameter("idusuario")));
+                FUsuarios fu= new FUsuarios();
+                 UsuariosDTO uregistrado = new UsuariosDTO(); 
+                uregistrado = fu.listarUsu(id);
+                if (uregistrado != null) {
         %>
 
 
@@ -133,7 +131,7 @@
         <div class="contenido">
             <div class="menu2"> 
                 <div class="menucoreer"> <img class="vector" src="../imagenes/manu.png " width="70"	height="70"></div>
-                    <% out.println(menu); %> 
+                   
             </div>
             <div class="mesa">
                 <h1>Datos de Registro</h1>
@@ -336,18 +334,25 @@
                         <div class="style"><%if (request.getParameter("msg") != null) {
                             } %>  </div>
                             
-                  <input  type="button"  class="btn btn-info  beton" name="btnActualizarusu"  onClick="location.href =  'recibirperfiladmi.jsp?idusuario=<%=uregistrado.getDocumento()%> '" id="guardar"   value="  Enviar"  >
+                  <input  type="submit"  class="btn btn-info  beton" name="btnActualizarusu"   id="guardar"   value="  Enviar"  >
 
 
                 </form>
             </div>		                     
         </div>
 
-        <%     } else {
-                response.sendRedirect("../index.jsp");
-            }
+      <%
+                                } else if (request.getParameter("msg") != null) {
+                                %>
+                                <div class="confirmarOK"><%=request.getParameter("msg")%></div>        
+                                <%
+                                        } else {
+                                            out.print("no llego nada");
 
-        %>
+                                        }
+                                    }
+                                %>
+
 
     </body>
 </html>
