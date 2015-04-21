@@ -11,6 +11,7 @@ import Dtos.CartaDentalDTO;
 import Dtos.CitaDTO;
 import Dtos.Historial;
 import Dtos.JornadaDTO;
+import Dtos.ProcedimientoDTO;
 import Dtos.ProcedimientosCatalogosDTO;
 import Dtos.UsuariosDTO;
 import Facade.FCitas;
@@ -133,27 +134,42 @@ public class GestionCitas extends HttpServlet {
         } else if (request.getParameter("iddiente") != null) {
             int idd = Integer.parseInt(request.getParameter("iddiente"));
             long ced = (long) sesion.getAttribute("docupa");
-            
+            sesion.setAttribute("idcartad",idd);
+            ArrayList<ProcedimientosCatalogosDTO> proca = new ArrayList();
+            proca = (ArrayList<ProcedimientosCatalogosDTO>) fh.lisCat();
+            sesion.setAttribute("catalo", proca);
             ArrayList<CartaDentalDTO> dent = new ArrayList();
-              dent = (ArrayList<CartaDentalDTO>) fh.lisCarta(ced, idd);
-               ArrayList<ProcedimientosCatalogosDTO> proca = new ArrayList();
-            proca=(ArrayList<ProcedimientosCatalogosDTO>) fh.lisCat();
-          
-          sesion.setAttribute("catalo", proca);
-           
+            dent = (ArrayList<CartaDentalDTO>) fh.lisCarta(ced, idd);
             sesion.setAttribute("histodent", dent);
-            
             response.sendRedirect("sitioweb/usuarios/odontograma.jsp");
 
-        }else if (request.getParameter("infodiente") != null) {
-          int proce= Integer.parseInt(request.getParameter("procedimientos"));
-          int estado=  Integer.parseInt(request.getParameter("estado"));
-          String obser= request.getParameter("observacion");
-            
-            
            
+
+        } else if (request.getParameter("infodiente") != null) {
+            int proce = Integer.parseInt(request.getParameter("catalogo"));
+            int estado = Integer.parseInt(request.getParameter("estado"));
+            String obser = request.getParameter("observacion");
+            long ced = (long) sesion.getAttribute("docupa");
+            int idcar= (int) sesion.getAttribute("idcartad");
+           
+            ProcedimientoDTO carta= new ProcedimientoDTO();
+            carta.setIdProcPac(ced);
+            carta.setIdCartadental(idcar);
+            carta.setIdCatalogo(proce);
+            carta.setObservacion(obser);
+            carta.setDetalle(estado);
+            String msg= fh.crePro(carta);
+                 if (msg.equals("ok")) {
+                response.sendRedirect("sitioweb/usuarios/odontograma.jsp?si=4");
+            } else {
+                response.sendRedirect("sitioweb/usuarios/odontograma.jsp?alert=3"+msg);
+            }
+            
+            
+             
+
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

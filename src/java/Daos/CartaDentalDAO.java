@@ -63,7 +63,7 @@ public class CartaDentalDAO {
      this.cnn = cnn;
         ArrayList< CartaDentalDTO> cartaDental = new ArrayList();
         try {
-            String sqlAll = "select cartadental.idCartaDental , cartadental.Descripcion, procedimientos.fechaProcCita,  procedimientos.observacion, procedimientoscatalogos.procedimiento, cartadental.Estado \n" +
+            String sqlAll = "select cartadental.idCartaDental , cartadental.Descripcion, procedimientos.fechaProcCita,  procedimientos.observacion, procedimientoscatalogos.procedimiento, procedimientos.detalle \n" +
 "from procedimientos\n" +
 "join procedimientoscatalogos on procedimientos.idCatalogo= procedimientoscatalogos.idCatalogo \n" +
 "join cartadental on procedimientos.idCartadental = cartadental.idCartaDental\n" +
@@ -81,8 +81,8 @@ public class CartaDentalDAO {
                     cdto.setDescripcion(rs.getString("Descripcion"));
                     cdto.setFechaProccita(rs.getString("fechaProcCita"));
                     cdto.setProcedimientos(rs.getString("procedimiento"));
-                    cdto.setEstado(rs.getInt("Estado"));
                     cdto.setObservacion(rs.getString("observacion"));
+                    cdto.setDetalle(rs.getInt("detalle"));
                     cartaDental.add(cdto);
                 }
             }
@@ -94,9 +94,9 @@ public class CartaDentalDAO {
  public  CartaDentalDTO obtenerUno(int idCartaDental,  Connection cnn) {
      this.cnn = cnn;
         CartaDentalDTO cdto = null;
-        String sqlOne = "SELECT `cartaDental`.`idCartaDental`, `cartaDental`.`Descripcion`,"
+        String sqlOne = "SELECT idCartaDenta, Descripcion"
        
-                + "FROM `smilesystemv2`.`cartaDental` WHERE `idCartaDental` = ?; ";
+                + "FROM cartaDental WHERE idCartaDental = ?; ";
           
         try {
             pstmt = cnn.prepareCall(sqlOne);

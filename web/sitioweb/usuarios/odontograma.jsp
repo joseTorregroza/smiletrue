@@ -76,6 +76,7 @@
                 dientes = (ArrayList<CartaDentalDTO>) sesion.getAttribute("histodent");
                  ArrayList<ProcedimientosCatalogosDTO> proca = new ArrayList();
                  proca= (ArrayList<ProcedimientosCatalogosDTO>)sesion.getAttribute("catalo");
+                
 
         %>
 
@@ -103,11 +104,11 @@
             </div>
 
             <div class="mesa"  style="height: 414px">	
-                <div class="dent"  style="border-color: green ;  border-style: solid;">
+                <div class="dent" >
                     <h1 class="h1-session" style="padding-top: 15px;">Odontograma</h1>
-                    <div class="pri"  style="border-color: #0033FF;  border-style: solid;">
-                        <div class="carta1"  style="border-color: #4acaa8 ;  border-style: solid;"> 
-                            <%for (int i = 0; i < 8; i++) {%>
+                    <div class="pri"  >
+                        <div class="carta1" > 
+                            <%for (int i = 7; i > -1; i--) {%>
                             <button type="submit" class="btn btn-default btn-mini" style="  margin-right: 3px;" onclick=location.href="../../GestionCitas?iddiente=<%=lista.get(i).getIdCartaDental()%>"><%=lista.get(i).getIdCartaDental()%></button>
 
                             <%} %> 
@@ -115,24 +116,24 @@
 
 
                     </div>
-                    <div class="sec"  style="border-color: #4acaa8 ;  border-style: solid;">
-                        <div class="carta2"  style="border-color: #4acaa8 ;  border-style: solid;">
+                    <div class="sec" >
+                        <div class="carta2" >
                             <%for (int i = 8; i < 16; i++) {%>
                             <button type="submit" class="btn btn-default btn-mini" style="  margin-right: 3px;" onclick=location.href="../../GestionCitas?iddiente=<%=lista.get(i).getIdCartaDental()%>"><%=lista.get(i).getIdCartaDental()%></button>
 
                             <%} %>
                         </div>
                     </div>
-                    <div class="tre"   style="border-color: #8702A8 ;  border-style: solid;">
-                        <div class="carta1"  style="border-color: #4acaa8 ;  border-style: solid;">
-                            <%for (int i = 16; i < 24; i++) {%>
+                    <div class="tre" >
+                        <div class="carta1"  >
+                            <%for (int i = 23; i >15; i--) {%>
                             <button type="submit" class="btn btn-default btn-mini" style="  margin-right: 3px;" onclick=location.href="../../GestionCitas?iddiente=<%=lista.get(i).getIdCartaDental()%>"><%=lista.get(i).getIdCartaDental()%></button>
 
                             <%} %>
                         </div>
                     </div>
-                    <div class="four"  style="border-color: #C00;  border-style: solid;">
-                        <div class="carta2"  style="border-color: #4acaa8 ;  border-style: solid;">
+                    <div class="four"  >
+                        <div class="carta2" >
                             <%for (int i = 24; i < 32; i++) {%>
                             <button type="submit" class="btn btn-default btn-mini" style="  margin-right: 3px;" onclick=location.href="../../GestionCitas?iddiente=<%=lista.get(i).getIdCartaDental()%>"><%=lista.get(i).getIdCartaDental()%></button>
                             <%} %>
@@ -141,12 +142,30 @@
                 </div>	
 
 
-                <% if (sesion.getAttribute("histodent") != null) {%>
-                <div class="his" style="border-color: blue;   border-style: solid;">
-                    <div class="es" style="border-color: blue;   border-style: solid;"></div>
+                            <% if (sesion.getAttribute("histodent") != null) {%>
+                <div class="his" >
+                    <% if (dientes.size()==0) {%>
+                    <div class="row text-right" >
+                        <div class="col-md-6 alert alert-info" style="margin-left: 132px; top: 90px;"><h2 class="text-center">Sin resultados</h2></div>
+
+                    </div>  
+   
+<%}else{%> 
+                    <div class="es" >
+                        <%for (int i =0; i < 1; i++) { %>
+                        <div class="es1"><strong>Detalle:</strong>  <%=dientes.get(i).getDescripcion()%></div>
+                        <%if (dientes.get(i).getDetalle()==1) {%>
+                        <div class="es2"><strong>Estado:</strong>  Presente</div>
+                                
+                            <%} else{%>
+                            <div class="es2"><strong>Estado:</strong>  Ausente</div>
+                      <%}%>
+                        
+                        <%}%>
+                    </div>
                     
 
-                    <table id ="tablah"  style="padding: 5px;" class="table table-bordered table-striped table-hover" >
+                    <table id ="tablah"  style="  padding: 5px; width: 483.111111164093px;margin-left: 5px;margin-top: 18px;" class="table table-bordered table-striped table-hover" >
                         <thead>
                             <tr id="titulo" >
 
@@ -161,7 +180,7 @@
                             <%for (CartaDentalDTO his : dientes) {%>
                             <tr>
                                 <td><%=his.getFechaProccita()%></td>
-                                <td><%=his.getObservacion()%></td>
+                                <td><%=his.getObservacion() %></td>
                                 <td><%=his.getProcedimientos()%></td>
                                 
 
@@ -171,16 +190,17 @@
                     </table>
                     <div id="pageNavPosition" ></div>
                     <script type="text/javascript">
-                                var pager = new Pager('tablah', 4);
+                                var pager = new Pager('tablah', 3);
                                 pager.init();
                                 pager.showPageNav('pager', 'pageNavPosition');
                                 pager.showPage(1);
                     </script>
-
-                    <% } %>
-                </div>
-                    <% if (sesion.getAttribute("histodent") != null ) {%>
-                <div class="act" style="border-color: yellow ;  border-style: solid;">
+              
+                            <% }} %>
+                              </div>
+                            <% if (sesion.getAttribute("histodent") != null || request.getParameter("si")!=null) {%>
+                       
+             <div class="act" >
                     <h1 class="h1-session" style="padding-top: 20px;">Agregar Informacion</h1>
                     <form class="inline"  action="../../GestionCitas" style="margin-top: 0px;">
                         <table>
@@ -189,17 +209,19 @@
                                 <td><div class="form-group">    
                                         <div >
                                             <select  class="form-control input-sm" name="estado" id="estado" required class="form-control input-sm"  style="width: 75px; padding-right: 0px; padding-left: 0px;">
-                                                <option value="0">Presente</option> 
+                                                <option value="1">Presente</option> 
                                                 <option value="2"> Ausente</option>                                                
                                             </select>
                                         </div>
-                                    </div></td> 
+                                    </div>
+                                </td> 
+                            
                             </tr>
                             <tr>
-                                <td><label for="procedimientos" class=" InputRequired col-lg-1  control-label">Procedimientos:</label></td> 
+                                <td><label for="catalogo" class=" InputRequired col-lg-1  control-label">Procedimientos:</label></td> 
                                 <td><div class="form-group">  
                                         <div col-lg-9>
-                                            <select  class="form-control input-sm InputRequired"  name="procedimientos" id="procedimientos" required >
+                                            <select  class="form-control input-sm InputRequired"  name="catalogo" id="procedimientos" required >
                                                 <option value="">Seleccione Especialidad</option>
                                                 <%for (ProcedimientosCatalogosDTO proce:proca) {%>
                                                 <option value="<%=proce.getIdCatalogo()  %>"><%=proce.getProcedimiento() %></option>
@@ -230,13 +252,17 @@
                         <input type="submit" name="infodiente" class="btn btn-primary input-small col-lg-3 " value="Guardar" style="margin-left: 278px;">
                     </form> 
                     </div>
-                    <% }%>
+                                       
+                                            
+                                                  
+                    <% }else{%>
+                    <div class="nada"><h1 class="selec">Seleccione un diente</h1></div>
                 
-
+                    
             </div>
      
             <%
-                } else {
+                            }} else {
                     response.sendRedirect("../index.jsp");
                 }
 

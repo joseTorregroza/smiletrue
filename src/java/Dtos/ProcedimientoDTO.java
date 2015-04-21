@@ -16,6 +16,7 @@ public class ProcedimientoDTO {
         private int idCartadental=0;
         private int idCatalogo=0;
         private String observacion="";
+        private int detalle=0;
 
     
        public ProcedimientoDTO(String fechaProcCita, long  idProcPac, int idCartadental, int idCatalogo, String observacion) {
@@ -100,12 +101,27 @@ public class ProcedimientoDTO {
         this.idCatalogo = idCatalogo;
     }
 
+    /**
+     * @return the detalle
+     */
+    public int getDetalle() {
+        return detalle;
+    }
+
+    /**
+     * @param detalle the detalle to set
+     */
+    public void setDetalle(int detalle) {
+        this.detalle = detalle;
+    }
+
     @Override
     public String toString() {
-        return "ProcedimientoDTO{" + "fechaProcCita=" + fechaProcCita 
-                + ", idProcPac=" + idProcPac + ", idCartadental=" + 
-                idCartadental + ", idCatalogo=" + idCatalogo + ", observacion="
-                + observacion + '}';
+        return "ProcedimientoDTO{" + "fechaProcCita=" + fechaProcCita + ", idProcPac=" + idProcPac + ", idCartadental=" + idCartadental + ", idCatalogo=" + idCatalogo + ", observacion=" + observacion + ", detalle=" + detalle + '}';
     }
+
+ 
+
+
     
 }

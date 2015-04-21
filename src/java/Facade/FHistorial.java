@@ -33,7 +33,7 @@ public class FHistorial extends HttpServlet {
             FHistorial citas = new FHistorial(); 
             
         
-        List<ProcedimientosCatalogosDTO> salida=citas.lisCat(); 
+        ArrayList<CartaDentalDTO> salida=citas.lisCarta(1081407241,12); 
         ArrayList<CartaDentalDTO> sali=citas.lisTodoCar(); 
         
           

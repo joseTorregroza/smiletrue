@@ -64,20 +64,21 @@ public class ProcedimientoDAO {
     public String crea(ProcedimientoDTO pdto,  Connection cnn) {
         this.cnn = cnn;
         try {
-            String sqlInsert = "insert into procedimientos (fechaProcCita,idProcPac,idCartadental,idCatalogo,observacion) value(?,?,?,?,?);";
+            String sqlInsert = "insert into procedimientos (fechaProcCita,idProcPac,idCartadental,idCatalogo,observacion,detalle) value(curdate(),?,?,?,?,?);";
             
             pstm = cnn.prepareStatement(sqlInsert);
-            pstm.setString(1, pdto.getFechaProcCita());
-            pstm.setLong(2, pdto.getIdProcPac());
-            pstm.setInt(3, pdto.getIdCartadental());
-            pstm.setInt(4, pdto.getIdCatalogo());
-            pstm.setString(6, pdto.getObservacion());
+            
+            pstm.setLong(1, pdto.getIdProcPac());
+            pstm.setInt(2, pdto.getIdCartadental());
+            pstm.setInt(3, pdto.getIdCatalogo());
+            pstm.setString(4, pdto.getObservacion());
+            pstm.setInt(5, pdto.getDetalle());
            
             rtdo = pstm.executeUpdate();
             if (rtdo != 0) {
-                mensaje = "Registro éxitoso";
+                mensaje = "ok";
             } else {
-                mensaje = "No se pudo realizar la insert";
+                mensaje = "no";
             }
 
         } catch (SQLException sqle) {
