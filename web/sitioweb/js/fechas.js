@@ -10,7 +10,7 @@ function validarFecha() {
 
    //alert("Actual  : "+fechaActual + "  fecha calendario : "+fechaSolicitud+ "la fecha mínima es : "+fechaMinima);
     
-    if (fechaSolicitud < fechaActual){
+    if (fechaSolicitud <= fechaActual){
         document.getElementById("respuesta").innerHTML=" <div><p><strong>Fecha No Valida</Strong> No es posible asignar citas con fechas anteriores <i class='glyphicon glyphicon-ok'></i></p><div>";
         document.getElementById("fechacita").focus();
         

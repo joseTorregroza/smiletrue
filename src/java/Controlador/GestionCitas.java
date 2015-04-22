@@ -110,7 +110,7 @@ public class GestionCitas extends HttpServlet {
                 if (msg.equals("ok")) {
                     response.sendRedirect("sitioweb/usuarios/citas.jsp?info=1");
                 } else {
-                    response.sendRedirect("sitioweb/usuarios/citas.jsp?alert=2");
+                    response.sendRedirect("sitioweb/usuarios/citas.jsp?alert=2"+msg);
                 }
             }
 
@@ -160,7 +160,10 @@ public class GestionCitas extends HttpServlet {
             carta.setDetalle(estado);
             String msg= fh.crePro(carta);
                  if (msg.equals("ok")) {
-                response.sendRedirect("sitioweb/usuarios/odontograma.jsp?si=4");
+                   ArrayList<CartaDentalDTO> dent = new ArrayList();
+                 dent = (ArrayList<CartaDentalDTO>) fh.lisCarta(ced, idcar);
+                 sesion.setAttribute("histodent", dent);
+                 response.sendRedirect("sitioweb/usuarios/odontograma.jsp");
             } else {
                 response.sendRedirect("sitioweb/usuarios/odontograma.jsp?alert=3"+msg);
             }
