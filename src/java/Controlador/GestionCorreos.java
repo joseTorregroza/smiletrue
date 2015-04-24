@@ -36,7 +36,7 @@ public class GestionCorreos extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String asunto = request.getParameter("cAsunto");
         String mensaje = request.getParameter("cCuerpo");
-       long  size =Long.parseLong(request.getParameter("contador"));
+       int size =(Integer.parseInt(request.getParameter("contador")));
         FUsuarios  pdao = new FUsuarios();
         StringBuilder correos = new StringBuilder("");
         PrintWriter out = response.getWriter();

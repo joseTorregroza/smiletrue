@@ -34,7 +34,7 @@ public HashMap<UsuariosDTO, String> validarUsuario(String usuario, String pss,Co
             stmt = cnn.prepareStatement("SELECT u.documento, u.nombres,u.tipoDoc,u.apellidos,u.direccion,u.fechadenacimiento,\n"
                     + "                    u.usuario, u.clave,u.genero,u.correo,t.idTelefono  as telefono, u.lugarDeNacimiento, \n"
                     + "                   u.ciudad,p.descripcion as rol,p.idperfil as idrol, p.idperfil, a.descripcion, \n"
-                    + "                  a.url, a.idaccion, up.perfilid, odon.tarjetaProfesional as tarjeta, pac.idRh as rh, paler.idAlergia as alergia\n"
+                    + "                  a.url, a.idaccion, up.perfilid, pac.idRh as rh, paler.idAlergia as alergia, odon.tarjetaProfesional as tarjeta\n"
                     + "				FROM usuarios u				\n"
                     + "			    LEFT JOIN  pacientes pac on u.documento= pac.idPaciente\n"
                     + "		        LEFT JOIN  pacientealergias paler on pac.idPaciente= paler.idPaciente\n"
@@ -45,7 +45,7 @@ public HashMap<UsuariosDTO, String> validarUsuario(String usuario, String pss,Co
                     + "				LEFT JOIN perfilaccion pa ON p.`idperfil`= pa.`perfilid`\n"
                     + "				LEFT JOIN  acciones a ON pa.`accionid`=a.`idaccion`\n"
                     + "				WHERE u.usuario =?\n"
-                    + "				AND clave =?\n"
+                    + "				AND clave =?"
                     + "				AND a.parent=0");
 
             stmt.setString(1, usuario);
@@ -71,10 +71,10 @@ public HashMap<UsuariosDTO, String> validarUsuario(String usuario, String pss,Co
                     user.setEmail(rs.getString("correo"));
                     user.setLugardeNacimiento(rs.getString("lugarDeNacimiento"));
                     user.setCiudad(rs.getString("ciudad"));
-                    user.setTelefono(rs.getString("telefono"));
-                    user.setTarjetaprofesional(rs.getLong("tarjeta"));
+                    user.setTelefono(rs.getString("telefono"));                    
                     user.setGrupoSangui(rs.getInt("rh"));
                     user.setTipoAlergia(rs.getInt("alergia"));
+                    user.setTarjetaprofesional(rs.getLong("tarjeta"));
                     
                     
                     
@@ -84,7 +84,8 @@ public HashMap<UsuariosDTO, String> validarUsuario(String usuario, String pss,Co
                     ResultSet rsSub = cnn.prepareStatement("SELECT a.idaccion, a.descripcion, a.url "
                             + " FROM acciones a INNER JOIN perfilaccion pa ON a.idaccion=pa.accionid"
                             + " WHERE parent = " + rs.getInt("idaccion")
-                            + " AND pa.perfilid = "+rs.getInt("idperfil")).executeQuery();
+                            + " AND pa.perfilid = "+rs.getInt("idperfil")).executeQuery(); 
+                                    
 
                     menu += "<ul>";
                     while (rsSub.next()) {

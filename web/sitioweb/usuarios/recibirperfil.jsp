@@ -9,6 +9,7 @@
         <%@page errorPage="../error404.jsp" %> 
         <meta charset="utf-8" />
         <link rel="shortcut icon" href="../imagenes/favicon.ico" />
+            <link href="../css/error.css" rel="stylesheet" type="text/css">
         <link href="../css/footer.css" rel="stylesheet" type="text/css">
         <link href="../css/secre.css" rel="stylesheet" type="text/css">
         <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">        
@@ -25,7 +26,7 @@
                 //codigo para validar que los campos solo sean letras
                 jQuery.validator.addMethod("lettersonly", function (value, element) {
                     return this.optional(element) || /^[a-z]+$/i.test(value);
-                }, "Digite solo caracteres");
+                }, '<div class="alert alert-danger movera" role="alert">Digite solo caracteres</div>');
      
 
 
@@ -110,7 +111,7 @@
         <div class="menu">
             <div class="tags">
                 <a href="iniciarsesion.jsp"><strong>Iniciar Sesión</strong></a>
-                <a href="#"><strong>Perfil Secretaria</strong></a>
+                <a href="#"><strong>Perfil <%  out.print(uregistrado.getRol());%></strong></a>
             </div>
             <div class ="menu-session">     
                 <button type="button" onClick="javascript:window.location = '../indexout.jsp'"  class="btn btn-info" >Cerrar Sesión </button>
@@ -128,7 +129,7 @@
             <div class="mesa">
                 <h1>Datos de Registro</h1>
 
-                <form class="form-horizontal" name="form1" id="form1" action="../../UsuarioServlet">
+                <form class="form-horizontal" name="form1" id="form1" action="../../UsuarioServlet"  method="POST">
 
                     <table>
                         <tr>
@@ -361,7 +362,7 @@
                         <div class="style"><%if (request.getParameter("msg") != null) {
                             } %>  </div>
       	                
-                    <button type="submit" class="boton"    name="btnModificar"   id="guardar">Guardar</button>
+                    <button type="submit" class=" btn btn-info  boton"    name="btnModificar"   id="guardar">Guardar</button>
 
 
 

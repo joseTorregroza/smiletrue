@@ -26,7 +26,7 @@
                 <h1>error 404</h1>
             
                 <h2>file not found</h2>
-                <h3>lo sentimos,la pagina que busca  no se encuuetra disponile <br> por favor dirijase a la pagina principal e inicie sesion.<br>     <label  class="ayuda"><a onClick="OcultarForm('Formlogin', 'Recuperar');" href="indexout.jsp"> Cerrar sesion</a></label>
+                <h3>lo sentimos,la pagina que busca  no se encuuetra disponile <br> por favor dirijase a la pagina principal e inicie sesion.<br>     <label  class="ayuda"><a   onClick="history.back()" > Cerrar sesion</a></label>
                 </h3>
             
             </div>

@@ -77,8 +77,9 @@
             30
         </session-timeout>
     </session-config>
-    <error-page>
-        <exception-type>exception</exception-type>
-        <location>/error500.jsp</location>
+  
+      <error-page>
+        <error-code>404</error-code>
+        <location>/error404.jsp</location>
     </error-page>
 </web-app>

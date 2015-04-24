@@ -4,12 +4,13 @@
         <%@page import="Dtos.UsuariosDTO"%>
         
         <%@page contentType="text/html" pageEncoding="UTF-8"%>
-        <%@page errorPage="../error404.jsp" %> 
+        <%@page errorPage="../../error404.jsp" %> 
         <title>Smile System</title>
         <meta charset="utf-8" />
         <link rel="shortcut icon" href="../imagenes/favicon.ico" />
         <link href="../css/footer.css" rel="stylesheet" type="text/css">
         <link href="../css/secre.css" rel="stylesheet" type="text/css">
+           <link href="../css/error.css" rel="stylesheet" type="text/css">
         <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">        
         <link href="../css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
 
@@ -24,7 +25,7 @@
                 //codigo para validar que los campos solo sean letras
                 jQuery.validator.addMethod("lettersonly", function (value, element) {
                     return this.optional(element) || /^[a-z]+$/i.test(value);
-                }, "Digite solo caracteres");
+                }, '<div class="alert alert-danger movera" role="alert">Digite solo caracteres</div>');
 
                 // sirve para bloquear los campos input
                 $('.bloqueado').attr('disabled', 'disabled');
@@ -65,30 +66,30 @@
                     },
                     messages: {
                         Cedula: {
-                            required: "Este campo es Requerido",
-                            number: "El campo debe ser Numérico ",
+                            required:  '<div class="alert alert-danger movera" role="alert">Este campo es Requerido</div>',
+                            number: '<div class="alert alert-danger movera" role="alert">El campo debe ser Numérico </div>',
                             minlength: "Son {0} digitos Mínimo  ",
                             maxlength: "Son {0} digitos Máximo"
                         },
                         Telefono: {
-                            required: "Este campo es Requerido",
-                            number: "El campo debe ser Numérico ",
-                            minlength: "Son {0} digitos Mínimo  ",
-                            maxlength: "Son {0} digitos Máximo"
+                            required:  '<div class="alert alert-danger movera" role="alert">Este campo es Requerido</div>',
+                            number: '<div class="alert alert-danger movera" role="alert">El campo debe ser Numérico </div>',
+                            minlength:  '<div class="alert alert-danger  movera" role="alert">Son {0} digitos Mínimo </div>',
+                            maxlength:  '<div class="alert alert-info movera" role="alert">Son {0} digitos Máximo </div>'
                         },
                         email: {
-                            email: "Dirección de correo invalida"
+                            email:  '<div class="alert alert-danger  movera" role="alert">Dirección de correo invalida</div>',
                         },
                         Direccion: {
-                            required: "Este campo es Requerido",
-                            minlength: "Son {0} digitos Mínimo  ",
-                            maxlength: "Son {0} digitos Máximo"
+                            required:  '<div class="alert alert-danger movera" role="alert">Este campo es Requerido</div>',
+                            minlength:  '<div class="alert alert-danger  movera" role="alert">Son {0} digitos Mínimo </div>',
+                            maxlength:  '<div class="alert alert-info movera" role="alert">Son {0} digitos Máximo </div>'
 
                         },
                         clave: {
-                            required: "Este campo es Requerido",
-                            minlength: "Son {0} digitos Mínimo  ",
-                            maxlength: "Son {0} digitos Máximo"
+                            required:  '<div class="alert alert-danger movera" role="alert">Este campo es Requerido</div>',
+                            minlength: '<div class="alert alert-danger  movera" role="alert">Son {0} digitos Mínimo </div>',
+                            maxlength:  '<div class="alert alert-info movera" role="alert">Son {0} digitos Máximo </div>'
                         }
                     },
                 });
@@ -120,10 +121,10 @@
         <div class="menu">
             <div class="tags">
                 <a href="iniciarsesion.jsp"><strong>Iniciar Sesión</strong></a>
-                <a href="#"><strong>Perfil Secretaria</strong></a>
+                <a href="#"><strong>Perfil   <%  out.print(uregistrado.getRol());%></strong></a>
             </div>
             <div class ="menu-session">     
-                <button type="button" onClick="javascript:window.location = '../indexout.jsp'">Cerrar Sesión </button>
+                <button   class="btn btn-info"  type="button" onClick="javascript:window.location = '../indexout.jsp'">Cerrar Sesión </button>
             </div>
             <div class ="menu-session">
                 <span style="color: white;">  <%  out.print(uregistrado.getRol());%>: </span>
@@ -159,10 +160,13 @@
 
                                             <option value="2" <% if ("2".equals(uregistrado.getRoles())) {
                                                     out.println("selected");
-                                                } %>>Ninguna</option>
+                                                } %>>Medico</option>
                                                     <option value="3" <% if ("3".equals(uregistrado.getRoles())) {
                                                     out.println("selected");
-                                                } %>>Polvo</option>
+                                                } %>>Secretaria</option>
+                                                      <option value="4" <% if ("4".equals(uregistrado.getRoles())) {
+                                                    out.println("selected");
+                                                } %>>Administrador</option>
                                                    
                                         </select>
                                     </div>
@@ -336,7 +340,7 @@
                         <div class="style"><%if (request.getParameter("msg") != null) {
                             } %>  </div>
                             
-                  <input  type="button"  class="btn btn-info  beton" name="btnActualizarusu"  onClick="location.href =  'recibirperfiladmi.jsp?idusuario=<%=uregistrado.getDocumento()%> '" id="guardar"   value="  Enviar"  >
+                  <input  type="button"  class="btn btn-info  beton" name="btnActualizarusu"  onClick="location.href =  'recibirperfiladmi.jsp?idadministra=<%=uregistrado.getDocumento()%> '" id="guardar"   value="  Enviar"  >
 
 
                 </form>

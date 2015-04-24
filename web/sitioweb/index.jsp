@@ -34,7 +34,7 @@
          $(document).ready(function () {
                 jQuery.validator.addMethod("lettersonly", function (value, element) {
                     return this.optional(element) || /^[a-zA-ZÃ¡Ã©Ã­Ã³ÃºÃ Ã¨Ã¬Ã²Ã¹ÃÃÃÃÃÃÃÃÃÃÃ±ÃÃ¼Ã_\s]+$/i.test(value);
-                }, '<div class="alert alert-info  movera"  role="alert">solo puede ingresar letras</div>');
+                }, '<div class="alert alert-danger  movera"  role="alert">solo puede ingresar letras</div>');
 
                 // sirver para validar los campos del formulario
                 $("#form1").validate({
@@ -47,19 +47,20 @@
                               user: {
                                   required: true,
                                   minlength: 5,
-                                  maxlength: 30
+                                  maxlength: 20
                               }
                         },
                         messages: {
                             pass: {
-                                required: '<div class="alert alert-info movera" role="alert">Este campo es Requerido</div>',
-                                minlength:  '<div class="alert alert-info movera" role="alert">Son {0} digitos Mínimo </div>',
-                                maxlength:  '<div class="alert alert-info movera" role="alert">Son {0} digitos Máximo </div>'
+                                required: '<div class="alert alert-danger movera" role="alert">Este campo es Requerido</div>',
+                                minlength:  '<div class="alert alert-danger movera" role="alert">Son {0} digitos Mínimo </div>',
+                                maxlength:  '<div class="alert alert-danger movera" role="alert">Son {0} digitos Máximo </div>'
                             },
                             user: {
-                                required:  '<div class="alert alert-info movera" role="alert">Este campo es Requerido</div>',
-                                number: '<div class="alert alert-info movera" role="alert">El  campo debe ser Numérico  </div>',
-                                minlength: '<div class="alert alert-info movera" role="alert">Son {0} digitos Mínimo </div>',
+                                required:  '<div class="alert alert-danger movera" role="alert">Este campo es Requerido</div>',
+                                number: '<div class="alert alert-danger movera" role="alert">El  campo debe ser Numérico  </div>',
+                                minlength: '<div class="alert alert-danger movera" role="alert">Son {0} digitos Mínimo </div>',
+                                maxlength:  '<div class="alert alert-danger movera" role="alert">Son {0} digitos Máximo </div>'
                                 
                                  
                             }
@@ -135,14 +136,12 @@
 
                                                 <div class="style"><%if (request.getParameter("msg") != null) {%>
 
-                                                    <div class="alert alert-error " role="alert" style="  width: 250px;  height: 40px;   margin-left: 57px;">
-                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                            <span >&times;</span>
-                                                        </button>
-                                                        <p><strong> <%out.print(request.getParameter("msg")); %></Strong> <i class='glyphicon glyphicon-ok'></i></p>
-                                                    </div>
+                                                <div class="alert alert-warning alert-dismissable">
+                                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                    <strong>¡Cuidado!</strong> existe usuari
+                                                  </div>
 
-
+                                                  
                                                     <%    }%>  </div>
                                                     <div class="mover">
                                                 <input style=" margin-left: 120px;  height: 57px; width: 200px; background-color: #46b8da; color:#000000;"  type="submit" name="btnIngresar" value="Ingresar" class="bt btn-info"> 

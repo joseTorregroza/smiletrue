@@ -4,6 +4,7 @@
     Author     : USUARIO
 --%>
 
+<%@page import="Facade.FUsuarios"%>
 <%@page import="java.util.LinkedList"%>
 <html>
     <head>
@@ -20,6 +21,8 @@
         <link rel="shortcut icon" href="../imagenes/favicon.ico" />	
         <link rel="stylesheet" href="../js/jquery-ui-1.11.1/jquery-ui.css">
         <link href="../css/footer.css" rel="stylesheet" type="text/css">
+        <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">        
+        <link href="../css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
         <link href="../css/css.css" rel="stylesheet" type="text/css">
         <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">        
         <link href="../css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
@@ -67,12 +70,11 @@
     <body>
       <%
             HttpSession miSesion = request.getSession(false);
-            UsuarioDAO  usdao = new  UsuarioDAO ();
+            FUsuarios  usdao = new  FUsuarios ();
             if (miSesion.getAttribute("usr") != null) {
-                UsuariosDTO uregistrado = (UsuariosDTO) miSesion.getAttribute("usr");
+            UsuariosDTO uregistrado = (UsuariosDTO) miSesion.getAttribute("usr");
                 String menu = (String) miSesion.getAttribute("mp");
-                
-
+        
         %>
   
         <div class="logo">       
@@ -81,8 +83,8 @@
         <div class="menu">
             <div class="tags">
                 <a href="iniciarsesion.jsp"><strong>Iniciar Sesión</strong></a>
-                <a href="ingresarhistorial.jsp"><strong>Ingresar Historial</strong></a>
-                <a href="#"><strong> Historial Paciente</strong></a>
+                
+                <a href="#"><strong> Listado Usuarios</strong></a>
             </div>  
             <div class ="menu-session"> 		   
                 <button type="button" onClick="javascript:window.location = '../indexout.jsp'"  class="btn btn-info" >Cerrar Sesión </button>
@@ -93,16 +95,18 @@
             </div>
         </div>
         <div class="contenido">
-              <div class="menu3his"> 
+              <div class="menu2"> 
                 <div class="menucoreer"> <img class="vector" src="../imagenes/manu.png " width="70"	height="70"></div>
                     <% out.println(menu); %> 
             </div>
             <div class="mesahisto  mesa-overflow">
                 <h1>Listado de los usuarios registrados</h1>
                 
-                 <%  LinkedList<UsuariosDTO> lista = new LinkedList<UsuariosDTO>();
-   //  lista = (LinkedList<UsuariosDTO>) usdao.listarPacinetes(nombre, apellidos, idpa, cnn); %> 
-            <table border="1">
+      <%--           <%  LinkedList<UsuariosDTO> lista = new LinkedList<UsuariosDTO>();
+         lista = (LinkedList<UsuariosDTO>) usdao.ListarTodosLosUsuarios(); %>   --%>
+   
+   <div class="col-md-8">
+   <table border="1" class="table table-striped table-hover table-condensed">
             <thead>
                 <tr>
                     <th>Cedula</th>
@@ -110,24 +114,29 @@
                     <th>Nombres</th>
                     <th>Apellidos</th>
                     <th>Direccion</th>
-                    <th>f.Nacimiento</th>
+                    <th>F.Nacimiento</th>
                     <th>Usuario</th>
                     <th>Clave</th>
                     <th>Sexo</th>
                     <th>Correo</th>
                     <th>L.Nacimiento</th>
                     <th>Ciudad</th>
-                    <th>Celular</th>
+                     <th>Estado</th>
+                    <th>Telefono</th>
                     <th>Rh</th>
                     <th>Alergia</th>
+                    <th>N. tarjeta</th>
+                    <th>Rol</th>
+                    <th>Descripcion</th>
+                    
                    
                    
-                        <%
+                        <%--
                             if ( uregistrado.getDocumento() == 3) {
-                        %>   
+                        --%>   
 
                     <th>Eliminar</th>
-                        <% }%> 
+                        <%-- }--%> 
                      <th>Modificar</th>
                 </tr>
             </thead>
@@ -148,18 +157,22 @@
                     <td><%=p.getEmail()  %></td>
                     <td><%=p.getLugardeNacimiento()  %></td>
                     <td><%=p.getCiudad()  %></td>
+                    <td><%=p.getActivarestado() %></td>
                     <td><%=p.getTelefono()  %></td>
                     <td><%=p.getGrupoSangui()  %></td>
                     <td><%=p.getTipoAlergia()  %></td>
+                    <td><%=p.getTarjetaprofesional() %></td>
+                    <td><%=p.getRoles() %></td>
+                    <td><%=p.getRol() %></td>
                     
                     
-                    <%
+                    <%--
                         if (uregistrado.getDocumento() == 3) {
-                    %>   
+                    --%>   
                         <td><a href="../Controlador?id=<%=p.getDocumento()  %>" onclick="return confirmar();"><img src="../img/eliminar.png" width="48" height="48" alt="Eliminar Registro"/>
                             </a>
                         </td>
-                    <% }%> 
+                    <%-- }--%> 
                    <td><a href="modificar.jsp?id=<%=p.getDocumento()%>"><img src="../img/Modificar.png" width="48" height="48" alt="Eliminar Registro"/>
                         </a></td>     
                         
@@ -169,6 +182,7 @@
 
             </tbody>
         </table>
+                    </div>
             </div>
         </div>
        

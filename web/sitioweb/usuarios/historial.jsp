@@ -85,7 +85,7 @@
             <div class="tags">
                 <a href="iniciarsesion.jsp"><strong>Iniciar Sesión</strong></a>
                 <a href="ingresarhistorial.jsp"><strong>Ingresar Historial</strong></a>
-                <a href="#"><strong> Historial Paciente</strong></a>
+                <a href="#"><strong> Historial Usuario</strong></a>
             </div>  
             <div class ="menu-session"> 		   
                 <button type="button" onClick="javascript:window.location = '../indexout.jsp'"  class="btn btn-info" >Cerrar Sesión </button>

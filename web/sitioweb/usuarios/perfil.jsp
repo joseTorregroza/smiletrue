@@ -8,6 +8,7 @@
         <title>Smile System</title>
         <meta charset="utf-8" />
         <link rel="shortcut icon" href="../imagenes/favicon.ico" />
+            <link href="../css/error.css" rel="stylesheet" type="text/css">
         <link href="../css/footer.css" rel="stylesheet" type="text/css">
         <link href="../css/secre.css" rel="stylesheet" type="text/css">
         <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">        
@@ -24,7 +25,7 @@
                 //codigo para validar que los campos solo sean letras
                 jQuery.validator.addMethod("lettersonly", function (value, element) {
                     return this.optional(element) || /^[a-z]+$/i.test(value);
-                }, "Digite solo caracteres");
+                }, '<div class="alert alert-danger movera" role="alert">Digite solo caracteres</div>');
 
                 // sirve para bloquear los campos input
                 $('.bloqueado').attr('disabled', 'disabled');
@@ -60,30 +61,30 @@
                     },
                     messages: {
                         Cedula: {
-                            required: "Este campo es Requerido",
-                            number: "El campo debe ser Numérico ",
-                            minlength: "Son {0} digitos Mínimo  ",
-                            maxlength: "Son {0} digitos Máximo"
+                            required: '<div class="alert alert-danger movera" role="alert">Este campo es Requerido</div>',
+                            number: '<div class="alert alert-danger movera" role="alert">El campo debe ser Numérico </div>',
+                            minlength: '<div class="alert alert-danger  movera" role="alert">Son {0} digitos Mínimo </div>',
+                            maxlength:  '<div class="alert alert-danger movera" role="alert">Son {0} digitos Máximo </div>'
                         },
                         Telefono: {
-                            required: "Este campo es Requerido",
-                            number: "El campo debe ser Numérico ",
-                            minlength: "Son {0} digitos Mínimo  ",
-                            maxlength: "Son {0} digitos Máximo"
+                            required:  '<div class="alert alert-danger movera" role="alert">Este campo es Requerido</div>',
+                            number: '<div class="alert alert-danger movera" role="alert">El campo debe ser Numérico </div>',
+                            minlength: '<div class="alert alert-danger  movera" role="alert">Son {0} digitos Mínimo </div>',
+                            maxlength: '<div class="alert alert-info movera" role="alert">Son {0} digitos Máximo </div>'
                         },
                         email: {
-                            email: "Dirección de correo invalida"
+                            email: '<div class="alert alert-danger  movera" role="alert">Dirección de correo invalida</div>',
                         },
                         Direccion: {
-                            required: "Este campo es Requerido",
-                            minlength: "Son {0} digitos Mínimo  ",
-                            maxlength: "Son {0} digitos Máximo"
+                            required:  '<div class="alert alert-danger  movera" role="alert">Este campo es Requerido</div>',
+                            minlength: '<div class="alert alert-danger  movera" role="alert">Son {0} digitos Mínimo </div>',
+                            maxlength: '<div class="alert alert-danger movera" role="alert">Son {0} digitos Máximo </div>'
 
                         },
                         clave: {
-                            required: "Este campo es Requerido",
-                            minlength: "Son {0} digitos Mínimo  ",
-                            maxlength: "Son {0} digitos Máximo"
+                            required:  '<div class="alert alert-info movera" role="alert">Este campo es Requerido</div>',
+                            minlength: '<div class="alert alert-info movera" role="alert">Son {0} digitos Mínimo </div>',
+                            maxlength: '<div class="alert alert-info movera" role="alert">Son {0} digitos Máximo </div>'
                         }
                     },
                 });
@@ -112,7 +113,7 @@
         <div class="menu">
             <div class="tags">
                 <a href="iniciarsesion.jsp"><strong>Iniciar Sesión</strong></a>
-                <a href="#"><strong>Perfil Secretaria</strong></a>
+                <a href="#"><strong>Perfil <%  out.print(uregistrado.getRol());%></strong></a>
             </div>
             <div class ="menu-session">     
                 <button type="button"  class="btn btn-info" onClick="javascript:window.location = '../indexout.jsp'">Cerrar Sesión </button>
@@ -130,7 +131,7 @@
             <div class="mesa">
                 <h1>Datos de Registro</h1>
 
-                <form class="form-horizontal" name="form1" id="form1" action="recibirperfil.jsp">
+                <form class="form-horizontal" name="form1" id="form1" action="" method="POST">
 
                     <table>
                         <tr>
@@ -148,7 +149,7 @@
 
                                     <div class="col-lg-10">
                                         <select  for="TipoAlergia" name="TipoAlergia" id="TipoAlergia" required class="nobloqueado  form-control">
-
+                                                      <option selected> Seleccione Tipo</option>   
                                             <option value="1" <% if ("1".equals(uregistrado.getTipoAlergia())) {
                                                     out.println("selected");
                                                 } %>>Ninguna</option>
@@ -182,7 +183,7 @@
                                     <div class="col-lg-10">
                                         <select  for="Gruposanguineo" name="Gruposanguineo" id="Gruposanguineo" required class="nobloqueado  form-control">
 
-                                                    <option value="1" <% if ("1".equals(uregistrado.getGrupoSangui())) {
+                               <option value="1" <% if ("1".equals(uregistrado.getGrupoSangui())) {
                                                     out.println("selected");
                                                 } %>>A+</option>
                                                     <option value="2"<% if ("2".equals(uregistrado.getGrupoSangui())) {
@@ -205,17 +206,17 @@
                                                 } %>> AB+</option>
                                                     <option value="8"<% if ("8".equals(uregistrado.getGrupoSangui())) {
                                                     out.println("selected");
-                                                } %>>AB-</option>	
+                                                } %>>AB-</option>       
                                         </select>
                                     </div>
                                 </div></td>
                         </tr>
-                        <tr>
+                         <tr>
                             <td><label for="tipodoc" class="col-lg-2 control-label">T.Documento:</label></td> 
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <select  for="tipodoc" name="tipodoc" id="tipodoc" required value="" class="nobloqueado  form-control">
+                                        <select  for="tipodoc" name="tipodoc" id="tipodoc" required value="" disabled class="  form-control">
                                             <option selected> Seleccione Tipo</option>
                                             <option value="CC"<% if ("CC".equals(uregistrado.getTipoDoc())) {
                                                     out.println("selected");
@@ -361,6 +362,7 @@
                         </tr>
                     </table> 
                         <div class="style"><%if (request.getParameter("msg") != null) {
+                            out.print("msg");
                             } %>  </div>
               <input  type="button"  class="btn btn-info  beton" onClick="location.href =  'recibirperfil.jsp?idusuario=<%=uregistrado.getDocumento()%> '" id="guardar"   value="  Enviar"  >
            

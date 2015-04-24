@@ -82,7 +82,7 @@
         <div class="menu">
             <div class="tags">
                 <a href="iniciarsesion.jsp"><strong style="font-size: 16px;  font-weight: bold">Iniciar Sesión</strong></a>
-                <a href="#"><strong>Citas Paciente</strong></a>
+                <a href="#"><strong>Agenda Medìco</strong></a>
             </div>
             <div class ="menu-session">     
                 <button type="button" onClick="javascript:window.location = '../indexout.jsp'" class="btn btn-info" >Cerrar Sesión </button>
