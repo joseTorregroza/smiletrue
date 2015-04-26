@@ -6,6 +6,7 @@
 package Conexion;
 
 import Daos.AgendaMedico;
+import Daos.CitaDAO;
 import Daos.EstadoDAO;
 import Dtos.AgendaMedicoDTO;
 import Dtos.EstadoDTO;
@@ -80,6 +81,8 @@ public class Conectar extends HttpServlet {
             DataSource ds = (DataSource) ctx.lookup("jdbc/smile");
             cnn = ds.getConnection();
             if (cnn != null) {
+                CitaDAO c= new CitaDAO();
+                c.Noasistio(cnn);
 
                 return cnn;
 

@@ -571,5 +571,29 @@ public class UsuarioDAO {
         }
         return usuario;
     }
+       public StringBuilder validarUserName(long idpa){
+
+        StringBuilder salida = new StringBuilder("");
+        try {
+
+            pstmt = cnn.prepareStatement("SELECT documento FROM usuarios join usuariosperfiles on usuariosperfiles.usuarioid=usuarios.documento where usuariosperfiles.perfilid=1 and  usuarios.documento=?");
+            pstmt.setLong(1, idpa);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                salida.append("existe");
+            } else {
+                salida.append("noexiste");
+            }
+
+        } catch (SQLException sqle) {
+            try {
+                throw new MyException("Error de My SQL" + sqle.getErrorCode() + " " + sqle.getMessage());
+            } catch (MyException ex) {
+                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return salida;
+    }
 
 }

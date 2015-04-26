@@ -5,25 +5,20 @@
  */
 package Controlador;
 
-import Dtos.Historial;
-import Dtos.UsuariosDTO;
 import Facade.FHistorial;
 import Facade.FUsuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Personal
  */
-public class GestionHistorial extends HttpServlet {
+public class ControlaorAjax extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,36 +31,25 @@ public class GestionHistorial extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         response.setContentType("text/html;charset=UTF-8");
+        
 
-        PrintWriter out = response.getWriter();
+        if (request.getParameter("idUsuario") != null) {
+            
+            StringBuilder respuesta = new StringBuilder("");
+            FUsuarios pdao = new FUsuarios();
+            respuesta.append(pdao.valajax(Long.parseLong(request.getParameter("idUsuario"))));
+            PrintWriter out = response.getWriter();
+            this.writeResponse(response, respuesta.toString());
+        } 
 
-        UsuariosDTO datos = new UsuariosDTO();
-        FUsuarios fu = new FUsuarios();
-        FHistorial fh = new FHistorial();
-        Historial h = null;
-        HttpSession sesion = request.getSession(false);
-        HttpSession miSesion = request.getSession(false);
-
-        if (request.getParameter("consultar") != null) {
-
-            long ced = Long.parseLong(request.getParameter("documento"));
-            String nom = request.getParameter("nombre");
-            String ape = request.getParameter("apellido");
-
-            ArrayList<UsuariosDTO> lista = (ArrayList<UsuariosDTO>) fu.listTodos(ced, nom, ape);
-            sesion.setAttribute("pacientes", lista);
-            response.sendRedirect("sitioweb/usuarios/ingresarhistorial.jsp");
-           
-
-        } else if (request.getParameter("Historial") != null) {
-            long ced = Long.parseLong(request.getParameter("Historial"));
-            ArrayList<UsuariosDTO> lista = (ArrayList<UsuariosDTO>) fh.lisHis(ced);
-            sesion.setAttribute("historial", lista);
-             datos = fu.ObUsu(ced);
-             sesion.setAttribute("pacientehis",datos);
-            response.sendRedirect("sitioweb/usuarios/historial.jsp");
-
-        }
+   }
+    public void writeResponse(HttpServletResponse response, String output) throws IOException {
+        response.setContentType("text/plain");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Content", "text/html;charset=iso-8859-1");
+        response.getWriter().write(output);
+   
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -108,4 +92,3 @@ public class GestionHistorial extends HttpServlet {
     }// </editor-fold>
 
 }
-

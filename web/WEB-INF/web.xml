@@ -36,6 +36,10 @@
         <servlet-name>GestionCorreos</servlet-name>
         <servlet-class>Controlador.GestionCorreos</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControlaorAjax</servlet-name>
+        <servlet-class>Controlador.ControlaorAjax</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Conectar</servlet-name>
         <url-pattern>/Conectar</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>GestionCorreos</servlet-name>
         <url-pattern>/GestionCorreos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControlaorAjax</servlet-name>
+        <url-pattern>/ControlaorAjax</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

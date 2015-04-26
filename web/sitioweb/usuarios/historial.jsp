@@ -17,7 +17,8 @@
         <link rel="stylesheet" href="../js/jquery-ui-1.11.1/jquery-ui.css">
         <link href="../css/footer.css" rel="stylesheet" type="text/css">
         <link href="../css/css.css" rel="stylesheet" type="text/css">
-        <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">        
+        <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">    
+        <script  src="../js/paginacion.js"></script>
         <link href="../css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
         <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Pathway+Gothic+One' rel='stylesheet' type='text/css'>
@@ -27,34 +28,7 @@
         <script src="../js/jquery.js"></script>
         <script src="../js/jquery.PrintArea.js"></script>
         <script src="../js/jquery-ui-1.11.1/jquery-ui.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-
-                /*$(".printer").click(function(){
-                 $('.Divprint').printArea();
-                 });*/
-
-                $("#dialog").dialog({
-                    autoOpen: false,
-                    width: 400,
-                    height: 300,
-                    close: function () {
-                        $('input').prop('checked', false);
-                    }
-                });
-            });
-
-            function mostrar(indentidad) {
-
-                if ($(".check-" + indentidad).is(':checked')) {
-
-                    valor = $(".check-" + indentidad).val();
-                    $("#dialog").html(valor);
-                    $("#dialog").dialog("open");
-                }
-            }
-
-        </script>
+      
         <%
             response.setHeader("Cache-Control", "no-cache");
             response.setHeader("Cache-Control", "no-store");
@@ -72,6 +46,7 @@
                 String menu = (String) miSesion.getAttribute("mp");
                 ArrayList<Historial> lista = new ArrayList();
                 lista = (ArrayList<Historial>) sesion.getAttribute("historial");
+                UsuariosDTO usupa = (UsuariosDTO) sesion.getAttribute("pacientehis"); 
 
 
         %>
@@ -103,7 +78,9 @@
 
 
                 <div >
-                    <h1>Historial Odontolígico </h1>
+                    <h1 class="h1-session" style="padding-top: 20px;">Historial Odontogico</h1>
+                    <h2  class="h2-session" style="font-size: 25px;">(<%=usupa.getNombres()+"  "+usupa.getApellidos() %> )</h2>
+                   
                     <% if (lista.size() == 0) {
                     %>
                     <div class="row text-right">
@@ -124,9 +101,9 @@
                 <div class="mesa"  style="height: 414px">	
 
 
-                    <div class="Divprint" style= "width: 90% " 
+                    <div class="Divprint" style= "  width: 90%;margin-left: 50px;margin-top: -100; " 
                          >
-                        <table id ="tablah" style =" padding-bottom:5px ;text-align: center;" >
+                        <table id ="tablah"  class="table table-bordered table-striped table-hover" >
                             <thead>
                                 <tr id="titulo" >
 
@@ -160,7 +137,7 @@
                         </table>
  <div id="pageNavPosition" ></div>
                         <script type="text/javascript"><!--
-                     var pager = new Pager('tablah', 4);
+                     var pager = new Pager('tablah', 8);
                             pager.init();
                             pager.showPageNav('pager', 'pageNavPosition');
                             pager.showPage(1);

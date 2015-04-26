@@ -143,11 +143,11 @@ public class JornadaDAO {
         }
         return mensaje;
     }
-     public List<JornadaDTO> listaDispo(Connection cnn, long id, String fe) {
+     public List<JornadaDTO> listaDispo( long id, String fe,Connection cn) {
         this.cnn = cnn;
         ArrayList<JornadaDTO> jornada = new ArrayList<>();
         try {
-            String sqlAll = "select horario , idJornada from jornadas where idJornada not in (select idJornada from citas where fecha = ? and idOdontologo = ?);";  
+            String sqlAll = "select horario , idJornada from jornadas where idJornada not in (select idJornada from citas where  idOdontologo = ?);";  
             pstm = cnn.prepareStatement(sqlAll);
             pstm.setLong(1, id);
             pstm.setString(2, fe);

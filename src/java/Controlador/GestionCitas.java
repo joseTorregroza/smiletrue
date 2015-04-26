@@ -81,20 +81,22 @@ public class GestionCitas extends HttpServlet {
 
                 CitaDTO cita = new CitaDTO();
                 cita = fc.OCitaId(us.getDocumento());
-                String val = cita.toString();
+                CitaDTO val = cita;
                 if (val != null) {
 
                     sesion.setAttribute("Citas", cita);
-                    datos = fu.ObUsu(1081407241);
+                    datos = fu.ObUsu(cita.getIdOdontologo());
                     sesion.setAttribute("Odonto", datos);
                     response.sendRedirect("sitioweb/usuarios/citas.jsp?si=1" + us.getDocumento());
 
                 } else {
-                    response.sendRedirect("sitioweb/usuarios/citas.jsp?");
+                    response.sendRedirect("sitioweb/usuarios/citas.jsp");
                 }
 
+            }else{
+                response.sendRedirect("sitioweb/usuarios/citas.jsp");
             }
-            response.sendRedirect("sitioweb/usuarios/citas.jsp?");
+          
         } else if (request.getParameter("citar") != null) {
             CitaDTO c = new CitaDTO();
 
@@ -105,7 +107,7 @@ public class GestionCitas extends HttpServlet {
                 c.setFecha(request.getParameter("fechacita"));
                 c.setIdJornada(Integer.parseInt(request.getParameter("turno")));
                 c.setIdEstados(2);
-
+                c.setObservaciones(request.getParameter("observacion"));
                 String msg = fc.creCi(c);
                 if (msg.equals("ok")) {
                     response.sendRedirect("sitioweb/usuarios/citas.jsp?info=1");
@@ -127,10 +129,16 @@ public class GestionCitas extends HttpServlet {
             long ced = Long.parseLong(request.getParameter("paci"));
             sesion.setAttribute("docupa", ced);
             String fecha = request.getParameter("fecha");
+            String msg = fc.actCi(ced, fecha);
+            if (msg.equals("ok")) {
             ArrayList<CartaDentalDTO> car = new ArrayList();
             car = (ArrayList<CartaDentalDTO>) fh.lisTodoCar();
             sesion.setAttribute("dientes", car);
             response.sendRedirect("sitioweb/usuarios/odontograma.jsp");
+            }else{
+                 response.sendRedirect("sitioweb/usuarios/agendamedico.jsp?time=1");
+                
+            }
         } else if (request.getParameter("iddiente") != null) {
             int idd = Integer.parseInt(request.getParameter("iddiente"));
             long ced = (long) sesion.getAttribute("docupa");

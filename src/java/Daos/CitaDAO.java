@@ -223,5 +223,61 @@ public class CitaDAO {
 
         return cdto;
     }
+        public String Noasistio(Connection cnn) {
+        this.cnn = cnn;
+
+        CallableStatement cstm;
+        try {
+            cstm = cnn.prepareCall("{call sp_NoAsiste(?)}");
+            
+            
+            cstm.registerOutParameter(1, Types.INTEGER);
+            cstm.execute();
+            int salida = cstm.getInt(1);
+            if (salida == 1) {
+                mensaje = "ok";
+            } else if (salida == 2) {
+                mensaje = "no";
+            } else {
+                mensaje = "Ningun cambio";
+            }
+
+        } catch (SQLException ex) {
+            mensaje = "Error: " + ex.getMessage();
+        }
+
+        return mensaje;
+    }
+          public String estadoCita(long idpa, String fecha, Connection cnn) {
+        this.cnn = cnn;
+
+        CallableStatement cstm;
+        try {
+            cstm = cnn.prepareCall("{call sp_estadocita(?,?,?) }");
+            cstm.setString(1, fecha);
+            cstm.setLong(2, idpa);
+           
+            cstm.registerOutParameter(3, Types.INTEGER);
+            cstm.execute();
+            int salida = cstm.getInt(3);
+            if (salida == 1) {
+                mensaje = "ok";
+            } else if (salida == 2) {
+                mensaje = "no";
+             
+             } else if (salida == 3) {
+                mensaje = "ok 48";
+             } else if (salida == 4) {
+                mensaje = "no 48";
+            }  else {
+                mensaje = "Ningun cambio";
+            }
+
+        } catch (SQLException ex) {
+            mensaje = "Error: " + ex.getMessage();
+        }
+
+        return mensaje;
+    }
 
 }

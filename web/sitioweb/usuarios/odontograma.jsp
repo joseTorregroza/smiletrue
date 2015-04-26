@@ -196,23 +196,24 @@
                                 pager.showPage(1);
                     </script>
               
-                            <% }} %>
+                            <% } %>
                               </div>
-                            <% if (sesion.getAttribute("histodent") != null || request.getParameter("si")!=null) {%>
-                       
-             <div class="act" >
+           <div class="act" >
                     <h1 class="h1-session" style="padding-top: 20px;">Agregar Informacion</h1>
                     <form class="inline"  action="../../GestionCitas" style="margin-top: 0px;">
                         <table>
                             <tr>
                                 <td><label for="estado" class=" InputRequired col-lg-1  control-label">Estado:</label></td> 
-                                <td><div class="form-group">    
+                                <td><div class="form-group">     <%for (int i =0; i < 1; i++) {%>
                                         <div >
-                                            <select  class="form-control input-sm" name="estado" id="estado" required class="form-control input-sm"  style="width: 75px; padding-right: 0px; padding-left: 0px;">
+                                            <select  class="form-control input-sm" <% if(dientes.get(i).getDetalle()==2 ){%>disabled=""<%}%> name="estado" id="estado" required class="form-control input-sm"  style="width: 75px; padding-right: 0px; padding-left: 0px;">
+                                                <% if(dientes.get(i).getDetalle()==2){%>
+                                                  <option value="2"> Ausente</option> <%}%>    
                                                 <option value="1">Presente</option> 
                                                 <option value="2"> Ausente</option>                                                
                                             </select>
                                         </div>
+                                        <% }%>
                                     </div>
                                 </td> 
                             

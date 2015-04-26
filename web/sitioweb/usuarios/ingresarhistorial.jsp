@@ -18,39 +18,14 @@
         <script src="../js/jquery.js"></script>
         <script  src="../js/paginacion.js"></script>
         <script src="../js/jquery.validate.js"></script>
+         <script type="text/javascript" src="../js/Validacion.js"></script>
+        <script type="text/javascript" src="../js/ajax.js"></script>
+        <script type="text/javascript" src="../js/validacionesAjax.js"></script>
+         <script src="../js/bootstrap.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-        <script type="text/javascript">
-
-            $(document).ready(function () {
-
-                //codigo para validar que los campos solo sean letras
-                jQuery.validator.addMethod("lettersonly", function (value, element) {
-                    return this.optional(element) || /^[a-zA-ZÃ¡Ã©Ã­Ã³ÃºÃ Ã¨Ã¬Ã²Ã¹ÃÃÃÃÃÃÃÃÃÃÃ±ÃÃ¼Ã_\s]+$/i.test(value);
-                }, "Digite solo caracteres");
-
-                // sirver para validar los campos del formulario
-                $('#form1').validate({
-                    rules: {
-                        password: {
-                            required: true,
-                            number: true,
-                            minlength: 8,
-                            maxlength: 10
-                        }
-                    },
-                    messages: {
-                        password: {
-                            required: "Este campo es Requerido",
-                            number: "El campo debe ser Numérico ",
-                            minlength: "Son {0} digitos Mínimo  ",
-                            maxlength: "Son {0} digitos Máximo"
-                        }
-                    }
-                });
-            });
-        </script>
+     
         <%
             response.setHeader("Cache-Control", "no-cache");
             response.setHeader("Cache-Control", "no-store");
@@ -96,34 +71,42 @@
             <% if (uregistrado.getRol().equals("Medico") || uregistrado.getRol().equals("Secretaria")) {%>
 
             <div class="mesa">
-                <div class="lado1-agenda">
-                  
-                        <form action="../../GestionHistorial" id="form1" class="form-format1" method="POST"> 
-                            <h1 class="h1-session" style="padding-bottom: 10px;padding-left: 54px;">Consultar Pacientes</h1>    
+              
+                   
+                        <form action="../../GestionHistorial" class="form-inline"  method="POST"> 
+                           
+                            <h1 class="h1-session" style="padding-bottom: 20px;padding-left: 54px; padding-top: 20px; ">Consultar Pacientes</h1>    
+                             
+                            <div class="form-group has-feedback" id="inpDocumento">
+                                    <label class="control-label" for="documento">Documento:</label>
+                                    <input type="text" class="form-control" tabindex="1" name="documento"
+                                           id="documento" value="0" maxlength="12" style=" margin-left: 7px;
+">
 
-                            <div >
-                                <label for ="documento"  class=" control-label" style="margin-left: 244px;"> Documento</label>
-                                <div class="corr">
-
-                                    <input type="text" name="documento" id="documento" style=" margin-top: -30;" value="0">
                                 </div>
-                                <label for ="nombre"  class="control-label" style="margin-left: 244px; margin-top: 30px;"> Nombre</label>
-                                <div class="corr">
+                            <div class="form-group has-feedback" id="inpNombres">
+                                                <label class="control-label" for="nombre">Nombres:</label>
+                                                <input type="text" class="form-control" name="nombre" maxlength="25"  
+                                                       id="nombre" tabindex="2" value="" style=" margin-left: 7px;
+" >
+                                              
+                                            </div>
 
-                                    <input type="text" name="nombre" id="nombre" style=" margin-top: -30;"  >
-                                </div>
-                                <label for ="apellido"  class="control-label" style="margin-left: 244px; margin-top: 30px;"> Apellidos</label>
-                                <div class="corr">
-
-                                    <input type="text" name="apellido" id="apellido" style=" margin-top: -30;" >
-                                </div>
-                            </div>
-                            <p style="padding-left: 66px;padding-top: 16px;"> Puede agilizar su busqueda usando <br>
-                                algunas de las opciones de filtrado</p>
-                            <input type="submit" value="Consultar" name="consultar" class="btn btn-primary btn-lg" style="margin-left: 70px;">
+                                            <div class="form-group has-feedback" id="inpApellidos">
+                                                <label class="control-label" for="ruApellidos">Apellidos:</label>
+                                                <input type="text" class="form-control" name="apellido" maxlength="25"
+                                                       id="ruApellidos" tabindex="3" value=""  style="margin-left: 7px;
+">
+                                                
+                                            </div>
+                            
+                            <p style="padding-left:25%;padding-top: 16px;"> Puede agilizar su busqueda usando algunas de las opciones de filtrado</p>
+                            
+                            <input type="submit" value="Consultar" name="consultar" class="btn btn-primary " style="  margin-left: 38%;">
                         </form>
-                    </div>
-                
+                      
+                  
+           
                 <%
  HttpSession sesion = request.getSession(false);
                     if (sesion.getAttribute("pacientes")!=null) {
@@ -145,12 +128,13 @@
                 <br>
 
 
-                <table id ="tablah" class="table table-bordered table-striped table-hover" style="margin-left: 42px;"> 
+                <table id ="tablah" class="table table-bordered table-striped table-hover" style="margin-left: 42px; width: 892.222222328186px;"> 
                     <thead>
                     <th style=" width:150px; height: 20px">Documento</th>
                     <th style=" width:150px; height: 20px">Nombre</th>
                     <th style=" width:150px; height: 20px">Telefono</th>
                     <th style=" width:150px; height: 20px">Ciudad</th>
+                     <th style=" width:150px; height: 20px">Acciones</th>
 
                     </thead>
                     <%            for (UsuariosDTO producto : productos) {
@@ -162,8 +146,8 @@
                         <td><%=producto.getNombres() +"   "+ producto.getApellidos()%></td>
                         <td><%=producto.getTelefono()%></td>
                         <td><%=producto.getCiudad()%></td>
-                        <td id="button"><a href="../../GestionHistorial?Historial=<%=producto.getDocumento()%>"> <img class="vector" src="../imagenes/Historial.png" width="30" height="30" alt="Historial" title=" Consultar Historial"/> </a> </td>
-                        <td id="button"><a href="../../GestionUsuario?perfil=<%=producto.getDocumento()%>"> <img class="vector" src="../imagenes/perfil.png" width="30" height="30" alt="perfil" title=" Consultar Perfil"/> </a>  </td>  
+                        <td> <a href="../../GestionHistorial?Historial=<%=producto.getDocumento()%>" class="btn btn-success" role="button" title="Consultar Historial" >Historial</a> 
+                        <a href="../../GestionUsuario?perfil=<%=producto.getDocumento()%>" class="btn btn-primary" role="button" title="Consultar Perfil" >Perfil</a> </td>
                     </tr>
                     <%            }
                     %>
@@ -183,7 +167,7 @@
                         }
                     }
                 %>
-            </div>    
+             
 
             <% } else {
                 FHistorial fh = new FHistorial();
@@ -217,7 +201,7 @@
 
                     <div class="Divprint" style= "width: 90% " 
                          >
-                        <table id ="tablah" style =" padding-bottom:5px ;text-align: center;" class="table table-bordered table-striped table-hover" >
+                        <table id ="tablah" style =" padding-bottom:5px; text-align: center;" class="table table-bordered table-striped table-hover" >
                             <thead>
                                 <tr id="titulo" >
 
@@ -281,5 +265,7 @@
 
         %>
         </div>
+        </div>
+        
     </body>
 </html>

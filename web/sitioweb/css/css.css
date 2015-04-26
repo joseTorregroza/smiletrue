@@ -322,11 +322,11 @@ h1.h1-session{
     font-family: angelina;
     background: none;
 }
-h2{
+h2.h2-session{
     font-family: angelina;
     text-align: center;
     color:#00009C;
-    font-size: 29px;
+    font-size: 25px;
 
 }
 h3{
