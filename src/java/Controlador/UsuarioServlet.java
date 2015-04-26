@@ -119,20 +119,21 @@ public class UsuarioServlet extends HttpServlet {
         
           try {
               UsuariosDTO usnuevo = new UsuariosDTO();
-              usnuevo.setNombres(request.getParameter("NombreCompleto").trim());
-              usnuevo.setApellidos(request.getParameter("ApellidoCompleto").trim());
-              usnuevo.setTipoDoc(request.getParameter("tipodoc").trim());
-              usnuevo.setDocumento(Long.parseLong(request.getParameter("Cedula").trim()));
-              usnuevo.setFechadenacimiento(request.getParameter("FechaNacimiento").trim());
-              usnuevo.setLugardeNacimiento(request.getParameter("LugardeNacimiento").trim());
-              usnuevo.setTipoAlergia(Integer.parseInt(request.getParameter("TipoAlergia").trim()));
+              usnuevo.setNombres(request.getParameter("NombreCompleto"));
+              usnuevo.setApellidos(request.getParameter("ApellidoCompleto"));
+              usnuevo.setTipoDoc(request.getParameter("tipodoc"));             
+              usnuevo.setFechadenacimiento(request.getParameter("FechaNacimiento"));
+             usnuevo.setLugardeNacimiento(request.getParameter("LugardeNacimiento"));
+               usnuevo.setEmail(request.getParameter("email"));
+               usnuevo.setDireccion(request.getParameter("Direccion").trim());
+              usnuevo.setCiudad(request.getParameter("Ciudad"));             
+              usnuevo.setGenero(request.getParameter("Sexo"));
+              usnuevo.setClave(request.getParameter("clave").trim());             
+              usnuevo.setTelefono(request.getParameter("Telefono").trim());   
               usnuevo.setGrupoSangui(Integer.parseInt(request.getParameter("Gruposanguineo").trim()));
-              usnuevo.setCiudad(request.getParameter("Ciudad").trim());
-              usnuevo.setEmail(request.getParameter("email").trim());
-              usnuevo.setTelefono(request.getParameter("Telefono").trim());
-              usnuevo.setDireccion(request.getParameter("Direccion").trim());
-              usnuevo.setGenero(request.getParameter("Sexo").trim());
-              usnuevo.setClave(request.getParameter("clave").trim());
+               usnuevo.setTipoAlergia(Integer.parseInt(request.getParameter("TipoAlergia").trim()));              
+               usnuevo.setDocumento(Long.parseLong(request.getParameter("Cedula")));
+              
               String salida = fu.ModUs(usnuevo);
               response.sendRedirect("sitioweb/usuarios/perfil.jsp?msg" + salida);
           } catch (SQLException ex) {

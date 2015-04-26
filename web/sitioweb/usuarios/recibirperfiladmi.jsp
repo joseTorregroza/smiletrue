@@ -4,10 +4,11 @@
         <%@page import="Dtos.UsuariosDTO"%>
         
         <%@page contentType="text/html" pageEncoding="UTF-8"%>
-        <%@page errorPage="../error404.jsp" %> 
+        <%@page errorPage="../../error404.jsp" %> 
         <title>Smile System</title>
         <meta charset="utf-8" />
         <link rel="shortcut icon" href="../imagenes/favicon.ico" />
+          <link href="../css/error.css" rel="stylesheet" type="text/css">
         <link href="../css/footer.css" rel="stylesheet" type="text/css">
         <link href="../css/secre.css" rel="stylesheet" type="text/css">
         <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">        
@@ -24,7 +25,7 @@
                 //codigo para validar que los campos solo sean letras
                 jQuery.validator.addMethod("lettersonly", function (value, element) {
                     return this.optional(element) || /^[a-z]+$/i.test(value);
-                }, "Digite solo caracteres");
+                }, '<div class="alert alert-danger movera" role="alert">Digite solo caracteres</div>');
 
                 // sirve para bloquear los campos input
                 $('.bloqueado').attr('disabled', 'disabled');
@@ -102,12 +103,12 @@
     </head>
     <body>
           <%
-            if (request.getParameter("idusuario") != null) {
+            if (request.getParameter("idadministra") != null) {
                 
-                long id = (Long.parseLong(request.getParameter("idusuario")));
+                long id = (Long.parseLong(request.getParameter("idadministra")));
                 FUsuarios fu= new FUsuarios();
                  UsuariosDTO uregistrado = new UsuariosDTO(); 
-                uregistrado = fu.listarUsu(id);
+                uregistrado = fu.listarUsuAdmi(id);
                 if (uregistrado != null) {
         %>
 
@@ -118,10 +119,10 @@
         <div class="menu">
             <div class="tags">
                 <a href="iniciarsesion.jsp"><strong>Iniciar Sesión</strong></a>
-                <a href="#"><strong>Perfil Secretaria</strong></a>
+                <a href="#"><strong>Perfil  <%  out.print(uregistrado.getRol());%></strong></a>
             </div>
             <div class ="menu-session">     
-                <button type="button" onClick="javascript:window.location = '../indexout.jsp'">Cerrar Sesión </button>
+                <button type="button" onClick="javascript:window.location = '../indexout.jsp'"   class="btn btn-info" >Cerrar Sesión </button>
             </div>
             <div class ="menu-session">
                 <span style="color: white;">  <%  out.print(uregistrado.getRol());%>: </span>
@@ -136,7 +137,7 @@
             <div class="mesa">
                 <h1>Datos de Registro</h1>
 
-                <form class="form-horizontal" name="form1" id="form1" action="">
+                <form class="form-horizontal" name="form1" id="form1" action="../../UsuarioServlet"  method="Post">
 
                     <table>
                         <tr>
@@ -157,10 +158,13 @@
 
                                             <option value="2" <% if ("2".equals(uregistrado.getRoles())) {
                                                     out.println("selected");
-                                                } %>>Ninguna</option>
+                                                } %>>Medico</option>
                                                     <option value="3" <% if ("3".equals(uregistrado.getRoles())) {
                                                     out.println("selected");
-                                                } %>>Polvo</option>
+                                                } %>>Secretaria</option>
+                                                     <option value="4" <% if ("4".equals(uregistrado.getRoles())) {
+                                                    out.println("selected");
+                                                } %>>Administrador</option>
                                                    
                                         </select>
                                     </div>
@@ -202,7 +206,7 @@
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <input type="text" class="  bloqueado email form-control" id="ejemplo_email_3" name="email" required value="<%  out.print(uregistrado.getEmail());%>"  placeholder="">
+                                        <input type="text" class=" email form-control" id="ejemplo_email_3" name="email" required value="<%  out.print(uregistrado.getEmail());%>"  placeholder="">
                                     </div>
                                 </div></td>
                         </tr>
@@ -211,14 +215,14 @@
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <input type="text" class="nobloqueado  form-control" required id="ejemplo_email_3" value="<%  out.print(uregistrado.getDocumento());%>" name="Cedula" placeholder=""  >
+                                        <input type="text" class="  form-control" disabled  required id="ejemplo_email_3" value="<%  out.print(uregistrado.getDocumento());%>" name="Cedula" placeholder=""  >
                                     </div>
                                 </div></td>
                             <td><label for="Telefono" class="InputRequired col-lg-2 control-label">Teléfono</label></td> 
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <input type="text" class=" form-control bloqueado" required name="Telefono" value="<%  out.print(uregistrado.getTelefono());%>"  id="" placeholder="">
+                                        <input type="text" class=" form-control" required name="Telefono" value="<%  out.print(uregistrado.getTelefono());%>"  id="" placeholder="">
                                     </div>
                                 </div></td>
                         </tr>
@@ -234,7 +238,7 @@
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <input type="text" class=" bloqueado" id="" name="Direccion" required value="<%  out.print(uregistrado.getDireccion());%>" placeholder="" >
+                                        <input type="text" class="" id="" name="Direccion" required value="<%  out.print(uregistrado.getDireccion());%>" placeholder="" >
                                     </div>
                                 </div></td>
                         </tr>
@@ -326,7 +330,7 @@
                             <td><div class="form-group">
 
                                     <div class="col-lg-10">
-                                        <input type="password" class=" bloqueado form-control" id=""  name="clave" required value="<%  out.print(uregistrado.getClave());%>"  placeholder="">
+                                        <input type="password" class="  form-control" id=""  name="clave" required value="<%  out.print(uregistrado.getClave());%>"  placeholder="">
                                     </div>
                                 </div></td>
                         </tr>

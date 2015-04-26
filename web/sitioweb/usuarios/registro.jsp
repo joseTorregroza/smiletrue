@@ -16,9 +16,11 @@
         <link rel="shortcut icon" href="../imagenes/favicon.ico" />
         <link href="../css/footer.css" rel="stylesheet" type="text/css">
         <link href="../css/secre.css" rel="stylesheet" type="text/css">
+         <script src="../js/fechas.js" type="text/javascript"></script>
         <script src="../js/jquery.js"></script>
         <script src="../js/jquery.validate.js"></script>
         <script src="../css/bootstrap.css"></script>
+         <script src="../js/bootstrap.js"></script>
         <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">        
         <link href="../css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
         <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
@@ -31,7 +33,7 @@
                 //codigo para validar que los campos solo sean letras
                 jQuery.validator.addMethod("lettersonly", function (value, element) {
                     return this.optional(element) || /^[a-zA-ZÃ¡Ã©Ã­Ã³ÃºÃ Ã¨Ã¬Ã²Ã¹ÃÃÃÃÃÃÃÃÃÃÃ±ÃÃ¼Ã_\s]+$/i.test(value);
-                }, "Digite solo caracteres");
+                }, '<div class="alert alert-danger movera" role="alert">Digite solo caracteres</div>');
 
                 // sirver para validar los campos del formulario
                 $('#form1').validate({
@@ -73,42 +75,42 @@
                     },
                     messages: {
                         NombreCompleto: {
-                            required: "Este campo es Requerido",
-                            minlength: "Son {0} digitos Mínimo  ",
+                            required: '<div class="alert alert-danger movera" role="alert">Este campo es Requerido</div>',
+                            minlength: '<div class="alert alert-danger  movera" role="alert">Son {0} digitos Mínimo </div>',
                             maxlength: "Son {0} digitos Máximo"
                         },
                         ApellidoCompleto: {
-                            required: "Este campo es Requerido",
-                            minlength: "Son {0} digitos Mínimo  ",
+                            required: '<div class="alert alert-danger movera" role="alert">Este campo es Requerido</div>',
+                            minlength:'<div class="alert alert-danger  movera" role="alert">Son {0} digitos Mínimo </div>',
                             maxlength: "Son {0} digitos Míximo"
                         },
                         TipoAlergia: {
-                            required: "Este campo es Requerido",
-                            minlength: "Son {0} digitos Mínimo  ",
+                            required: '<div class="alert alert-danger movera" role="alert">Este campo es Requerido</div>',
+                            minlength: '<div class="alert alert-danger  movera" role="alert">Son {0} digitos Mínimo </div>',
                             maxlength: "Son {0} digitos Máximo"
                         },
                         Cedula: {
-                            required: "Este campo es Requerido",
-                            number: "El  campo debe ser Numérico ",
-                            minlength: "Son {0} digitos Mínimo  ",
+                            required: '<div class="alert alert-danger movera" role="alert">Este campo es Requerido</div>',
+                            number: '<div class="alert alert-danger movera" role="alert">El campo debe ser Numérico </div>',
+                            minlength: '<div class="alert alert-danger  movera" role="alert">Son {0} digitos Mínimo </div>',
                             maxlength: "Son {0} digitos Máximo"
                         },
                         FechaNacimiento: {
-                            required: "El campo es Requerido"
+                            required: '<div class="alert alert-danger movera" role="alert">Este campo es Requerido</div>',
 
                         },
                         Telefono: {
-                            required: "Este campo es Requerido",
-                            number: "El campo debe ser Numérico ",
-                            minlength: "Son {0} digitos Mínimo  ",
+                            required: '<div class="alert alert-danger movera" role="alert">Este campo es Requerido</div>',
+                            number: '<div class="alert alert-danger movera" role="alert">El campo debe ser Numérico </div>',
+                            minlength: '<div class="alert alert-danger  movera" role="alert">Son {0} digitos Mínimo </div>',
                             maxlength: "Son {0} digitos Máximo"
                         },
                         email: {
                             email: "Dirección de correo invalida"
                         },
                         Direccion: {
-                            required: "Este campo es Requerido",
-                            minlength: "Son {0} digitos Mínimo  ",
+                            required: '<div class="alert alert-danger movera" role="alert">Este campo es Requerido</div>',
+                            minlength: '<div class="alert alert-danger  movera" role="alert">Son {0} digitos Mínimo </div>',
                             maxlength: "Son {0} digitos Máximo"
 
                         }
@@ -140,7 +142,7 @@
         <div class="menu">
             <div class="tags">
                 <a href="iniciarsesion.jsp"><strong>Iniciar Sesión</strong></a>
-                <a href="#"><strong>Registrar Paciente</strong></a>
+                <a href="#"><strong>Registro</strong></a>
             </div>
             <div class ="menu-session">     
                 <button type="button" onClick="javascript:window.location = '../indexout.jsp'"  class="btn btn-info" >Cerrar Sesión </button>
@@ -255,8 +257,10 @@
                         <td><label for="FechaNacimiento" class="col-lg-2 control-label">F.Nacimiento:</label></td> 
                         <td><div class="form-group">
 
-                                <div class="col-lg-10">
-                                    <input type="date" class=" form-control" required id="ejemplo_email_3" value="" name="FechaNacimiento">
+                                <div class="col-lg-10">    
+        
+
+                                    <input type="date" class=" form-control   input-sm" required id="FechaNacimiento" value="" name="FechaNacimiento"  onblur="javascript:validarFechaParaAño();">
                                 </div>
                             </div></td>
                         <td><label for="Direccion" class=" InputRequired col-lg-2 control-label" >Direccion</label></td> 

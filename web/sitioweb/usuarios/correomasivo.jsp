@@ -1,8 +1,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="Facade.FUsuarios"%>
+ <%@page import="Dtos.UsuariosDTO"%>
 <html>
     <head>
-        <%@page import="Dtos.UsuariosDTO"%>
+       
         
         <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page errorPage="../error404.jsp" %> 
@@ -113,7 +114,7 @@
         <div class="menu">
             <div class="tags">
                 <a href="iniciarsesion.jsp"><strong>Iniciar Sesión</strong></a>
-                <a href="#"><strong>Perfil Secretaria</strong></a>
+                <a href="#"><strong>Envio Correos</strong></a>
             </div>
             <div class ="menu-session">     
                 <button type="button"  class="btn btn-info" onClick="javascript:window.location = '../indexout.jsp'">Cerrar Sesión </button>
@@ -128,12 +129,15 @@
                 <div class="menucoreer"> <img class="vector" src="../imagenes/manu.png " width="70"	height="70"></div>
                     <% out.println(menu); %> 
             </div>
-            <div class="mesa">
+            
+
+            <div class="mesa"   style="  max-height: 639px;
+  overflow: auto;">
                 <div  class="" style="  margin-left: 329px;    margin-top: 70px;">  
                    <form method="POST" action="../../GestionCorreos">
                 <div class="row">                
                     <div class="col-md-4">                       
-                                <legend class="text-center"  style="  width: 230px;">Enviar correo másivo</legend>
+                                <legend class="text-center"  style="  width: 230px;   font-weight: bold;"  >Enviar correo másivo</legend>
                         <div class="form-group">
                             <label for="cAsunto">Asunto:</label>
                            <input type="text" name="cAsunto" id="cAsunto" 
@@ -141,26 +145,18 @@
                         </div>
                         <div class="form-group">
                             <label for="cCuerpo">Mensaje:</label>
- <textarea type="text" name="cCuerpo" id="cCuerpo" class="form-control" required placeholder="Mensaje para las personas" style="  width: 390px;  margin-left: -16px;  height: 332px;"></textarea>                        </div>                        
-                        <button type="submit" class="btn btn-success">Enviar Correo</button>
+ <textarea type="text" name="cCuerpo" id="cCuerpo" class="form-control" required placeholder="Mensaje para las personas" style="  width: 390px;  margin-left: -16px;  height: 170px;"></textarea>                        </div>                        
+                        <button type="submit" class="btn btn-info">Enviar Correo</button>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8" style="  margin-left: -481px;  margin-top: 563px;">
 
                               <table class="table table-striped table-hover table-condensed">
                             <thead>
                                 <tr>
                                     <th>Documento</th>
                                     <th>Nombre</th>
-                                    <th>Apellidos</th>
-                                    <th>tipodocumento</th>
-                                    <th>fecha</th>
-                                    <th>lugar de nacimiento</th>
-                                    <th>correo</th>
-                                    <th>direccion</th>
-                                    <th>ciudad</th>
-                                    <th>genero </th>
-                                    <th>usuario</th>
-                                    <th>clave</th>
+                                    <th>Apellidos</th>                                
+                                    <th>correo</th>    
                                     <th>estado</th>
                                     <th>activos</th>
                                     
@@ -180,23 +176,13 @@
                                 <tr>
                                     <td><%= p.getDocumento()%></td>
                                     <td><%= p.getNombres()  %></td>
-                                    <td><%= p.getApellidos()%></td>
-                                    <td><%= p.getTipoDoc()  %></td>
-                                     <td><%= p.getFechadenacimiento()  %></td>
-                                    <td><%= p.getLugardeNacimiento()  %></td>
-                                    <td><%= p.getEmail()  %></td>
-                                     <td><%= p.getDireccion() %></td>
-                                    <td><%= p.getCiudad()    %></td>
-                                    <td><%= p.getGenero()  %></td>
-                                     <td><%= p.getUsuario()   %></td>
-                                    <td><%= p.getClave()  %></td>
-                                    <td><%= p.getEstado()  %></td>
-                                    <td><%= p.getActivarestado()  %></td>
-                                     <td><a href="#">Suspender</a></td>
+                                    <td><%= p.getApellidos()%></td>                                    
+                                    <td><%= p.getEmail()  %></td>                                                                   
+                                    <td><%= p.getActivarestado()  %></td>                                     
                                     <td class="text-center">
-                                        <div class="checkbox <% if (p.getEstado() == 0 || p.getActivarestado()== 0) { out.print("disabled");} %>">
+                                        <div class="checkbox <% if (p.getActivarestado()== 0) { out.print("disabled");} %>">
                                             <label>
-                                                <input type="checkbox"  <% if (p.getEstado() == 0 || p.getActivarestado()== 0) { out.print("disabled "); out.print("value='" + 0 +"'"); } else { %> value='<%= p.getDocumento()  %>' <%}%>name="idPersona[<%= i%>]">
+                                                <input type="checkbox"  <% if ( p.getActivarestado()== 0) { out.print("disabled "); out.print("value='" + 0 +"'"); } else { %> value='<%= p.getDocumento()  %>' <%}%>name="idPersona[<%= i%>]">
                                             </label>
                                         </div>
                                     </td>
