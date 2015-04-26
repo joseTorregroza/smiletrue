@@ -35,9 +35,9 @@ public class FUsuarios extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter(); 
         FUsuarios u= new  FUsuarios();
-//      HashMap<UsuariosDTO, String> salida=  u.Validarusu("ltorres", "1081407251");
+      StringBuilder salida=  u.valajax(1081407241);
         
-   UsuariosDTO salida= u.ObUsu(1081407241); 
+   UsuariosDTO salida1= u.ObUsu(1081407241); 
         
        out.print(salida);
     }
@@ -102,6 +102,9 @@ public class FUsuarios extends HttpServlet {
       public List obtenerPersonasParaCorreos() {
       return usuario.obtenerPersonas(cnx);
       }
+       public StringBuilder valajax(long id) {
+        return usuario.validarUserName(id);
+    }
       
           
      ////////////////////////////////////////ESTADOS//////////////////////////////////////////////
