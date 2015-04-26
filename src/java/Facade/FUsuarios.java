@@ -6,6 +6,7 @@
 package Facade;
 
 import Conexion.Conectar;
+import Conexion.MyException;
 import Daos.UsuarioDAO;
 
 import Daos.menuDAO;
@@ -35,11 +36,9 @@ public class FUsuarios extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter(); 
         FUsuarios u= new  FUsuarios();
-      StringBuilder salida=  u.valajax(1081407241);
         
-   UsuariosDTO salida1= u.ObUsu(1081407241); 
-        
-       out.print(salida);
+ 
+  
     }
     
     public FUsuarios() {
@@ -74,6 +73,10 @@ public class FUsuarios extends HttpServlet {
     public UsuariosDTO listarUsu(long id) {
         return usuario.listarUno(id, cnx);
     }
+    
+      public UsuariosDTO listarUsuAdmi(long id) {
+        return usuario.listarUnoAdmi(id, cnx);
+    }
 
     public String  ModUs(UsuariosDTO  usdto)   throws SQLException {
         return usuario.modfificarUsuario(usdto, cnx);
@@ -105,6 +108,14 @@ public class FUsuarios extends HttpServlet {
        public StringBuilder valajax(long id) {
         return usuario.validarUserName(id);
     }
+      
+       public String cambiarEstado(int personaID, int nuevoEstado) {
+       return usuario.cambiarestado(personaID, nuevoEstado, cnx);
+       }
+       
+       public List<UsuariosDTO> ListarTodosLosUsuarios() throws MyException, SQLException {
+           return usuario.ListarTodisUsuarios(cnx);
+       }
       
           
      ////////////////////////////////////////ESTADOS//////////////////////////////////////////////
