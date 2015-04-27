@@ -32,7 +32,7 @@
             response.setDateHeader("Expires", 0);
         %>
     </head>
-    <body>
+    <body style="margin-left:123px">
         <%
             HttpSession miSesion = request.getSession(false);
            

@@ -121,9 +121,9 @@ public class GestionCitas extends HttpServlet {
             String fecha = request.getParameter("fechaci2");
             String msg = fc.CanCi(ced, fecha);
             if (msg.equals("ok")) {
-                response.sendRedirect("sitioweb/usuarios/citas.jsp?info=1");
+                response.sendRedirect("sitioweb/usuarios/citas.jsp?infor=1");
             } else {
-                response.sendRedirect("sitioweb/usuarios/citas.jsp?si=1");
+                response.sendRedirect("sitioweb/usuarios/citas.jsp?alerta=1&&si=1");
             }
         } else if (request.getParameter("paci") != null || request.getParameter("fecha") != null) {
             long ced = Long.parseLong(request.getParameter("paci"));

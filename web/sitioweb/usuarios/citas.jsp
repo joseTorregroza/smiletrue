@@ -16,10 +16,10 @@
         <link href="../css/css.css" rel="stylesheet" type="text/css">
         <script src="../js/jquery.js"></script>
         <script src="../js/jquery.validate.js"></script>
-        <script src="../js/fechas.js" type="text/javascript"></script>
-        <script type="text/javascript" src="../js/Validacion.js"></script>
-        <script type="text/javascript" src="../js/ajax.js"></script>
-        <script type="text/javascript" src="../js/validacionesAjax.js"></script>
+        <script src="../js/fechas1.js" type="text/javascript"></script>
+        <script type="text/javascript" src="../js/Validacion1.js"></script>
+        <script type="text/javascript" src="../js/ajax1.js"></script>
+        <script type="text/javascript" src="../js/validacionesAjax1.js"></script>
         <script src="../js/bootstrap.js"></script>
         <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">   
         
@@ -34,7 +34,7 @@
             response.setDateHeader("Expires", 0);
         %>
     </head>
-    <body>
+    <body style="margin-left:123px">
         <%
             HttpSession miSesion = request.getSession(false);
             HttpSession sesion = request.getSession(false);
@@ -71,6 +71,7 @@
                 <div class="menucoreer"> <img class="vector" src="../imagenes/manu.png " width="70"	height="70"></div>
                     <% out.println(menu); %> 
             </div>
+            
             <div class="mesa">
                 <div class="row">
                     <div class="col-md-4"></div>
@@ -81,7 +82,7 @@
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <p><strong> Cita asignada</Strong> La cita  se ha reservado sin contratiempo <i class='glyphicon glyphicon-ok'></i></p>
+                            <p><strong> Cita asignada</Strong> La cita  se ha reservado sin contratiempo </p>
                         </div>
                         <%
                     } else if (request.getParameter("alert") != null) {%>
@@ -89,7 +90,7 @@
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <p><strong> Cita No asignada</Strong> No se recuerde no puede tener 2 Citas el mismo dia <i class='glyphicon glyphicon-ok'></i></p>
+                            <p><strong> Cita No asignada</Strong> No se recuerde no puede tener 2 Citas el mismo dia</p>
                         </div>
 
 
@@ -116,8 +117,28 @@
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <p><strong> Cita Programada </Strong> en este momento usted ya tiene una cita asignada <i class="glyphicon glyphicon-ok"></i></p>
+                            <p><strong> Cita Programada </Strong> en este momento usted ya tiene una cita asignada</p>
                         </div>
+                         <%                        if (request.getParameter("infor") != null) {
+                        %>
+                        <div class="alert alert-info text-center">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <p><strong> Cita cancelada</Strong> La cita  se ha cancelado sin contratiempo </p>
+                        </div>
+                        <%
+                        } else if (request.getParameter("alerta") != null) {%>
+                        <div class="alert alert-danger " role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <p><strong> No cancelada</Strong> No se ha podido cancelar recuerde que solo es posible cancelar  con minimo 24 horas de anticipacion</p>
+                        </div>
+
+
+                        <% }
+                        %>
                       
 
                     </div>
@@ -149,7 +170,7 @@
 
 
                         </table>
-                      <a  class="btn btn-danger" role="button"  href="../../GestionCitas?can2=<%=citas.getIdPaciente()%>&&fechaci2=<%=citas.getFecha()%> " title="Cancelar Cital" style="margin-left: 723px; margin-top: -54;" > Cancelar </a>        
+                      <a  class="btn btn-danger" role="button"  href="../../GestionCitas?can2=<%=citas.getIdPaciente()%>&&fechaci2=<%=citas.getFecha()%> " title="Cancelar Cita" style="margin-left: 723px; margin-top: -54;" > Cancelar </a>        
 
                     </div>
 
@@ -168,9 +189,7 @@
                                     <label class="control-label" for="cedula">Documento:</label>
                                     <input type="text" class="form-control" tabindex="1" name="cedula" onchange=" validarUsuarioYaRegistrado(this);"
                                            id="cedula" value="" maxlength="12" onblur="validarDocumento(this)"  style=" margin-left: 0px;"  >
-                  <div id="empResult" style="background-color: white; font-size: 12px;color:red;">
-            </div><div id="empResult2" style="background-color: white; font-size: 12px;color:green;">
-            </div>
+             
                                 </div>
               
                                 <%}%>
@@ -180,7 +199,7 @@
                                   <%  } else{ %>
                                 <div class="form-group has-feedback" id="inpRol">
                                     <label for="odontologo" class="control-label">Odontologo:</label>
-                                    <select name="odontologo" id="odontologo" class="form-control" tabindex="2"  required autofocus   onblur="validarRol(this)" onchange="getSubcategorias(this) >
+                                    <select name="odontologo" id="odontologo" class="form-control" tabindex="2"  required autofocus   onblur="validarRol(this)" onchange="jornadaslist(this)" >
                                         <option value="" >Seleccione un odontologo</option>
                                         <%for (UsuariosDTO odontologos : odonto) { %>
                                         <option value="<%=odontologos.getDocumento()%>"><%=odontologos.getNombres() + odontologos.getApellidos()%></option>
@@ -190,7 +209,7 @@
                                     <% }%>
                                 <div class="form-group has-feedback" id="inpFecha">
                                     <label class="control-label" for="fechacita">Fecha:</label>
-                                    <input type="date" class="form-control" name="fechacita" id="fechacita"    tabindex="3" onblur="validarFecha(this)" style=" margin-left: 0px; width: 312.5px;" onchange="getSubcategorias(this)>
+                                    <input type="date" class="form-control" name="fechacita" id="fechacita"    tabindex="3" onblur="validarFecha(this)" style=" margin-left: 0px; width: 312.5px;" onchange="jornadaslist(this)">
 
                                 </div>
                                 <div class="form-group has-feedback" id="inpCiudad">

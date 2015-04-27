@@ -147,7 +147,7 @@ public class JornadaDAO {
         this.cnn = cnn;
         ArrayList<JornadaDTO> jornada = new ArrayList<>();
         try {
-            String sqlAll = "select horario , idJornada from jornadas where idJornada not in (select idJornada from citas where  idOdontologo = ?);";  
+            String sqlAll = "select horario , idJornada from jornadas where idJornada not in (select idJornada from citas where  idOdontologo = ? and fecha= ?);";  
             pstm = cnn.prepareStatement(sqlAll);
             pstm.setLong(1, id);
             pstm.setString(2, fe);

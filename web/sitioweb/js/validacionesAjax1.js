@@ -23,13 +23,13 @@ function validarUsuarioYaRegistrado() {
 function callbackIdUsuario() {
     if (req1.readyState === 4) {
         if (req1.status === 200) {
-            if (req1.responseText.toString() === "existe") {
+            if (req1.responseText.toString() === "noexiste") {
                 document.getElementById('cedula').setAttribute('data-toggle', 'tooltip');
-                document.getElementById('cedula').setAttribute('data-original-title', 'Usuario ya registrado anteriormente, intente iniciar sesión');
+                document.getElementById('cedula').setAttribute('data-original-title', 'Usuario no registrado');
                 $(document).ready(function() {
                     // Initialize tooltip
                     $('[data-toggle="tooltip"]').tooltip({
-                        placement: 'left'
+                        placement: 'right'
                     });
                 });
                 document.getElementById('inpDocumento').setAttribute('class', 'form-group has-feedback has-error');
@@ -38,7 +38,7 @@ function callbackIdUsuario() {
                 document.getElementById('nombre').setAttribute('disabled', 'true');
      
         
-            } else if (req1.responseText.toString() === "noexiste") {
+            } else if (req1.responseText.toString() === "existe") {
                 document.getElementById('cedula').removeAttribute('data-toggle', 'tooltip');
                 document.getElementById('cedula').removeAttribute('data-original-title');
                 document.getElementById('inpDocumento').setAttribute('class', 'form-group has-feedback has-success');
