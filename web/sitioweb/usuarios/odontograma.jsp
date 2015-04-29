@@ -61,7 +61,7 @@
                 response.setDateHeader("Expires", 0);
             %>
     </head>
-    <body style="margin-left:123px">
+    <body>
         <%
             HttpSession miSesion = request.getSession(false);
             HttpSession sesion = request.getSession(false);
@@ -76,6 +76,7 @@
                 dientes = (ArrayList<CartaDentalDTO>) sesion.getAttribute("histodent");
                  ArrayList<ProcedimientosCatalogosDTO> proca = new ArrayList();
                  proca= (ArrayList<ProcedimientosCatalogosDTO>)sesion.getAttribute("catalo");
+                 
                 
 
         %>
@@ -86,7 +87,7 @@
         <div class="menu">
             <div class="tags">
                 <a href="iniciarsesion.jsp"><strong  font-size: 16px;  font-weight: bold>Iniciar Sesión</strong></a>
-                <a href="#"><strong>Odontograma</strong></a>
+                <a href="#"><strong></strong></a>
             </div>
             <div class ="menu-session">     
                 <button type="button" onClick="javascript:window.location = '../indexout.jsp'" class="btn btn-info" >Cerrar Sesión </button>
@@ -196,9 +197,11 @@
                                 pager.showPage(1);
                     </script>
               
-                            <% } %>
+                            <% }} %>
                               </div>
-           <div class="act" >
+                            <% if (sesion.getAttribute("histodent") != null) {%>
+                       
+             <div class="act" >
                     <h1 class="h1-session" style="padding-top: 20px;">Agregar Informacion</h1>
                     <form class="inline"  action="../../GestionCitas" style="margin-top: 0px;">
                         <table>

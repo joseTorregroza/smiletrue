@@ -15,15 +15,13 @@
             FCitas fc = new FCitas();
             ArrayList<JornadaDTO> jornadas = new ArrayList();
 
-          if (request.getParameter("idfecha")!=null) {
-                  
-              
-
-                jornadas = (ArrayList<JornadaDTO>) fc.lisDis(1081407271,"2015-04-21");                
+          if (request.getParameter("idDoctor")!=null && request.getParameter("idfecha")!=null) {
+              jornadas = (ArrayList<JornadaDTO>) fc.lisDis(Long.parseLong(request.getParameter("idDoctor")),request.getParameter("idfecha"));                
                 if (jornadas.size() > 0) {
                     for (JornadaDTO cDatos : jornadas) {
                         out.write("<option value= " + cDatos.getIdJornada() + ">" + cDatos.getHorario() + "</option>");
                     }
+                    
                 }
           }
         %>

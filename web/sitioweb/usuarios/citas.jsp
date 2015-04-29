@@ -194,12 +194,12 @@
               
                                 <%}%>
                                 <%if (uregistrado.getRol().equals("Medico")) {%>
-                                <input type="hidden" name="odontologo" value="<%=uregistrado.getDocumento()%>">
+                                <input type="hidden" name="odontologo" id="odontologo" value="<%=uregistrado.getDocumento()%>">
                                         
                                   <%  } else{ %>
                                 <div class="form-group has-feedback" id="inpRol">
                                     <label for="odontologo" class="control-label">Odontologo:</label>
-                                    <select name="odontologo" id="odontologo" class="form-control" tabindex="2"  required autofocus   onblur="validarRol(this)" onchange="jornadaslist(this)" >
+                                    <select name="odontologo" id="odontologo" class="form-control" tabindex="2"  required autofocus   onblur="validarRol(this)" >
                                         <option value="" >Seleccione un odontologo</option>
                                         <%for (UsuariosDTO odontologos : odonto) { %>
                                         <option value="<%=odontologos.getDocumento()%>"><%=odontologos.getNombres() + odontologos.getApellidos()%></option>
@@ -216,7 +216,7 @@
                                     <label class="control-label" for="turno">Hora:</label>
                                     <select name="turno" id="turno" class="form-control" tabindex="4"  required autofocus    onblur="validarHora(this)">
                                         <option value="">Seleccione una hora</option>
-                                        <option value="3">9:30</option>
+                                      
                                         
                                     </select>
                                 </div>                                
