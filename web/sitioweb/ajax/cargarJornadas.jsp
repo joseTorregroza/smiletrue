@@ -21,7 +21,7 @@
                     for (JornadaDTO cDatos : jornadas) {
                         out.write("<option value= " + cDatos.getIdJornada() + ">" + cDatos.getHorario() + "</option>");
                     }
-                    
+                   
                 }
           }
         %>

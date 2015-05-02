@@ -61,7 +61,9 @@
                 response.setDateHeader("Expires", 0);
             %>
     </head>
-    <body>
+    <body style="
+    margin-left: 91px;
+">
         <%
             HttpSession miSesion = request.getSession(false);
             HttpSession sesion = request.getSession(false);
@@ -110,7 +112,7 @@
                     <div class="pri"  >
                         <div class="carta1" > 
                             <%for (int i = 7; i > -1; i--) {%>
-                            <button type="submit" class="btn btn-default btn-mini" style="  margin-right: 3px;" onclick=location.href="../../GestionCitas?iddiente=<%=lista.get(i).getIdCartaDental()%>"><%=lista.get(i).getIdCartaDental()%></button>
+                            <button type="submit" class="btn btn-default btn-xs" style="  margin-right: 3px;" onclick=location.href="../../GestionCitas?iddiente=<%=lista.get(i).getIdCartaDental()%>"><%=lista.get(i).getIdCartaDental()%></button>
 
                             <%} %> 
                         </div>
@@ -120,7 +122,7 @@
                     <div class="sec" >
                         <div class="carta2" >
                             <%for (int i = 8; i < 16; i++) {%>
-                            <button type="submit" class="btn btn-default btn-mini" style="  margin-right: 3px;" onclick=location.href="../../GestionCitas?iddiente=<%=lista.get(i).getIdCartaDental()%>"><%=lista.get(i).getIdCartaDental()%></button>
+                            <button type="submit" class="btn btn-default btn-xs" style="  margin-right: 3px;" onclick=location.href="../../GestionCitas?iddiente=<%=lista.get(i).getIdCartaDental()%>"><%=lista.get(i).getIdCartaDental()%></button>
 
                             <%} %>
                         </div>
@@ -128,7 +130,7 @@
                     <div class="tre" >
                         <div class="carta1"  >
                             <%for (int i = 23; i >15; i--) {%>
-                            <button type="submit" class="btn btn-default btn-mini" style="  margin-right: 3px;" onclick=location.href="../../GestionCitas?iddiente=<%=lista.get(i).getIdCartaDental()%>"><%=lista.get(i).getIdCartaDental()%></button>
+                            <button type="submit" class="btn btn-default btn-xs" style="  margin-right: 3px;" onclick=location.href="../../GestionCitas?iddiente=<%=lista.get(i).getIdCartaDental()%>"><%=lista.get(i).getIdCartaDental()%></button>
 
                             <%} %>
                         </div>
@@ -136,7 +138,7 @@
                     <div class="four"  >
                         <div class="carta2" >
                             <%for (int i = 24; i < 32; i++) {%>
-                            <button type="submit" class="btn btn-default btn-mini" style="  margin-right: 3px;" onclick=location.href="../../GestionCitas?iddiente=<%=lista.get(i).getIdCartaDental()%>"><%=lista.get(i).getIdCartaDental()%></button>
+                            <button type="submit" class="btn btn-default btn-xs" style="  margin-right: 3px;" onclick=location.href="../../GestionCitas?iddiente=<%=lista.get(i).getIdCartaDental()%>"><%=lista.get(i).getIdCartaDental()%></button>
                             <%} %>
                         </div>
                     </div>
@@ -197,17 +199,19 @@
                                 pager.showPage(1);
                     </script>
               
-                            <% }} %>
+                            <% }%>
                               </div>
-                            <% if (sesion.getAttribute("histodent") != null) {%>
+                           
                        
              <div class="act" >
                     <h1 class="h1-session" style="padding-top: 20px;">Agregar Informacion</h1>
-                    <form class="inline"  action="../../GestionCitas" style="margin-top: 0px;">
+                    <form class="form-horizontal"  action="../../GestionCitas" style="margin-top: 0px;">
                         <table>
                             <tr>
                                 <td><label for="estado" class=" InputRequired col-lg-1  control-label">Estado:</label></td> 
-                                <td><div class="form-group">     <%for (int i =0; i < 1; i++) {%>
+                                <td><div class="form-group">    
+                                        <% if (dientes.size()!=0) {
+                                         for (int i =0; i < 1; i++) {%>
                                         <div >
                                             <select  class="form-control input-sm" <% if(dientes.get(i).getDetalle()==2 ){%>disabled=""<%}%> name="estado" id="estado" required class="form-control input-sm"  style="width: 75px; padding-right: 0px; padding-left: 0px;">
                                                 <% if(dientes.get(i).getDetalle()==2){%>
@@ -215,8 +219,18 @@
                                                 <option value="1">Presente</option> 
                                                 <option value="2"> Ausente</option>                                                
                                             </select>
+                                                
                                         </div>
-                                        <% }%>
+                                        <% }}else {%>
+                                        <div >
+                                            <select  class="form-control input-sm"  name="estado" id="estado" required class="form-control input-sm"  style="width: 75px; padding-right: 0px; padding-left: 0px;"> 
+                                                <option value="1">Presente</option> 
+                                                <option value="2"> Ausente</option>                                                
+                                            </select>
+                                                
+                                        </div>
+                                                <% }%>
+                                    </div>
                                     </div>
                                 </td> 
                             
@@ -225,7 +239,7 @@
                                 <td><label for="catalogo" class=" InputRequired col-lg-1  control-label">Procedimientos:</label></td> 
                                 <td><div class="form-group">  
                                         <div col-lg-9>
-                                            <select  class="form-control input-sm InputRequired"  name="catalogo" id="procedimientos" required >
+                                            <select  class="form-control input-sm InputRequired" style=" margin-top: 13px;"  name="catalogo" id="procedimientos" required >
                                                 <option value="">Seleccione Especialidad</option>
                                                 <%for (ProcedimientosCatalogosDTO proce:proca) {%>
                                                 <option value="<%=proce.getIdCatalogo()  %>"><%=proce.getProcedimiento() %></option>
@@ -243,7 +257,7 @@
                                 <td><div class="form-group">  
                                         <div col-lg-9
                                              >
-                                            <textarea style="margin-left: -20;" rows="3"   name="observacion" id="observacion" required >
+                                            <textarea style="width: 304.22222232818604px;   margin-top: 10px;" rows="5"   name="observacion" id="observacion" required >
                                                  
                                                   
                                             </textarea>
@@ -253,7 +267,7 @@
                             </tr>
 
                         </table> 
-                        <input type="submit" name="infodiente" class="btn btn-primary input-small col-lg-3 " value="Guardar" style="margin-left: 278px;">
+                        <input type="submit" name="infodiente" class="btn btn-primary input-small col-lg-3 " value="Guardar" style="margin-left:50%;">
                     </form> 
                     </div>
                                        
